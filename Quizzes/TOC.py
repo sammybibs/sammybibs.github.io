@@ -60,7 +60,7 @@ def TOC_to_all(filelist):
                             README[-1] = tagged_title+" "+tag_start+tag+tag_end
                             step = 1
                             matched = False
-                            TOC.append(indent+"["+title+"]"+"(#"+tag+")")
+                            TOC.append(indent+"["+title+"]"+"(#"+tag+"-)")
                             master_TOC.append(indent+"["+title+"]"+"("+"/"+file+"#"+tag+"-)")
                             indent = "- "
                             title = ""
