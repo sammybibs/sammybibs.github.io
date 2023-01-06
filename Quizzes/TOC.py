@@ -48,7 +48,7 @@ def TOC_to_all(filelist):
                             for letter in line[step::]:
                                 tagged_title = tagged_title+letter
                                 if letter == "<":
-                                    tagged_title = tagged_title.strip()[0:-1]
+                                    tagged_title = tagged_title[0:-1]
                                     step = 1
                                     matched = False
                                     break
