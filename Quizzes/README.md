@@ -6,7 +6,6 @@
 
 # DIAG_Question section <a name="DIAG_Question"></a>
 -----------
-- [December 14 2016](/DIAG_Question.md#December142016)
 - [Diagnostics Question](/DIAG_Question.md#DiagnosticsQuestion)
   - [Reported issue](/DIAG_Question.md#Reportedissue)
     - [Initial Pings](/DIAG_Question.md#InitialPings)
@@ -31,3 +30,4 @@
 -----------
 - [TABLE OF CONTENTS](/README.md#TABLEOFCONTENTS)
 - [DIAG_Question section](/README.md#DIAG_Questionsection)
+- [README section](/README.md#READMEsection)

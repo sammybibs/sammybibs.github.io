@@ -1,5 +1,4 @@
 # TOC
-- [December 14 2016](#December142016)
 - [Diagnostics Question](#DiagnosticsQuestion)
   - [Reported issue](#Reportedissue)
     - [Initial Pings](#InitialPings)
@@ -21,9 +20,8 @@
       - [S3 Show vlan](#S3Showvlan)
 - [Solution](#Solution)
 
-# December 14 2016 <a name="December142016"></a>
-
 # Diagnostics Question <a name="DiagnosticsQuestion"></a>
+December 14 2016
 
 Your job is to diagnose & locate the source of the problem, please post your comments below & I will follow this up with a post detailing the solution in due course.
 
