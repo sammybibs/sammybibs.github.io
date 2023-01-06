@@ -1,3 +1,3 @@
 # TABLE OF CONTENTS
 - [README](#README)
-- [Quizzes](/Quizzes/README.md)
+- [Quizzes](/Quizzes/README)
