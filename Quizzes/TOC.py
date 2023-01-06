@@ -56,6 +56,7 @@ def TOC_to_all(filelist):
                                     title = title+letter
                             tagged_title = tagged_title.strip()
                             title = title.strip()
+                            title = title.lower()
                             tag = title.replace(" ", "-")
                             README[-1] = tagged_title+" "+tag_start+tag+tag_end
                             step = 1

@@ -1,26 +1,26 @@
 # TOC
-- [Diagnostics Question](#Diagnostics-Question-)
-  - [Reported issue](#Reported-issue-)
-    - [Initial Pings](#Initial-Pings-)
-      - [Client 1](#Client-1-)
-      - [Client 2](#Client-2-)
-  - [Show Command outputs](#Show-Command-outputs-)
-    - [Switch 1](#Switch-1-)
-      - [S1 show run](#S1-show-run-)
-      - [S1 show vtp status](#S1-show-vtp-status-)
-      - [S1 Show vlan](#S1-Show-vlan-)
-      - [S1 show spanning-tree](#S1-show-spanning-tree-)
-    - [Switch 2](#Switch-2-)
-      - [S2 show run](#S2-show-run-)
-      - [S2 show vtp status](#S2-show-vtp-status-)
-      - [S2 Show log](#S2-Show-log-)
-    - [Switch 3](#Switch-3-)
-      - [S3 Show run](#S3-Show-run-)
-      - [S3 Show vtp status](#S3-Show-vtp-status-)
-      - [S3 Show vlan](#S3-Show-vlan-)
-- [Solution](#Solution-)
+- [diagnostics question](#diagnostics-question-)
+  - [reported issue](#reported-issue-)
+    - [initial pings](#initial-pings-)
+      - [client 1](#client-1-)
+      - [client 2](#client-2-)
+  - [show command outputs](#show-command-outputs-)
+    - [switch 1](#switch-1-)
+      - [s1 show run](#s1-show-run-)
+      - [s1 show vtp status](#s1-show-vtp-status-)
+      - [s1 show vlan](#s1-show-vlan-)
+      - [s1 show spanning-tree](#s1-show-spanning-tree-)
+    - [switch 2](#switch-2-)
+      - [s2 show run](#s2-show-run-)
+      - [s2 show vtp status](#s2-show-vtp-status-)
+      - [s2 show log](#s2-show-log-)
+    - [switch 3](#switch-3-)
+      - [s3 show run](#s3-show-run-)
+      - [s3 show vtp status](#s3-show-vtp-status-)
+      - [s3 show vlan](#s3-show-vlan-)
+- [solution](#solution-)
 
-# Diagnostics Question <a name="Diagnostics-Question"></a>
+# Diagnostics Question <a name="diagnostics-question"></a>
 December 14 2016
 
 Your job is to diagnose & locate the source of the problem, please post your comments below & I will follow this up with a post detailing the solution in due course.
@@ -32,7 +32,7 @@ The two clients that connected to Switch 1 & Switch 3 are both in the same VLAN 
 ![](images/2023-01-06-13-59-06.png)
 
 
-## Reported issue <a name="Reported-issue"></a>
+## Reported issue <a name="reported-issue"></a>
 The users of the clients have complained that they cannot communicate directly with one another, but they can reach thier local IP hateways
 
 Troubleshooting already completed:
@@ -47,8 +47,8 @@ To help isolate the fault the following items were asked for & can be seen below
 - "show spanning-tree" from switch 1
 - "show log" from switch 2
 
-### Initial Pings <a name="Initial-Pings"></a>
-#### Client 1 <a name="Client-1"></a>
+### Initial Pings <a name="initial-pings"></a>
+#### Client 1 <a name="client-1"></a>
 ```
 !!!Ping Swithc 1 SVI gateway for Client 1
 CLIENT1#ping 192.168.1.1
@@ -73,7 +73,7 @@ Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
 ```
 
 
-#### Client 2 <a name="Client-2"></a>
+#### Client 2 <a name="client-2"></a>
 ```
 !!!Ping my own IP address
 CLIENT2#ping 192.168.1.2
@@ -97,9 +97,9 @@ Sending 5, 100-byte ICMP Echos to 192.168.255.2, timeout is 2 seconds:
 Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
 ```
 
-## Show Command outputs <a name="Show-Command-outputs"></a>
-### Switch 1 <a name="Switch-1"></a>
-#### S1 show run <a name="S1-show-run"></a>
+## Show Command outputs <a name="show-command-outputs"></a>
+### Switch 1 <a name="switch-1"></a>
+#### S1 show run <a name="s1-show-run"></a>
 ```
 SW1#show run
 Building configuration...
@@ -220,7 +220,7 @@ line vty 0 4
 end
 ```
 
-#### S1 show vtp status <a name="S1-show-vtp-status"></a>
+#### S1 show vtp status <a name="s1-show-vtp-status"></a>
 ```
 SW1#show vtp status
 VTP Version capable             : 1 to 3
@@ -254,7 +254,7 @@ VTP Operating Mode                : Transparent
 
 ```
 
-#### S1 Show vlan <a name="S1-Show-vlan"></a>
+#### S1 Show vlan <a name="s1-show-vlan"></a>
 ```
 
 SW1#show vlan
@@ -298,7 +298,7 @@ Primary Secondary Type              Ports
 
 ```
 
-#### S1 show spanning-tree <a name="S1-show-spanning-tree"></a>
+#### S1 show spanning-tree <a name="s1-show-spanning-tree"></a>
 ```
 
 SW1#show spanning-tree
@@ -411,8 +411,8 @@ Et1/0               Desg FWD 100       128.5    Shr
 
 ```
 
-### Switch 2 <a name="Switch-2"></a>
-#### S2 show run <a name="S2-show-run"></a>
+### Switch 2 <a name="switch-2"></a>
+#### S2 show run <a name="s2-show-run"></a>
 ```
 SW2#show run
 Building configuration...
@@ -535,7 +535,7 @@ line vty 0 4
 end
 ```
 
-#### S2 show vtp status <a name="S2-show-vtp-status"></a>
+#### S2 show vtp status <a name="s2-show-vtp-status"></a>
 ```
 SW2#show vtp status
 VTP Version capable             : 1 to 3
@@ -568,7 +568,7 @@ Feature UNKNOWN:
 VTP Operating Mode                : Transparent
 ```
 
-#### S2 Show log <a name="S2-Show-log"></a>
+#### S2 Show log <a name="s2-show-log"></a>
 ```
 *Nov  5 09:56:59.789: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan1, changed state to down
 *Nov  5 09:57:52.203: %LINK-3-UPDOWN: Interface Vlan1, changed state to up
@@ -694,8 +694,8 @@ VTP Operating Mode                : Transparent
 *Nov  5 10:40:47.172: OSPF-1 ADJ   Et0/1: Rcv pkt from 192.168.23.2, area 0.0.0.0 : src not on the same network
 ```
 
-### Switch 3 <a name="Switch-3"></a>
-#### S3 Show run <a name="S3-Show-run"></a>
+### Switch 3 <a name="switch-3"></a>
+#### S3 Show run <a name="s3-show-run"></a>
 ```
 Building configuration...
 
@@ -811,7 +811,7 @@ line vty 0 4
 end
 ```
 
-#### S3 Show vtp status <a name="S3-Show-vtp-status"></a>
+#### S3 Show vtp status <a name="s3-show-vtp-status"></a>
 ```
 VTP Version capable             : 1 to 3
 VTP version running             : 3
@@ -843,7 +843,7 @@ Feature UNKNOWN:
 VTP Operating Mode                : Transparent
 ```
 
-#### S3 Show vlan <a name="S3-Show-vlan"></a>
+#### S3 Show vlan <a name="s3-show-vlan"></a>
 ```
 VLAN Name                             Status    Ports
 ---- -------------------------------- --------- -------------------------------
@@ -884,7 +884,7 @@ Primary Secondary Type              Ports
 ------- --------- ----------------- ------------------------------------------
 ```
 
-# Solution <a name="Solution"></a>
+# Solution <a name="solution"></a>
 Again, your job is to diagnose & locate the source of the problem, please check your answer here by hovering over the link
 
 1. [VLAN 1008 is mapped to SW2 Ethernet1/2](DIAG_Question.md#Solution "Correct, the vlan ascending policy assinged vlans 1007 upwards internally to L3 ports")
