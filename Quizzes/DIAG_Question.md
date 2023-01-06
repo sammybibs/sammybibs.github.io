@@ -1,7 +1,7 @@
 # TOC
 - [Diagnostics Question](#DiagnosticsQuestion)
-  - [Reported issue:](#Reportedissue:)
-    - [Initial Pings:](#InitialPings:)
+  - [Reported issue](#Reportedissue)
+    - [Initial Pings](#InitialPings)
       - [Client 1](#Client1)
       - [Client 2](#Client2)
   - [Show Command outputs](#ShowCommandoutputs)
@@ -30,7 +30,7 @@ The two clients that connected to Switch 1 & Switch 3 are both in the same VLAN 
 ![](images/2023-01-06-13-59-06.png)
 
 
-## Reported issue: <a name="Reportedissue:"></a>
+## Reported issue <a name="Reportedissue"></a>
 The users of the clients have complained that they cannot communicate directly with one another, but they can reach thier local IP hateways
 
 Troubleshooting already completed:
@@ -45,7 +45,7 @@ To help isolate the fault the following items were asked for & can be seen below
 - "show spanning-tree" from switch 1
 - "show log" from switch 2
 
-### Initial Pings: <a name="InitialPings:"></a>
+### Initial Pings <a name="InitialPings"></a>
 #### Client 1 <a name="Client1"></a>
 ```
 !!!Ping Swithc 1 SVI gateway for Client 1
@@ -881,6 +881,7 @@ Primary Secondary Type              Ports
 ------- --------- ----------------- ------------------------------------------
 ```
 
+# Solution
 Again, your job is to diagnose & locate the source of the problem, please check your answer here by hovering over the link
 
 1. [VLAN 1008 is mapped to SW2 Ethernet1/2](DIAG_Question "Correct, the vlan ascending policy assinged vlans 1007 upwards internally to L3 ports")
