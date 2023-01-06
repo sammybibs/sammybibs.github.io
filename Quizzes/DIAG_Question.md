@@ -1,36 +1,25 @@
 # TOC
-- [Enterprise architecture model](#Enterprisearchitecturemodel)
-- [Layer Two](#LayerTwo)
-  - [LAN Switching](#LANSwitching)
-  - [STP](#STP)
-  - [STP Versions](#STPVersions)
-  - [VTP](#VTP)
-  - [Port Aggregation](#PortAggregation)
-- [Layer Three](#LayerThree)
-  - [EIGRP](#EIGRP)
-  - [EIGRP vs OSPF vs ISIS](#EIGRPvsOSPFvsISIS)
-- [OSPF](#OSPF)
-  - [Basics](#Basics)
-  - [OSPF process](#OSPFprocess)
-  - [OSPF neighbors](#OSPFneighbors)
-  - [OSPF areas](#OSPFareas)
-- [Routing](#Routing)
-- [Redundancy](#Redundancy)
-- [Network Address Translation (NAT)](#NetworkAddressTranslation(NAT))
-- [Vitalization Techniqies][def]
-- [VPN Techniqies](#VPNTechniqies)
-- [Wireless](#Wireless)
-  - [RF Principles](#RFPrinciples)
-  - [Wireless Deployment options](#WirelessDeploymentoptions)
-  - [Roaming and location services](#Roamingandlocationservices)
-  - [AP operation](#APoperation)
-  - [Wireless Client Authentication](#WirelessClientAuthentication)
-  - [Wireless Client Troubleshooting](#WirelessClientTroubleshooting)
-    - [Overall wireless](#Overallwireless)
-    - [CLient connectivity](#CLientconnectivity)
-- [SD-WAN](#SD-WAN)
+- [Diagnostics Question](#DiagnosticsQuestion)
+  - [Reported issue:](#Reportedissue:)
+    - [Initial Pings:](#InitialPings:)
+      - [Client 1](#Client1)
+      - [Client 2](#Client2)
+  - [Show Command outputs](#ShowCommandoutputs)
+    - [Switch 1](#Switch1)
+      - [show run](#showrun)
+      - [show vtp status](#showvtpstatus)
+      - [Show vlan](#Showvlan)
+      - [show spanning-tree](#showspanning-tree)
+    - [Switch 2](#Switch2)
+      - [show run](#showrun)
+      - [show vtp status](#showvtpstatus)
+      - [Show log](#Showlog)
+    - [Switch 3](#Switch3)
+      - [Show run](#Showrun)
+      - [Show vtp status](#Showvtpstatus)
+      - [Show vlan](#Showvlan)
 
-# Diagnostics Question
+# Diagnostics Question <a name="DiagnosticsQuestion"></a>
 
 Your job is to diagnose & locate the source of the problem, please post your comments below & I will follow this up with a post detailing the solution in due course.
 
@@ -38,9 +27,10 @@ The following is the topology for BlogTown's new network that has just been inst
 
 The two clients that connected to Switch 1 & Switch 3 are both in the same VLAN & subnet '192.168.1.0/24'
 
-![](2023-01-06-13-59-06.png)
+![](images/2023-01-06-13-59-06.png)
 
-## Reported issue:
+
+## Reported issue: <a name="Reportedissue:"></a>
 The users of the clients have complained that they cannot communicate directly with one another, but they can reach thier local IP hateways
 
 Troubleshooting already completed:
@@ -55,8 +45,8 @@ To help isolate the fault the following items were asked for & can be seen below
 - "show spanning-tree" from switch 1
 - "show log" from switch 2
 
-### Initial Pings:
-#### Client 1
+### Initial Pings: <a name="InitialPings:"></a>
+#### Client 1 <a name="Client1"></a>
 ```
 !!!Ping Swithc 1 SVI gateway for Client 1
 CLIENT1#ping 192.168.1.1
@@ -80,7 +70,7 @@ Sending 5, 100-byte ICMP Echos to 192.168.255.2, timeout is 2 seconds:
 Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
 ```
 
-#### Client 2
+#### Client 2 <a name="Client2"></a>
 ```
 !!!Ping my own IP address
 CLIENT2#ping 192.168.1.2
@@ -104,9 +94,9 @@ Sending 5, 100-byte ICMP Echos to 192.168.255.2, timeout is 2 seconds:
 Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
 ```
 
-## Show Command outputs
-### Switch 1
-#### show run
+## Show Command outputs <a name="ShowCommandoutputs"></a>
+### Switch 1 <a name="Switch1"></a>
+#### show run <a name="showrun"></a>
 ```
 SW1#show run
 Building configuration...
@@ -227,7 +217,7 @@ line vty 0 4
 end
 ```
 
-#### show vtp status
+#### show vtp status <a name="showvtpstatus"></a>
 ```
 SW1#show vtp status
 VTP Version capable             : 1 to 3
@@ -261,7 +251,7 @@ VTP Operating Mode                : Transparent
 
 ```
 
-#### Show vlan
+#### Show vlan <a name="Showvlan"></a>
 ```
 
 SW1#show vlan
@@ -305,7 +295,7 @@ Primary Secondary Type              Ports
 
 ```
 
-#### show spanning-tree
+#### show spanning-tree <a name="showspanning-tree"></a>
 ```
 
 SW1#show spanning-tree
@@ -418,8 +408,8 @@ Et1/0               Desg FWD 100       128.5    Shr
 
 ```
 
-### Switch 2
-#### show run
+### Switch 2 <a name="Switch2"></a>
+#### show run <a name="showrun"></a>
 ```
 SW2#show run
 Building configuration...
@@ -542,7 +532,7 @@ line vty 0 4
 end
 ```
 
-#### show vtp status
+#### show vtp status <a name="showvtpstatus"></a>
 ```
 SW2#show vtp status
 VTP Version capable             : 1 to 3
@@ -575,7 +565,7 @@ Feature UNKNOWN:
 VTP Operating Mode                : Transparent
 ```
 
-#### Show log
+#### Show log <a name="Showlog"></a>
 ```
 *Nov  5 09:56:59.789: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan1, changed state to down
 *Nov  5 09:57:52.203: %LINK-3-UPDOWN: Interface Vlan1, changed state to up
@@ -701,8 +691,8 @@ VTP Operating Mode                : Transparent
 *Nov  5 10:40:47.172: OSPF-1 ADJ   Et0/1: Rcv pkt from 192.168.23.2, area 0.0.0.0 : src not on the same network
 ```
 
-### Switch 3
-#### Show run
+### Switch 3 <a name="Switch3"></a>
+#### Show run <a name="Showrun"></a>
 ```
 Building configuration...
 
@@ -818,7 +808,7 @@ line vty 0 4
 end
 ```
 
-#### Show vtp status
+#### Show vtp status <a name="Showvtpstatus"></a>
 ```
 VTP Version capable             : 1 to 3
 VTP version running             : 3
@@ -850,7 +840,7 @@ Feature UNKNOWN:
 VTP Operating Mode                : Transparent
 ```
 
-#### Show vlan
+#### Show vlan <a name="Showvlan"></a>
 ```
 VLAN Name                             Status    Ports
 ---- -------------------------------- --------- -------------------------------
@@ -891,12 +881,12 @@ Primary Secondary Type              Ports
 ------- --------- ----------------- ------------------------------------------
 ```
 
-Again, your job is to diagnose & locate the source of the problem, please check your answer here:
+Again, your job is to diagnose & locate the source of the problem, please check your answer here by hovering over the link
 
-1. [VLAN 1008 is mapped to SW2 Ethernet1/2](nope)
-2. [VTP databases are not in sync](no.md)
-3. [VTP does not support extended VLANs](no.md)
-4. [Misconfigured subnets between devices](no.md)
+1. [VLAN 1008 is mapped to SW2 Ethernet1/2](DIAG_Question "Correct, the vlan ascending policy assinged vlans 1007 upwards internally to L3 ports")
+2. [VTP databases are not in sync](DIAG_Question "Sorry, no")
+3. [VTP does not support extended VLANs](DIAG_Question "Sorry, no")
+4. [Misconfigured subnets between devices](DIAG_Question "No, the OSPF isse here is due to packets from SW1 and SW in VL1007 getting delivered to SW2 on eth 1/2 ")
 
-[I'm an inline-style link with title](https://www.google.com "Google's Homepage")
+[I'm an inline-style link with title](DIAG_Question "Google's Homepage")
 
