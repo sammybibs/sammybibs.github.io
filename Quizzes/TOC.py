@@ -61,7 +61,7 @@ def TOC_to_all(filelist):
                             step = 1
                             matched = False
                             TOC.append(indent+"["+title+"]"+"(#"+tag+")")
-                            master_TOC.append(indent+"["+title+"]"+"("+"/"+file+"#"+tag+")")
+                            master_TOC.append(indent+"["+title+"]"+"("+"/"+file+"#"+tag+"-)")
                             indent = "- "
                             title = ""
                 if line[0:4] == "![](":
