@@ -1,9 +1,12 @@
 # TABLE OF CONTENTS
 [DIAG_Question](#DIAG_Question)
 
+[README](#README)
+
 
 # DIAG_Question section <a name="DIAG_Question"></a>
 -----------
+- [December 14 2016](/DIAG_Question.md#December142016)
 - [Diagnostics Question](/DIAG_Question.md#DiagnosticsQuestion)
   - [Reported issue](/DIAG_Question.md#Reportedissue)
     - [Initial Pings](/DIAG_Question.md#InitialPings)
@@ -11,16 +14,20 @@
       - [Client 2](/DIAG_Question.md#Client2)
   - [Show Command outputs](/DIAG_Question.md#ShowCommandoutputs)
     - [Switch 1](/DIAG_Question.md#Switch1)
-      - [show run](/DIAG_Question.md#showrun)
-      - [show vtp status](/DIAG_Question.md#showvtpstatus)
-      - [Show vlan](/DIAG_Question.md#Showvlan)
-      - [show spanning-tree](/DIAG_Question.md#showspanning-tree)
+      - [S1 show run](/DIAG_Question.md#S1showrun)
+      - [S1 show vtp status](/DIAG_Question.md#S1showvtpstatus)
+      - [S1 Show vlan](/DIAG_Question.md#S1Showvlan)
+      - [S1 show spanning-tree](/DIAG_Question.md#S1showspanning-tree)
     - [Switch 2](/DIAG_Question.md#Switch2)
-      - [show run](/DIAG_Question.md#showrun)
-      - [show vtp status](/DIAG_Question.md#showvtpstatus)
-      - [Show log](/DIAG_Question.md#Showlog)
+      - [S2 show run](/DIAG_Question.md#S2showrun)
+      - [S2 show vtp status](/DIAG_Question.md#S2showvtpstatus)
+      - [S2 Show log](/DIAG_Question.md#S2Showlog)
     - [Switch 3](/DIAG_Question.md#Switch3)
-      - [Show run](/DIAG_Question.md#Showrun)
-      - [Show vtp status](/DIAG_Question.md#Showvtpstatus)
-      - [Show vlan](/DIAG_Question.md#Showvlan)
+      - [S3 Show run](/DIAG_Question.md#S3Showrun)
+      - [S3 Show vtp status](/DIAG_Question.md#S3Showvtpstatus)
+      - [S3 Show vlan](/DIAG_Question.md#S3Showvlan)
 - [Solution](/DIAG_Question.md#Solution)
+# README section <a name="README"></a>
+-----------
+- [TABLE OF CONTENTS](/README.md#TABLEOFCONTENTS)
+- [DIAG_Question section](/README.md#DIAG_Questionsection)

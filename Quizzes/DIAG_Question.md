@@ -1,4 +1,5 @@
 # TOC
+- [December 14 2016](#December142016)
 - [Diagnostics Question](#DiagnosticsQuestion)
   - [Reported issue](#Reportedissue)
     - [Initial Pings](#InitialPings)
@@ -6,19 +7,21 @@
       - [Client 2](#Client2)
   - [Show Command outputs](#ShowCommandoutputs)
     - [Switch 1](#Switch1)
-      - [show run](#showrun)
-      - [show vtp status](#showvtpstatus)
-      - [Show vlan](#Showvlan)
-      - [show spanning-tree](#showspanning-tree)
+      - [S1 show run](#S1showrun)
+      - [S1 show vtp status](#S1showvtpstatus)
+      - [S1 Show vlan](#S1Showvlan)
+      - [S1 show spanning-tree](#S1showspanning-tree)
     - [Switch 2](#Switch2)
-      - [show run](#showrun)
-      - [show vtp status](#showvtpstatus)
-      - [Show log](#Showlog)
+      - [S2 show run](#S2showrun)
+      - [S2 show vtp status](#S2showvtpstatus)
+      - [S2 Show log](#S2Showlog)
     - [Switch 3](#Switch3)
-      - [Show run](#Showrun)
-      - [Show vtp status](#Showvtpstatus)
-      - [Show vlan](#Showvlan)
+      - [S3 Show run](#S3Showrun)
+      - [S3 Show vtp status](#S3Showvtpstatus)
+      - [S3 Show vlan](#S3Showvlan)
 - [Solution](#Solution)
+
+# December 14 2016 <a name="December142016"></a>
 
 # Diagnostics Question <a name="DiagnosticsQuestion"></a>
 
@@ -97,7 +100,7 @@ Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
 
 ## Show Command outputs <a name="ShowCommandoutputs"></a>
 ### Switch 1 <a name="Switch1"></a>
-#### show run <a name="showrun"></a>
+#### S1 show run <a name="S1showrun"></a>
 ```
 SW1#show run
 Building configuration...
@@ -218,7 +221,7 @@ line vty 0 4
 end
 ```
 
-#### show vtp status <a name="showvtpstatus"></a>
+#### S1 show vtp status <a name="S1showvtpstatus"></a>
 ```
 SW1#show vtp status
 VTP Version capable             : 1 to 3
@@ -252,7 +255,7 @@ VTP Operating Mode                : Transparent
 
 ```
 
-#### Show vlan <a name="Showvlan"></a>
+#### S1 Show vlan <a name="S1Showvlan"></a>
 ```
 
 SW1#show vlan
@@ -296,7 +299,7 @@ Primary Secondary Type              Ports
 
 ```
 
-#### show spanning-tree <a name="showspanning-tree"></a>
+#### S1 show spanning-tree <a name="S1showspanning-tree"></a>
 ```
 
 SW1#show spanning-tree
@@ -410,7 +413,7 @@ Et1/0               Desg FWD 100       128.5    Shr
 ```
 
 ### Switch 2 <a name="Switch2"></a>
-#### show run <a name="showrun"></a>
+#### S2 show run <a name="S2showrun"></a>
 ```
 SW2#show run
 Building configuration...
@@ -533,7 +536,7 @@ line vty 0 4
 end
 ```
 
-#### show vtp status <a name="showvtpstatus"></a>
+#### S2 show vtp status <a name="S2showvtpstatus"></a>
 ```
 SW2#show vtp status
 VTP Version capable             : 1 to 3
@@ -566,7 +569,7 @@ Feature UNKNOWN:
 VTP Operating Mode                : Transparent
 ```
 
-#### Show log <a name="Showlog"></a>
+#### S2 Show log <a name="S2Showlog"></a>
 ```
 *Nov  5 09:56:59.789: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan1, changed state to down
 *Nov  5 09:57:52.203: %LINK-3-UPDOWN: Interface Vlan1, changed state to up
@@ -693,7 +696,7 @@ VTP Operating Mode                : Transparent
 ```
 
 ### Switch 3 <a name="Switch3"></a>
-#### Show run <a name="Showrun"></a>
+#### S3 Show run <a name="S3Showrun"></a>
 ```
 Building configuration...
 
@@ -809,7 +812,7 @@ line vty 0 4
 end
 ```
 
-#### Show vtp status <a name="Showvtpstatus"></a>
+#### S3 Show vtp status <a name="S3Showvtpstatus"></a>
 ```
 VTP Version capable             : 1 to 3
 VTP version running             : 3
@@ -841,7 +844,7 @@ Feature UNKNOWN:
 VTP Operating Mode                : Transparent
 ```
 
-#### Show vlan <a name="Showvlan"></a>
+#### S3 Show vlan <a name="S3Showvlan"></a>
 ```
 VLAN Name                             Status    Ports
 ---- -------------------------------- --------- -------------------------------
@@ -889,4 +892,5 @@ Again, your job is to diagnose & locate the source of the problem, please check 
 2. [VTP databases are not in sync](DIAG_Question.md#Solution "Sorry, no")
 3. [VTP does not support extended VLANs](DIAG_Question.md#Solution "Sorry, no")
 4. [Misconfigured subnets between devices](DIAG_Question.md#Solution "No, the OSPF isse here is due to packets from SW1 and SW in VL1007 getting delivered to SW2 on eth 1/2 ")
+
 
