@@ -18,6 +18,7 @@
       - [Show run](#Showrun)
       - [Show vtp status](#Showvtpstatus)
       - [Show vlan](#Showvlan)
+- [Solution](#Solution)
 
 # Diagnostics Question <a name="DiagnosticsQuestion"></a>
 
@@ -881,13 +882,11 @@ Primary Secondary Type              Ports
 ------- --------- ----------------- ------------------------------------------
 ```
 
-# Solution
+# Solution <a name="Solution"></a>
 Again, your job is to diagnose & locate the source of the problem, please check your answer here by hovering over the link
 
-1. [VLAN 1008 is mapped to SW2 Ethernet1/2](DIAG_Question "Correct, the vlan ascending policy assinged vlans 1007 upwards internally to L3 ports")
-2. [VTP databases are not in sync](DIAG_Question "Sorry, no")
-3. [VTP does not support extended VLANs](DIAG_Question "Sorry, no")
-4. [Misconfigured subnets between devices](DIAG_Question "No, the OSPF isse here is due to packets from SW1 and SW in VL1007 getting delivered to SW2 on eth 1/2 ")
-
-[I'm an inline-style link with title](DIAG_Question "Google's Homepage")
+1. [VLAN 1008 is mapped to SW2 Ethernet1/2](DIAG_Question.md#Solution "Correct, the vlan ascending policy assinged vlans 1007 upwards internally to L3 ports")
+2. [VTP databases are not in sync](DIAG_Question.md#Solution "Sorry, no")
+3. [VTP does not support extended VLANs](DIAG_Question.md#Solution "Sorry, no")
+4. [Misconfigured subnets between devices](DIAG_Question.md#Solution "No, the OSPF isse here is due to packets from SW1 and SW in VL1007 getting delivered to SW2 on eth 1/2 ")
 
