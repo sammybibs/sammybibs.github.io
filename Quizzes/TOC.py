@@ -15,7 +15,7 @@ def TOC_to_all(filelist):
     master_TOC = []
     for file in filelist:
         text_title = file.strip('md$').strip('.')
-        master_TOC.append('# '+text_title+' section'+' <a name=\"'+text_title+'"></a>')
+        master_TOC.append('/ '+text_title+' section'+' <a name=\"'+text_title+'"></a>')
         master_TOC.append("-----------")
         with open(file, 'r') as TOC_FILE:
             TOC = ['# TOC']
