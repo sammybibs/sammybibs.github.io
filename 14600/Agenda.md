@@ -1,6 +1,6 @@
 # TOC
 - [payment status](#payment-status-)
-  - [brief agenda](#brief-agenda-)
+  - [agenda](#agenda-)
 
 # Payment status <a name="payment-status"></a>
 
@@ -12,7 +12,7 @@ Sam | Mat | Marc | Mart | Gal | Scott
   * Samuel Bibby - 20-67-49 : 80416711
 
 
-## Brief agenda <a name="brief-agenda"></a>
+## Agenda <a name="agenda"></a>
 
 Friday 2nd June - Sunday 4th June
 
