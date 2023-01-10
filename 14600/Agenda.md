@@ -16,6 +16,8 @@ Sam | Mat | Marc | Mart | Gal | Scott
 
 Friday 2nd June - Sunday 4th June
 
+**Flights allow only:: One small under seat cabin bag (max 45 x 36 x 20 cm)**
+
 ```Friday```
 * 09:00 - 10:00 ::: Meet in ```TBC (Spoons)```
 * 10:00 - 11:00 ::: Transport to LWG ```(TBC the method)```
