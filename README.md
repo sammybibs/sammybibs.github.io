@@ -1,7 +1,3 @@
 # TABLE OF CONTENTS
-[README](#README)
-
-
-# README section <a name="README"></a>
------------
-- [TABLE OF CONTENTS](/README.md#TABLEOFCONTENTS)
+- [README](#README)
+- [Quizzes](/Quizzes/README.md)
