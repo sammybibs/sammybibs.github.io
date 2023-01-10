@@ -77,7 +77,8 @@ def TOC_to_all(filelist):
     with open('README.md', 'w+') as NEW_TOC_FILE:
         NEW_TOC_FILE.write("# TABLE OF CONTENTS"+"\n")
         for file in filelist:
-            text_title = file.strip('md$').strip('.')
+            #text_title = file.strip('md$').strip('.')
+            text_title = file
             NEW_TOC_FILE.write("["+text_title+"](/"+text_title+")\n\n")
         NEW_TOC_FILE.write("\n")
         for line in master_TOC:
