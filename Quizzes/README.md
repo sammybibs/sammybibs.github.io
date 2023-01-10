@@ -1,7 +1,7 @@
 # TABLE OF CONTENTS
-[DIAG_Question](#DIAG_Question)
+[DIAG_Question](DIAG_Question.md)
 
-[README](#README)
+[README](README.md)
 
 
 # DIAG_Question section <a name="DIAG_Question"></a>
