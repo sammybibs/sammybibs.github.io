@@ -1,7 +1,7 @@
 # TABLE OF CONTENTS
-[Agenda](/Quizzes/Agenda.md)
+[Agenda](/14600/Agenda.md)
 
-[README](/Quizzes/README.md)
+[README](/14600/README.md)
 
 
 # Agenda section <a name="Agenda"></a>
@@ -12,3 +12,4 @@
 -----------
 - [table of contents](/README.md#table-of-contents-)
 - [agenda section](/README.md#agenda-section-)
+- [readme section](/README.md#readme-section-)
