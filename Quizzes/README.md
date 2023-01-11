@@ -1,7 +1,7 @@
 # TABLE OF CONTENTS
-[DIAG_Question](/Quizzes/DIAG_Question.md)
+[DIAG_Question](/Quizzes/DIAG_Question)
 
-[README](/Quizzes/README.md)
+[README](/Quizzes/README)
 
 
 # DIAG_Question section <a name="DIAG_Question"></a>
@@ -30,3 +30,4 @@
 -----------
 - [table of contents](/README.md#table-of-contents-)
 - [diag_question section](/README.md#diag_question-section-)
+- [readme section](/README.md#readme-section-)
