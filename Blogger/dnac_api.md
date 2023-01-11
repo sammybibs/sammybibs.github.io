@@ -2,7 +2,6 @@
 - [technology covered](#technology-covered-)
 - [the background story](#the-background-story-)
 - [web back end baseline](#web-back-end-baseline-)
-    - [this import needed to parse templates](#this-import-needed-to-parse-templates-)
     - [add support for post calls](#add-support-for-post-calls-)
     - [base import](#base-import-)
     - [the sets the flask app up](#the-sets-the-flask-app-up-)
@@ -39,7 +38,7 @@ The first goal is to create the web front end with flask, then see if we can pun
 # Web back end baseline <a name="web-back-end-baseline"></a>
 First lets pull together a base shel to work from, this is called ```Hello_flask.py```
 ```python
-###This import needed to parse templates <a name="this-import-needed-to-parse-templates"></a>
+ ###This import needed to parse templates
 from flask import render_template
 
 ###Add support for POST calls <a name="add-support-for-post-calls"></a>

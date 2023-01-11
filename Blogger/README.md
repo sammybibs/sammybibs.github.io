@@ -14,7 +14,6 @@
 - [technology covered](/dnac_api.md#technology-covered-)
 - [the background story](/dnac_api.md#the-background-story-)
 - [web back end baseline](/dnac_api.md#web-back-end-baseline-)
-    - [this import needed to parse templates](/dnac_api.md#this-import-needed-to-parse-templates-)
     - [add support for post calls](/dnac_api.md#add-support-for-post-calls-)
     - [base import](/dnac_api.md#base-import-)
     - [the sets the flask app up](/dnac_api.md#the-sets-the-flask-app-up-)
