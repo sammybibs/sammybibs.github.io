@@ -178,14 +178,14 @@ def links():
 <br><br>
 
 Then in the /templates folder we create the template thats to be rendered ```second_page.html```. This tempate uses jinja2 to render the items in the passed dictionary, where shown also has one ```if``` statement to highlight the key ```Discord``` in bold.
-```python
+```javascript
 <html>
     <head>
         <title>{{ title }}</title>
     </head>
     <body>
         <ul>
-        !unsafe {% for k,v in hyperlinks.items() %}
+        {% for k,v in hyperlinks.items() %}
         {% if k == "Discord": %}
         <li> This is <a href="{{ v }}">{{ k }}</a> </li>
 	    {% else %}
