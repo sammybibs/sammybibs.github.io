@@ -1,7 +1,7 @@
 # TABLE OF CONTENTS
-[README](/Quizzes/README)
+[README](/Blogger/README)
 
-[nac_api](/Quizzes/nac_api)
+[nac_api](/Blogger/nac_api)
 
 
 # README section <a name="README"></a>
