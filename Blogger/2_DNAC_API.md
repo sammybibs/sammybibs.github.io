@@ -127,38 +127,83 @@ DNAC API info is self documented in DNAC:
 
 **How do we achieve this?** <br>
 Working backwards from what we want to do, we need the following data:
+0. Push the SNMP data to the UDF in DNAC
 1. All SNMP contact and location data on the device.
 2. Details of the devices that we want to glean the SNMP data from and post to the UDF fields.
 
-For (1) we can get all this data via an API call to the ```Get Device by ID```API, specifically **/dna/intent/api/v1/network-device/${id}**. This will provide us with a plethora of usable data about the chassis including the SNMP data. Plus this information is cached within DNAC already, so no need to make any calls direct the device itself.
+For (1) we can get all this data via an API call to the ```Get Device by ID``` API, specifically **/dna/intent/api/v1/network-device/${id}**. This will provide us with a plethora of usable data about the chassis including the SNMP data. Plus this information is cached within DNAC already, so no need to make any calls direct the device itself.
 
 To achieve the above we need to get (2), what are the devices we want to query and specifically what are the devise IDs (this is a DNAC 36 character value that DNAC uses to ID a node).
 
 <br>
 
-So working backwards we first need the device IDs:
+### Glean device IDs from DNAC
 
+So working backwards we first need the device IDs. We can do this with a function that calls the ```Get Device list```, specifically **/dna/intent/api/v1/network-device**. This returns a list of all devices & we can  pass parameters to filter the returned response (such as device type, location, role...)
+
+For our filter I have decided to use the ```ROLE``` field, where the usable options are as per the DNAC inventory 'Device Role' column.
+* **[UNKNOWN, ACCESS, CORE, DISTRIBUTION, BODER ROUTER]**
+
+If no role is passed, the function will assume ALL. Now we can use the data from our previous functions and pass them to this function to glean the device ID's (dnac_data & token)
 
 ```python
-def get_devices(dnac_system, token, role=0):
+def get_devices(dnac_system, token, role='ALL'):
     """[summary]
     Gets the required devices
     """
     headers = {'content-type': 'application/json'}
     headers['x-auth-token'] = token
     BASE_URL = f'https://{dnac_system[0]}:{dnac_system[1]}'
-    ###Get all devices
     DEVICE_URL = '/dna/intent/api/v1/network-device'
     device_data = requests.get(BASE_URL+DEVICE_URL, headers=headers, verify=False)
     device_data = device_data.json()
-    if role == 0:
-        devices = [i['instanceUuid'] for i in device_data['response']]
-    elif role == 'ALL':
+    if role == 'ALL':
         devices = [i['instanceUuid'] for i in device_data['response']]
     else:
         devices = [i['instanceUuid'] for i in device_data['response'] if i['role'] == role]
     return devices
 ```
+
+Running this with no role defined we see all nodes are gleaned:
+```python
+device_list = get_devices(dnac_data, token)
+print(device_list)
+['redacted-e0ac-4616-81e7-xxxredacted', 'redacted-e0d5-4194-b062-xxxredacted', 'redacted-9024-46c9-8775-xxxredacted', 'redacted-f52a-4869-b447-xxxredacted', 'redacted-1658-459b-9c77-xxxredacted', 'redacted-fdf4-47b9-aa45-xxxredacted', 'redacted-543d-46d2-95c7-xxxredacted', 'redacted-4fc4-4589-a906-xxxredacted', 'redacted-d751-4892-91d0-xxxredacted', 'redacted-7b3d-458b-9212-xxxredacted', 'redacted-d7a3-4912-8cdf-xxxredacted', 'redacted-4ba6-43e3-9793-xxxredacted', 'redacted-e87a-4a48-a8bf-xxxredacted', 'redacted-0881-4926-a348-xxxredacted', 'redacted-7578-444c-8e87-xxxredacted', 'redacted-a518-4866-96f2-xxxredacted', 'redacted-fb0a-453a-b3d4-xxxredacted', 'redacted-1825-4392-a05c-xxxredacted', 'redacted-3d18-42b2-8c47-xxxredacted', 'redacted-0071-46a3-be21-xxxredacted', 'redacted-e20b-46ec-a3d5-xxxredacted', 'redacted-8a6f-4b40-9026-xxxredacted', 'redacted-dc1b-400f-8333-xxxredacted', 'redacted-a1db-4555-a863-xxxredacted', 'redacted-d50e-4a09-ad35-xxxredacted', 'redacted-ed9f-47dc-9612-xxxredacted', 'redacted-afec-4933-a7aa-xxxredacted']
+```
+
+Vs running this with the 'ACCESS' filter passed, where we see just the nodes with that classification.
+```python
+device_list = get_devices(dnac_data, token, role='ACCESS')
+print(device_list)
+['redacted-4fc4-4589-a906-xxxredacted', 'redacted-7578-444c-8e87-xxxredacted', 'redacted-a518-4866-96f2-xxxredacted', 'redacted-8a6f-4b40-9026-xxxredacted', 'redacted-ed9f-47dc-9612-xxxredacted']
+```
+
+<br>
+
+> Side note: I redacted the prefix and suffix out of paranoia, heres how i achieved that:
+```python
+new_device_list = []
+for d in device_list:
+    ess = 'redacted'
+    ess += i[8:-12]
+    ess += 'xxxredacted'
+    new.append(ess)
+print(new_device_list)
+```
+
+<br>
+
+**Result:** Success, we now have the device ID's we can pass to the ```Get Device by ID``` and pull the SNMP data.
+
+### Glean device data using the device IDs from DNAC
+
+Within this function we can do two things:
+1. Pass the device ID data to the ```Get Device by ID``` API and glean the SNMP data.
+2. Post this SNMP data to the DNAC ```User Defined Fields``` API.
+
+> **Warning:** this post action will only work if the field placeholder is already created in DNAC.. Broswe to DNAC, sleect a device, optn the 'user defined field' menu & click ```Manage User Defined Fields```, then ```Create new field``.
+
+> The name we use here is ised as the key, when posting the data back to DNAC.
 
 ```python
 def get_snmp(dnac_system, token, devices):
