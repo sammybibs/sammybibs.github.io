@@ -1,7 +1,7 @@
 # TOC
 - [technology covered](#technology-covered-)
 - [the background story](#the-background-story-)
-- [web back end baselin](#web-back-end-baselin-)
+- [web back end baseline](#web-back-end-baseline-)
 
 # Technology covered <a name="technology-covered"></a>
 * DNAC API
@@ -25,7 +25,7 @@ Concurrently I have been tinkering with creating my first webex bot using the [w
 
 The first goal is to create the web front end with flask, then see if we can punt this functionality into a webex bot running in AWS.
 
-# Web back end baselin <a name="web-back-end-baselin"></a>
+# Web back end baseline <a name="web-back-end-baseline"></a>
 First lets pull together a base shel to work from, this is called ```Hello_flask.py```
 ```python
  ###This import needed to parse templates

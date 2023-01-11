@@ -13,4 +13,4 @@
 -----------
 - [technology covered](/dnac_api.md#technology-covered-)
 - [the background story](/dnac_api.md#the-background-story-)
-- [web back end baselin](/dnac_api.md#web-back-end-baselin-)
+- [web back end baseline](/dnac_api.md#web-back-end-baseline-)
