@@ -4,12 +4,13 @@
 - [web back end baseline](#web-back-end-baseline-)
 
 # Technology covered <a name="technology-covered"></a>
-* DNAC API
 * Python
   * Flask
-  * Webex Bot
   * jinja2
-* AWS hosted
+  * lists
+  * dictionaries
+  * if/else
+  * HTML
 
 <br><br>
 
