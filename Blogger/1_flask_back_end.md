@@ -178,6 +178,8 @@ def links():
 <br><br>
 
 Then in the /templates folder we create the template thats to be rendered ```second_page.html```. This tempate uses jinja2 to render the items in the passed dictionary, where shown also has one ```if``` statement to highlight the key ```Discord``` in bold.
+> Note: had to write the for loop in [```liquid```](https://shopify.dev/api/liquid/tags/iteration-tags#for) format to get past the git parser checks, else we could unpack them as one line per ```(k,v in hyperlinks.items())```
+
 ```html
 <html>
    <head>
@@ -185,12 +187,12 @@ Then in the /templates folder we create the template thats to be rendered ```sec
    </head>
    <body>
       <ul>
-         {% for k,v in hyperlinks.items() -%}
-            {% if k == "Discord": %}
-            <li><b> <a href="{{ v }}">{{ k }}</a> But in big bold letters </b></li>
+         {% for k in hyperlinks.keys() %}
+            {% if k == "Discord" %}
+            <li><b> <a href="{{ hyperlinks[k] }}">{{ k }}</a> But in big bold letters </b></li>
             {% else %}
-            <li><a href="{{ v }}">{{ k }}</a> </li>
-            {%- endif -%}
+            <li><a href="{{ hyperlinks[k] }}">{{ k }}</a> </li>
+            {% endif %}
          {% endfor %}
       </ul>
    </body>
