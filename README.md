@@ -1,7 +1,7 @@
 # TABLE OF CONTENTS
 - [README](#README)
 - [Quizzes](/Quizzes/README.md)
-- [Bloger](/Blogger/README.md)
+- [Blogger](/Blogger/README.md)
 
 ## Other ways to find me
 

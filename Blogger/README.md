@@ -1,7 +1,7 @@
 # TABLE OF CONTENTS
 [README](/Blogger/README)
 
-[dnac_api](/Blogger/nac_api)
+[dnac_api](/Blogger/dnac_api)
 
 
 # README section <a name="README"></a>
@@ -9,7 +9,7 @@
 - [table of contents](/README.md#table-of-contents-)
 - [readme section](/README.md#readme-section-)
 - [nac_api section](/README.md#nac_api-section-)
-# nac_api section <a name="nac_api"></a>
+# dnac_api section <a name="dnac_api"></a>
 -----------
 - [technology covered](/dnac_api.md#technology-covered-)
 - [the background story](/dnac_api.md#the-background-story-)
