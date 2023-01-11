@@ -185,12 +185,12 @@ Then in the /templates folder we create the template thats to be rendered ```sec
    </head>
    <body>
       <ul>
-         {% for k,v in hyperlinks.items() %}
+         {% for k,v in hyperlinks.items() -%}
             {% if k == "Discord": %}
-            <li> This is <a href="{{ v }}">{{ k }}</a> </li>
+            <li><b> <a href="{{ v }}">{{ k }}</a> But in big bold letters </b></li>
             {% else %}
             <li><a href="{{ v }}">{{ k }}</a> </li>
-            {% endif %}
+            {%- endif -%}
          {% endfor %}
       </ul>
    </body>
