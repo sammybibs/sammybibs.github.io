@@ -1,8 +1,7 @@
 # TOC
 - [technology covered](#technology-covered-)
 - [the background story](#the-background-story-)
-- [web back end baseline](#web-back-end-baseline-)
-  - [where the decorator can renders a template with static variables](#where-the-decorator-can-renders-a-template-with-static-variables-)
+- [web back end baselin](#web-back-end-baselin-)
 
 # Technology covered <a name="technology-covered"></a>
 * DNAC API
@@ -26,7 +25,7 @@ Concurrently I have been tinkering with creating my first webex bot using the [w
 
 The first goal is to create the web front end with flask, then see if we can punt this functionality into a webex bot running in AWS.
 
-# Web back end baseline <a name="web-back-end-baseline"></a>
+# Web back end baselin <a name="web-back-end-baselin"></a>
 First lets pull together a base shel to work from, this is called ```Hello_flask.py```
 ```python
  ###This import needed to parse templates
@@ -148,7 +147,7 @@ Below we update the file ```first_page.html``` file with a button object that ca
 We add a new route to our ```Hello_flask.py``` file, this will pass a dictionary ```link_me``` that the jinja2 engine can parse when rendering the ```second_page.html``` file.
 ```python
  ###The route() decorator, @app.route(), binds a URL to a function.
-##Where The decorator can renders a template with static variables <a name="where-the-decorator-can-renders-a-template-with-static-variables"></a>
+ ###Where The decorator can renders a template with static variables
 @app.route('/links')
 def links():
    link_me = {"YouTube":"https://www.youtube.com/channel/UCFsz8jHR4Al-BqbfzFkGLPg",

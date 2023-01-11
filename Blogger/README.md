@@ -13,5 +13,4 @@
 -----------
 - [technology covered](/dnac_api.md#technology-covered-)
 - [the background story](/dnac_api.md#the-background-story-)
-- [web back end baseline](/dnac_api.md#web-back-end-baseline-)
-  - [where the decorator can renders a template with static variables](/dnac_api.md#where-the-decorator-can-renders-a-template-with-static-variables-)
+- [web back end baselin](/dnac_api.md#web-back-end-baselin-)
