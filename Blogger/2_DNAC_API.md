@@ -201,14 +201,15 @@ Within this function we can do two things:
 1. Pass the device ID data to the ```Get Device by ID``` API and glean the SNMP data.
 2. Post this SNMP data to the DNAC ```User Defined Fields``` API.
 
-> **Warning:** this post action will only work if the field placeholder is already created in DNAC.. Broswe to DNAC, sleect a device, optn the 'user defined field' menu & click ```Manage User Defined Fields```, then ```Create new field``.
+> **Warning:** this post action will only work if the field placeholder is already created in DNAC.. Browse to DNAC, select a device, open the 'user defined field' menu & click ```Manage User Defined Fields```, then ```Create new field``.
+> The name we use here is used as the key, when posting the data back to DNAC.
 
-> The name we use here is ised as the key, when posting the data back to DNAC.
+![](images/2023-01-11-19-48-03.png)
 
 ```python
 def get_snmp(dnac_system, token, devices):
     """[summary]
-    this will glean the SNMP contact/location from each deivce, then update the UDF fields
+    this will glean the SNMP contact/location from each device, then update the UDF fields
     in DNAC with this same data.
     """
     headers = {'content-type': 'application/json'}
@@ -217,6 +218,7 @@ def get_snmp(dnac_system, token, devices):
     ##Get SNMP info
     DEVICE_URL = '/dna/intent/api/v1/network-device/'
     UDF_TAG = '/user-defined-field'
+    ##Loop over each device passed, glen the data, print the output for debugging
     for DEVICE in devices:
         platform_data = requests.get(BASE_URL+DEVICE_URL+DEVICE, headers=headers, verify=False)
         platform_data = platform_data.json()
@@ -226,6 +228,7 @@ def get_snmp(dnac_system, token, devices):
         print(f"snmpContact = {platform_data['response']['snmpContact']}")
         print(f"snmpLocation = {platform_data['response']['snmpLocation']}")
         print()
+        ##Check what SNMP variables are present and set the respective needed payloads.
         if platform_data['response']['snmpContact'] and platform_data['response']['snmpLocation']:
             payload = [{"name":"snmpContact","value":platform_data['response']['snmpContact']},
                     {"name":"snmpLocation","value":platform_data['response']['snmpLocation']}]
@@ -238,5 +241,15 @@ def get_snmp(dnac_system, token, devices):
             #
         else:
             continue
+         ##Make the post call to DNAC with the correct payload to update the GUI UDF page.
         requests.put(BASE_URL+DEVICE_URL+DEVICE+UDF_TAG,data=json.dumps(payload), headers=headers, verify=False)
 ```
+
+Now we can use the data from our previous functions and pass them to this function to glean the device ID's (dnac_data, token & the **device_list**)
+
+(((TBC TBC TBC)))
+Forst elts check DNAC and a device to be sue its go no data:
+
+
+We pass this function the 
+get_snmp(dnac_data, token, device_list)
