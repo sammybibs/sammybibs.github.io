@@ -2,15 +2,6 @@
 - [technology covered](#technology-covered-)
 - [the background story](#the-background-story-)
 - [web back end baseline](#web-back-end-baseline-)
-    - [add support for post calls](#add-support-for-post-calls-)
-    - [base import](#base-import-)
-    - [the sets the flask app up](#the-sets-the-flask-app-up-)
-    - [sets up the flask server if this code is called directly](#sets-up-the-flask-server-if-this-code-is-called-directly-)
-    - [add some header variables to demo thier usage](#add-some-header-variables-to-demo-thier-usage-)
-    - [this import & variable used to get todays date](#this-import-&-variable-used-to-get-todays-date-)
-    - [the route() decorator, @app.route(), binds a url to a function.](#the-route()-decorator,-@app.route(),-binds-a-url-to-a-function.-)
-    - [the url in thei case is the root of the page '/'](#the-url-in-thei-case-is-the-root-of-the-page-'/'-)
-    - [the route() decorator, @app.route(), binds a url to a function.](#the-route()-decorator,-@app.route(),-binds-a-url-to-a-function.-)
   - [where the decorator can renders a template with static variables](#where-the-decorator-can-renders-a-template-with-static-variables-)
 
 # Technology covered <a name="technology-covered"></a>
@@ -41,17 +32,17 @@ First lets pull together a base shel to work from, this is called ```Hello_flask
  ###This import needed to parse templates
 from flask import render_template
 
-###Add support for POST calls <a name="add-support-for-post-calls"></a>
+ ###Add support for POST calls
 from flask import request
 from flask import Flask, redirect, url_for, request
 
-###Base import <a name="base-import"></a>
+ ###Base import
 from flask import Flask
 
-###The sets the flask app up <a name="the-sets-the-flask-app-up"></a>
+ ###The sets the flask app up
 app = Flask(__name__)
 
-###Sets up the flask server if this code is called directly <a name="sets-up-the-flask-server-if-this-code-is-called-directly"></a>
+ ###Sets up the flask server if this code is called directly
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=81)
 ```
@@ -69,17 +60,17 @@ Press CTRL+C to quit
 So we need a page to present at the route "/" page, like an index or readme.
 
 ```python
-###Add some header variables to demo thier usage <a name="add-some-header-variables-to-demo-thier-usage"></a>
+ ###Add some header variables to demo thier usage
 dev = 'Sam Bibby'
 updated = 'Jan 11th 2023'
 purpose = 'learning'
 
-###This import & variable used to get todays date <a name="this-import-&-variable-used-to-get-todays-date"></a>
+ ###This import & variable used to get todays date
 from datetime import datetime
 date = datetime.now().strftime('%Y/%m/%d')
 
-###The route() decorator, @app.route(), binds a URL to a function. <a name="the-route()-decorator,-@app.route(),-binds-a-url-to-a-function."></a>
-###The URL in thei case is the root of the page '/' <a name="the-url-in-thei-case-is-the-root-of-the-page-'/'"></a>
+ ###The route() decorator, @app.route(), binds a URL to a function.
+ ###The URL in thei case is the root of the page '/'
 @app.route('/',methods = ['POST', 'GET'])
 def index():
    if request.method == 'GET':
@@ -156,7 +147,7 @@ Below we update the file ```first_page.html``` file with a button object that ca
 
 We add a new route to our ```Hello_flask.py``` file, this will pass a dictionary ```link_me``` that the jinja2 engine can parse when rendering the ```second_page.html``` file.
 ```python
-###The route() decorator, @app.route(), binds a URL to a function. <a name="the-route()-decorator,-@app.route(),-binds-a-url-to-a-function."></a>
+ ###The route() decorator, @app.route(), binds a URL to a function.
 ##Where The decorator can renders a template with static variables <a name="where-the-decorator-can-renders-a-template-with-static-variables"></a>
 @app.route('/links')
 def links():
