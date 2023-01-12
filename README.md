@@ -1,7 +1,8 @@
 # TABLE OF CONTENTS
 - [Blogger](/Blogger/README.md)
   - [Flask Back End basics (01/01/23)](/Blogger/1_flask_back_end)
-  - [DNAC APIs required (2/01/23)](/Blogger/2_DNAC_API)
+  - [DNAC APIs required (2/01/23)](/Blogger/2_DNAC_API)\
+  - [DNAC info Flask](/Blogger/3_DNAC_into_flask)
 - [Quizzes](/Quizzes/README.md)
   - [DIAG_Question (14/12/2016)](/Quizzes/DIAG_Question)
 
