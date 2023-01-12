@@ -1,4 +1,4 @@
-# TOC
+# Contents
 - [Technology covered](#technology-covered-)
 - [The background story](#the-background-story-)
 - [Accessing the API](#accessing-the-api-)
@@ -7,6 +7,8 @@
     - [Glean device IDs](#glean-device-ids-)
     - [Glean device data](#glean-device-data-)
       - [Summary](#summary-)
+  - [DNAC SFP inventory check](#dnac-sfp-inventory-check-)
+  - [DNAC Find named ports](#dnac-find-named-ports-)
 
 # Technology covered <a name="technology-covered"></a>
 * DNAC API
@@ -372,10 +374,10 @@ To make this work you need to execute following workflow:
 5. Execute the GET/PUT of the data
 
 
-## DNAC SFP inventory check
+## DNAC SFP inventory check <a name="dnac-sfp-inventory-check"></a>
 ---
 
-## DNAC Find named ports
+## DNAC Find named ports <a name="dnac-find-named-ports"></a>
 ---
 
 
