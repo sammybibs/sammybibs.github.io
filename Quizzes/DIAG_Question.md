@@ -1,4 +1,4 @@
-# TOC
+# Contents:
 - [Diagnostics Question](#diagnostics-question-)
   - [Reported issue](#reported-issue-)
     - [Initial Pings](#initial-pings-)
