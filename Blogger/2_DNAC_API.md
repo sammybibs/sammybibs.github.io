@@ -1,10 +1,10 @@
 # TOC
 - [Technology covered](#technology-covered-)
 - [The background story](#the-background-story-)
-- [Accessing the api](#accessing-the-api-)
+- [Accessing the API](#accessing-the-api-)
 - [Use cases](#use-cases-)
-  - [Dnac user defined fields update](#dnac-user-defined-fields-update-)
-    - [Glean device ids](#glean-device-ids-)
+  - [DNAC User Defined Fields update](#dnac-user-defined-fields-update-)
+    - [Glean device IDs](#glean-device-ids-)
     - [Glean device data](#glean-device-data-)
       - [Summary](#summary-)
 

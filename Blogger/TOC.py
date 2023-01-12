@@ -56,12 +56,12 @@ def TOC_to_all(filelist):
                                     title = title+letter
                             tagged_title = tagged_title.strip()
                             title = title.strip()
-                            title = title.lower()
-                            tag = title.replace(" ", "-")
+                            title2 = title.lower()
+                            tag = title2.replace(" ", "-")
                             README[-1] = tagged_title+" "+tag_start+tag+tag_end
                             step = 1
                             matched = False
-                            TOC.append(indent+"["+title.capitalize()+"]"+"(#"+tag+"-)")
+                            TOC.append(indent+"["+title+"]"+"(#"+tag+"-)")
                             master_TOC.append(indent+"["+title+"]"+"("+"/"+file+"#"+tag+"-)")
                             indent = "- "
                             title = ""
