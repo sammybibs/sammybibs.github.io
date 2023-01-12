@@ -1,7 +1,7 @@
 # TOC
-- [technology covered](#technology-covered-)
-- [the background story](#the-background-story-)
-- [web back end baseline](#web-back-end-baseline-)
+- [Technology covered](#technology-covered-)
+- [The background story](#the-background-story-)
+- [Web back end baseline](#web-back-end-baseline-)
 
 # Technology covered <a name="technology-covered"></a>
 * Python

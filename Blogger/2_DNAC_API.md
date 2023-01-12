@@ -1,12 +1,12 @@
 # TOC
-- [technology covered](#technology-covered-)
-- [the background story](#the-background-story-)
-- [accessing the api](#accessing-the-api-)
-- [use cases for the api that the gui cannot provide](#use-cases-for-the-api-that-the-gui-cannot-provide-)
-  - [dnac user defined fields update](#dnac-user-defined-fields-update-)
-    - [glean device ids from dnac](#glean-device-ids-from-dnac-)
-    - [glean device data using the device ids from dnac](#glean-device-data-using-the-device-ids-from-dnac-)
-      - [summary](#summary-)
+- [Technology covered](#technology-covered-)
+- [The background story](#the-background-story-)
+- [Accessing the api](#accessing-the-api-)
+- [Use cases](#use-cases-)
+  - [Dnac user defined fields update](#dnac-user-defined-fields-update-)
+    - [Glean device ids](#glean-device-ids-)
+    - [Glean device data](#glean-device-data-)
+      - [Summary](#summary-)
 
 # Technology covered <a name="technology-covered"></a>
 * DNAC API
@@ -112,7 +112,7 @@ eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDJlNTBiZmI2MDg5YzAwOTMyZjEyMWY
 <br>
 
 
-# Use cases for the API that the GUI cannot provide <a name="use-cases-for-the-api-that-the-gui-cannot-provide"></a>
+# Use cases <a name="use-cases"></a>
 
 DNAC API info is self documented in DNAC:
 * https://**{{YOUR-DNAC-IP}}**/dna/platform/app/consumer-portal/developer-toolkit/apis
@@ -143,7 +143,7 @@ To achieve the above we need to get (2), what are the devices we want to query a
 
 <br>
 
-### Glean device IDs from DNAC <a name="glean-device-ids-from-dnac"></a>
+### Glean device IDs <a name="glean-device-ids"></a>
 ---
 
 So working backwards we first need the device IDs. We can do this with a function that calls the ```Get Device list```, specifically **/dna/intent/api/v1/network-device**. This returns a list of all devices & we can  pass parameters to filter the returned response (such as device type, location, role...)
@@ -201,7 +201,7 @@ print(device_list)
 
 <br>
 
-### Glean device data using the device IDs from DNAC <a name="glean-device-data-using-the-device-ids-from-dnac"></a>
+### Glean device data <a name="glean-device-data"></a>
 ---
 
 Within this function we can do two things:
