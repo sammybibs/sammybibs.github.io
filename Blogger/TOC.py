@@ -73,15 +73,6 @@ def TOC_to_all(filelist):
                 NEW_TOC_FILE.write(line+"\n")
             for line in README:
                 NEW_TOC_FILE.write(line+"\n")
-        #
-    with open('README.md', 'w+') as NEW_TOC_FILE:
-        NEW_TOC_FILE.write("# TABLE OF CONTENTS"+"\n")
-        for file in filelist:
-            text_title = file.strip('md$').strip('.')
-            NEW_TOC_FILE.write("["+text_title+"](/Blogger/"+text_title+")\n\n")
-        NEW_TOC_FILE.write("\n")
-        for line in master_TOC:
-            NEW_TOC_FILE.write(line+"\n")
 
 
 def move_files(move_list):

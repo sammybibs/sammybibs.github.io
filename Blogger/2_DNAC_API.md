@@ -1,7 +1,11 @@
 # TOC
 - [technology covered](#technology-covered-)
 - [the background story](#the-background-story-)
-- [web back end baseline](#web-back-end-baseline-)
+- [accessing the api](#accessing-the-api-)
+- [use cases for the api that the gui cannot provide](#use-cases-for-the-api-that-the-gui-cannot-provide-)
+  - [dnac user defined fields update](#dnac-user-defined-fields-update-)
+    - [glean device ids from dnac](#glean-device-ids-from-dnac-)
+    - [glean device data using the device ids from dnac](#glean-device-data-using-the-device-ids-from-dnac-)
 
 # Technology covered <a name="technology-covered"></a>
 * DNAC API
@@ -30,7 +34,7 @@ The first goal is to create the web front end with flask, then see if we can pun
 
 <br><br>
 
-# Accessing the API
+# Accessing the API <a name="accessing-the-api"></a>
 I'm not going to go into a lot of depth here, as there is a plethora of information out there, but in a bid to not send you on a internet hole ill add the baseice in here. But do have a look at [Cisco DNAC API DevNet page](https://developer.cisco.com/docs/dna-center/#!api-quick-start/api-quickstart) for further reading.
 
 The short of it is we need the information on the target system, and using this we need a token. For this demo ill use the [devnet DENAC alway-on sandbox](https://sandboxdnac.cisco.com/). 
@@ -107,13 +111,13 @@ eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDJlNTBiZmI2MDg5YzAwOTMyZjEyMWY
 <br>
 
 
-# Use cases for the API that the GUI cannot provide
+# Use cases for the API that the GUI cannot provide <a name="use-cases-for-the-api-that-the-gui-cannot-provide"></a>
 
 DNAC API info is self documented in DNAC:
 * https://**{{YOUR-DNAC-IP}}**/dna/platform/app/consumer-portal/developer-toolkit/apis
 
 
-## DNAC User Defined Fields update
+## DNAC User Defined Fields update <a name="dnac-user-defined-fields-update"></a>
 
 **Requirement:**
 * Use DNAC to identify who the device owner and contact details for them.
@@ -137,7 +141,7 @@ To achieve the above we need to get (2), what are the devices we want to query a
 
 <br>
 
-### Glean device IDs from DNAC
+### Glean device IDs from DNAC <a name="glean-device-ids-from-dnac"></a>
 
 So working backwards we first need the device IDs. We can do this with a function that calls the ```Get Device list```, specifically **/dna/intent/api/v1/network-device**. This returns a list of all devices & we can  pass parameters to filter the returned response (such as device type, location, role...)
 
@@ -195,7 +199,7 @@ print(new_device_list)
 
 **Result:** Success, we now have the device ID's we can pass to the ```Get Device by ID``` and pull the SNMP data.
 
-### Glean device data using the device IDs from DNAC
+### Glean device data using the device IDs from DNAC <a name="glean-device-data-using-the-device-ids-from-dnac"></a>
 
 Within this function we can do two things:
 1. Pass the device ID data to the ```Get Device by ID``` API and glean the SNMP data.
