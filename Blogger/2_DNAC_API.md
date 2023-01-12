@@ -9,8 +9,8 @@
   - [1 DNAC User Defined Fields update](#1-dnac-user-defined-fields-update-)
     - [Glean SNMP data](#glean-snmp-data-)
       - [Summary](#summary-)
-  - [DNAC SFP inventory check](#dnac-sfp-inventory-check-)
-  - [DNAC Find named ports](#dnac-find-named-ports-)
+  - [2 DNAC SFP inventory check](#2-dnac-sfp-inventory-check-)
+  - [3 DNAC Find named ports](#3-dnac-find-named-ports-)
 
 # Technology covered <a name="technology-covered"></a>
 * January 02 2023
@@ -451,7 +451,7 @@ To make this work you need to execute following workflow:
 5. Execute the GET/PUT of the data
 
 
-## DNAC SFP inventory check <a name="dnac-sfp-inventory-check"></a>
+## 2 DNAC SFP inventory check <a name="2-dnac-sfp-inventory-check"></a>
 ---
 
 **Requirement:**
@@ -520,7 +520,7 @@ AGM45456789
 ```
 <br>
 
-## DNAC Find named ports <a name="dnac-find-named-ports"></a>
+## 3 DNAC Find named ports <a name="3-dnac-find-named-ports"></a>
 ---
 
 **Requirement:**
