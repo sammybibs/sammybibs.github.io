@@ -1,11 +1,7 @@
 # Contents
-- [TOC](#toc-)
 - [Payment status](#payment-status-)
   - [Agenda](#agenda-)
 
-# TOC <a name="toc"></a>
-- [payment status](#payment-status-)
-  - [agenda](#agenda-)
 
 # Payment status <a name="payment-status"></a>
 
