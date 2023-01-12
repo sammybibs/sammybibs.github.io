@@ -7,7 +7,7 @@ Version 0.1 18/08/21 = Makde it work
 Version 0.2 19/08/21 = split the files over pages and made master index
 .
 .
-Version 0.3 XX/XX/XX = Refcator
+Version 0.3 XX/XX/XX = Refcator 
 """
 import os
 
@@ -18,11 +18,11 @@ def TOC_to_all(filelist):
         master_TOC.append('# '+text_title+' section'+' <a name=\"'+text_title+'"></a>')
         master_TOC.append("-----------")
         with open(file, 'r') as TOC_FILE:
-            TOC = ['# TOC']
+            TOC = ['# Contents']
             README = ['']
             SKIP_TOC = False
             for line in TOC_FILE:
-                if "# TOC" in line:
+                if "# Contents" in line:
                     SKIP_TOC = True
                     continue
                 if SKIP_TOC:
@@ -56,8 +56,8 @@ def TOC_to_all(filelist):
                                     title = title+letter
                             tagged_title = tagged_title.strip()
                             title = title.strip()
-                            title = title.lower()
-                            tag = title.replace(" ", "-")
+                            title2 = title.lower()
+                            tag = title2.replace(" ", "-")
                             README[-1] = tagged_title+" "+tag_start+tag+tag_end
                             step = 1
                             matched = False
@@ -73,15 +73,6 @@ def TOC_to_all(filelist):
                 NEW_TOC_FILE.write(line+"\n")
             for line in README:
                 NEW_TOC_FILE.write(line+"\n")
-        #
-    with open('README.md', 'w+') as NEW_TOC_FILE:
-        NEW_TOC_FILE.write("# TABLE OF CONTENTS"+"\n")
-        for file in filelist:
-            text_title = file.strip('md$').strip('.')
-            NEW_TOC_FILE.write("["+text_title+"](/14600/"+file+")\n\n")
-        NEW_TOC_FILE.write("\n")
-        for line in master_TOC:
-            NEW_TOC_FILE.write(line+"\n")
 
 
 def move_files(move_list):
@@ -97,6 +88,7 @@ def commit_git(commit_list):
 
 
 filelist = [entry for entry in (os.popen("ls | grep .md$").read().split())]
+filelist.remove('README.md')
 #commit_list = os.popen("ls | grep -E '.md$|py$'").read().replace('\n', ' ')
 move_list = [entry for entry in (os.popen("ls | grep .png").read().split())]
 commit_list = ' '.join([entry for entry in os.popen("git status | grep 'modified:'").read().split()][1::2])
