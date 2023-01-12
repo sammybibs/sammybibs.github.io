@@ -1,9 +1,11 @@
 # TABLE OF CONTENTS
 
 - [Flask Back End basics](/Blogger/1_flask_back_end)
-    - [Technology covered](#technology-covered-)
-    - [The background story](#the-background-story-)
-    - [Web back end baseline](#web-back-end-baseline-)
+  - [Technology covered](#technology-covered-)
+  - [The background story](#the-background-story-)
+  - [Web back end baseline](#web-back-end-baseline-)
+
+<br>
 
 - [DNAC APIs required](/Blogger/2_DNAC_API)
     - [Technology covered](#technology-covered-)
