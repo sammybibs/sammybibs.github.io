@@ -2,7 +2,6 @@
 - [Payment status](#payment-status-)
   - [Agenda](#agenda-)
 
-
 # Payment status <a name="payment-status"></a>
 
 Sam | Mat | Marc | Mart | Gal | Scott
