@@ -360,5 +360,13 @@ If we head back over to DNAC we can validate that these two devices have the req
 ![](images/2023-01-12-09-47-27.png)
 
 <br>
+
 #### Summary <a name="summary"></a>
 ---
+
+To make this work you need to execute following workflow:
+1. Access to DNAC
+2. Create the UDF fields in DNAC
+3. DNAC token
+4. Some device filter to glean required devices (see DNAC internal API docs)
+5. Execute the GET/PUT of the data
