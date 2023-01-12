@@ -11,8 +11,10 @@
   - [DNAC Find named ports](#dnac-find-named-ports-)
 
 # Technology covered <a name="technology-covered"></a>
+* January 02 2023
 * DNAC API
 * Python
+
 
 <br><br>
 

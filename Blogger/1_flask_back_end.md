@@ -4,6 +4,7 @@
 - [Web back end baseline](#web-back-end-baseline-)
 
 # Technology covered <a name="technology-covered"></a>
+* January 01 2023
 * Python
   * Flask
   * jinja2
