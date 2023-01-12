@@ -21,7 +21,10 @@ from datetime import date
 import importlib
 
 ###Sets the app up
-app = Flask(__name__)
+#app = Flask(__name__)
+
+app = Flask(__name__, template_folder='templates', static_folder='StaticFiles')
+
 
 
 ####Need to add buttin for UDF update with SNMP...
@@ -37,7 +40,7 @@ def index():
       if len(os.listdir('cache')) != 0:
          size = sum([os.path.getsize(x) for x in os.scandir('cache')])//1024
          datestamp = str(date.fromtimestamp(os.path.getmtime('cache')))
-      return render_template('dnac_setup.html', data=DNAC_data.dnac_server(), size=size, cache_timestamp=datestamp)
+      return render_template('dnac_sys_data.html', data=DNAC_data.dnac_server(), size=size, cache_timestamp=datestamp)
 
 
 #####Current need to write
@@ -169,6 +172,4 @@ def dnac_get_sfp():
 ###Sets up the flask server if this code is called directly
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=81)
-
-
 
