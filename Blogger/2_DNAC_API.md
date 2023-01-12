@@ -3,7 +3,7 @@
 - [The background story](#the-background-story-)
 - [Accessing the API](#accessing-the-api-)
 - [Use cases](#use-cases-)
-  - [The raw data needed](#the-raw-data-needed-)
+  - [0 The raw data needed](#0-the-raw-data-needed-)
     - [Glean device IDs](#glean-device-ids-)
     - [Glean device data](#glean-device-data-)
   - [1 DNAC User Defined Fields update](#1-dnac-user-defined-fields-update-)
@@ -117,7 +117,7 @@ DNAC API info is self documented in DNAC:
 * https://**{{YOUR-DNAC-IP}}**/dna/platform/app/consumer-portal/developer-toolkit/apis
 
 
-## The raw data needed <a name="the-raw-data-needed"></a>
+## 0 The raw data needed <a name="0-the-raw-data-needed"></a>
 
 For all the use cases below we are going to need similar data points, so they are contained here for ease of reference:
 1. Types of devices that we want to glean data from
