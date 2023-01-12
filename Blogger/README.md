@@ -1,6 +1,20 @@
 # TABLE OF CONTENTS
-[README](/Blogger)
 
 [Flask Back End basics](/Blogger/1_flask_back_end)
+- [Technology covered](#technology-covered-)
+- [The background story](#the-background-story-)
+- [Web back end baseline](#web-back-end-baseline-)
 
 [DNAC APIs required](/Blogger/2_DNAC_API)
+- [Technology covered](#technology-covered-)
+- [The background story](#the-background-story-)
+- [Accessing the API](#accessing-the-api-)
+- [Use cases](#use-cases-)
+  - [The raw data needed](#the-raw-data-needed-)
+    - [Glean device IDs](#glean-device-ids-)
+    - [Glean device data](#glean-device-data-)
+  - [1 DNAC User Defined Fields update](#1-dnac-user-defined-fields-update-)
+    - [Glean SNMP data](#glean-snmp-data-)
+      - [Summary](#summary-)
+  - [2 DNAC SFP inventory check](#2-dnac-sfp-inventory-check-)
+  - [3 DNAC Find named ports](#3-dnac-find-named-ports-)
