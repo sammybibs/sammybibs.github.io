@@ -13,13 +13,6 @@
 # Technology covered <a name="technology-covered"></a>
 * DNAC API
 * Python
-  * Flask
-  * jinja2
-  * lists
-  * dictionaries
-  * if/else
-  * HTML
-* AWS hosted
 
 <br><br>
 
