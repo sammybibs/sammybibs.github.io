@@ -7,7 +7,7 @@ Version 0.1 18/08/21 = Makde it work
 Version 0.2 19/08/21 = split the files over pages and made master index
 .
 .
-Version 0.3 XX/XX/XX = Refcator
+Version 0.3 XX/XX/XX = Refcator 
 """
 import os
 
