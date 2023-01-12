@@ -88,6 +88,7 @@ def commit_git(commit_list):
 
 
 filelist = [entry for entry in (os.popen("ls | grep .md$").read().split())]
+filelist.remove('README.md')
 #commit_list = os.popen("ls | grep -E '.md$|py$'").read().replace('\n', ' ')
 move_list = [entry for entry in (os.popen("ls | grep .png").read().split())]
 commit_list = ' '.join([entry for entry in os.popen("git status | grep 'modified:'").read().split()][1::2])

@@ -6,6 +6,7 @@
   - [dnac user defined fields update](#dnac-user-defined-fields-update-)
     - [glean device ids from dnac](#glean-device-ids-from-dnac-)
     - [glean device data using the device ids from dnac](#glean-device-data-using-the-device-ids-from-dnac-)
+      - [summary](#summary-)
 
 # Technology covered <a name="technology-covered"></a>
 * DNAC API
@@ -118,6 +119,7 @@ DNAC API info is self documented in DNAC:
 
 
 ## DNAC User Defined Fields update <a name="dnac-user-defined-fields-update"></a>
+---
 
 **Requirement:**
 * Use DNAC to identify who the device owner and contact details for them.
@@ -142,6 +144,7 @@ To achieve the above we need to get (2), what are the devices we want to query a
 <br>
 
 ### Glean device IDs from DNAC <a name="glean-device-ids-from-dnac"></a>
+---
 
 So working backwards we first need the device IDs. We can do this with a function that calls the ```Get Device list```, specifically **/dna/intent/api/v1/network-device**. This returns a list of all devices & we can  pass parameters to filter the returned response (such as device type, location, role...)
 
@@ -184,22 +187,22 @@ print(device_list)
 
 <br>
 
-> Side note: I redacted the prefix and suffix out of paranoia, heres how i achieved that:
+> Side note: I redacted the prefix and suffix out of paranoia, heres how i achieved that with slicing in a for loop.
 ```python
-new_device_list = []
-for d in device_list:
-    ess = 'redacted'
-    ess += i[8:-12]
-    ess += 'xxxredacted'
-    new.append(ess)
-print(new_device_list)
+r = 'redacted'
+for i,dev in enumerate(device_list):
+    device_list[i] = r+dev[8:-8]+r
+print(device_list)
 ```
 
 <br>
 
 **Result:** Success, we now have the device ID's we can pass to the ```Get Device by ID``` and pull the SNMP data.
 
+<br>
+
 ### Glean device data using the device IDs from DNAC <a name="glean-device-data-using-the-device-ids-from-dnac"></a>
+---
 
 Within this function we can do two things:
 1. Pass the device ID data to the ```Get Device by ID``` API and glean the SNMP data.
@@ -226,9 +229,10 @@ def get_snmp(dnac_system, token, devices):
     for DEVICE in devices:
         platform_data = requests.get(BASE_URL+DEVICE_URL+DEVICE, headers=headers, verify=False)
         platform_data = platform_data.json()
+        print(f"device-id = {r+DEVICE[8:-8]+r}")
         print(f"hostname = {platform_data['response']['hostname']}")
         print(f"platformId = {platform_data['response']['platformId']}")
-        print(f"serialNumber = {platform_data['response']['serialNumber']}")
+        print(f"softwareVersion = {platform_data['response']['softwareVersion']}")
         print(f"snmpContact = {platform_data['response']['snmpContact']}")
         print(f"snmpLocation = {platform_data['response']['snmpLocation']}")
         print()
@@ -246,14 +250,115 @@ def get_snmp(dnac_system, token, devices):
         else:
             continue
          ##Make the post call to DNAC with the correct payload to update the GUI UDF page.
-        requests.put(BASE_URL+DEVICE_URL+DEVICE+UDF_TAG,data=json.dumps(payload), headers=headers, verify=False)
+        req = requests.put(BASE_URL+DEVICE_URL+DEVICE+UDF_TAG,data=json.dumps(payload), headers=headers, verify=False)
+        ##Debugging and demo purposes
+        print(req)
 ```
 
-Now we can use the data from our previous functions and pass them to this function to glean the device ID's (dnac_data, token & the **device_list**)
+Now we can use the data from our previous functions (**dnac_data, token & the device_list**) and pass them to this function to glean the device information and updte the DNAC UDF GUI.
 
-(((TBC TBC TBC)))
-Forst elts check DNAC and a device to be sue its go no data:
+First Lets check DNAC and a device to be sure its got no deifned UDF data. We can see below it has none and its a role of access (this mathces our device_data query (*you can validate teh deivce ID by checking the broswer URL also*))
+![](images/2023-01-12-08-46-42.png)
 
 
-We pass this function the 
+Now lets run this function and from the outputs we can see the data we are looking for, where onoly two devices have SNMP data defined.
+```python
 get_snmp(dnac_data, token, device_list)
+
+device-id = redacted-4fc4-4589-a906-8276redacted
+hostname = DNA_9800_WLC.ramblings-one
+platformId = C9800-CL-K9
+softwareVersion = 16.11.1c
+snmpContact = 
+snmpLocation = 
+
+device-id = redacted-7578-444c-8e87-fe67redacted
+hostname = UK-LAB-FE-01.ramblings-one
+platformId = C9300-48U
+softwareVersion = 17.6.3
+snmpContact = Sam Bibby
+snmpLocation = The Lab of doom
+
+<Response [202]>
+device-id = redacted-a518-4866-96f2-ff82redacted
+hostname = UK-LAB-FE-02.ramblings-one
+platformId = C9300-48U
+softwareVersion = 17.6.3
+snmpContact = The Rambling Frog
+snmpLocation = 
+
+<Response [202]>
+device-id = redacted-8a6f-4b40-9026-e052redacted
+hostname = vFE01.corpnet2.com
+platformId = None
+softwareVersion = 17.6.1
+snmpContact = 
+snmpLocation = 
+
+device-id = redacted-ed9f-47dc-9612-5f5credacted
+hostname = VIRTUAL_SITE_CP_BN
+platformId = CSR1000V
+softwareVersion = 17.3.4a
+snmpContact = 
+snmpLocation = 
+```
+
+We can also see from the returned code **202** that everything looks ok **The request has been accepted for processing, but the processing has not been completed.**
+
+If we then revert back to DNAC to see if these SNMP varaibles have been posted to the UDF field withing the GUI..... Well i can tell you it failed, and ill explain why as its a simple error.
+
+If look at the code that generated the put payload below we can see the fields used are *"snmpContact"* & *"snmpLocation"*, where if we check on DNAC (see above screenshot), our UFD "Field Names" are **"SNMP Contact"** & **"SNMP Location"**
+```python
+        if platform_data['response']['snmpContact'] and platform_data['response']['snmpLocation']:
+            payload = [{"name":"snmpContact","value":platform_data['response']['snmpContact']},
+                    {"name":"snmpLocation","value":platform_data['response']['snmpLocation']}]
+                    #
+        elif platform_data['response']['snmpContact']:
+            payload = [{"name":"snmpContact","value":platform_data['response']['snmpContact']}]
+            #
+        elif platform_data['response']['snmpLocation']:
+            payload = [{"name":"snmpLocation","value":platform_data['response']['snmpLocation']}]
+            #
+```
+
+
+So lets fix that code block & re-run the function.
+```python
+        if platform_data['response']['snmpContact'] and platform_data['response']['snmpLocation']:
+            payload = [{"name":"SNMP Contact","value":platform_data['response']['snmpContact']},
+                    {"name":"SNMP Location","value":platform_data['response']['snmpLocation']}]
+                    #
+        elif platform_data['response']['snmpContact']:
+            payload = [{"name":"SNMP Contact","value":platform_data['response']['snmpContact']}]
+            #
+        elif platform_data['response']['snmpLocation']:
+            payload = [{"name":"SNMP Location","value":platform_data['response']['snmpLocation']}]
+            #
+```
+
+**Omitted deivces with no SNMP DATA to consolidate outputs**
+```python
+get_snmp(dnac_data, token, device_list)
+
+device-id = redacted-7578-444c-8e87-fe67redacted
+hostname = UK-LAB-FE-01.ramblings-one
+platformId = C9300-48U
+softwareVersion = 17.6.3
+snmpContact = Sam Bibby
+snmpLocation = The Lab of doom
+
+<Response [202]>
+device-id = redacted-a518-4866-96f2-ff82redacted
+hostname = UK-LAB-FE-02.ramblings-one
+platformId = C9300-48U
+softwareVersion = 17.6.3
+snmpContact = The Rambling Frog
+snmpLocation = 
+```
+If we head back over to DNAC we can validate that these two devices have the required DATA in the GUI:
+![](images/2023-01-12-09-47-04.png)
+![](images/2023-01-12-09-47-27.png)
+
+<br>
+#### Summary <a name="summary"></a>
+---
