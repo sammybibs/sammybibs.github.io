@@ -1,10 +1,4 @@
 # Contents
-- [Contents](#contents-)
-- [Technology covered](#technology-covered-)
-- [The background story](#the-background-story-)
-- [Web back end baseline](#web-back-end-baseline-)
-
-# Contents <a name="contents"></a>
 - [Technology covered](#technology-covered-)
 - [The background story](#the-background-story-)
 - [Web back end baseline](#web-back-end-baseline-)

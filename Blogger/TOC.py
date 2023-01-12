@@ -22,7 +22,7 @@ def TOC_to_all(filelist):
             README = ['']
             SKIP_TOC = False
             for line in TOC_FILE:
-                if "# TOC" in line:
+                if "# Contents" in line:
                     SKIP_TOC = True
                     continue
                 if SKIP_TOC:

@@ -1,17 +1,4 @@
 # Contents
-- [Contents](#contents-)
-- [Technology covered](#technology-covered-)
-- [The background story](#the-background-story-)
-- [Accessing the API](#accessing-the-api-)
-- [Use cases](#use-cases-)
-  - [DNAC User Defined Fields update](#dnac-user-defined-fields-update-)
-    - [Glean device IDs](#glean-device-ids-)
-    - [Glean device data](#glean-device-data-)
-      - [Summary](#summary-)
-  - [DNAC SFP inventory check](#dnac-sfp-inventory-check-)
-  - [DNAC Find named ports](#dnac-find-named-ports-)
-
-# Contents <a name="contents"></a>
 - [Technology covered](#technology-covered-)
 - [The background story](#the-background-story-)
 - [Accessing the API](#accessing-the-api-)
