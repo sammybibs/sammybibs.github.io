@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <title>{{ title }}</title>
+    </head>
+    <body>
+        <ul>
+        {% for member in members: %}
+        {% if member == "Sam": %}
+        <h1>Hello master {{ member }} </h1>
+	    {% else %}
+        <li>Hello {{ member }}</li>
+	{% endif %}
+	{% endfor %}
+	</ul>
+    </body>
+</html>

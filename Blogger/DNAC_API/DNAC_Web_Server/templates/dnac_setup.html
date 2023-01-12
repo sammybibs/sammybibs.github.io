@@ -1,0 +1,43 @@
+<html>
+   <head>
+      <h3>Welcome to the DNAC query engine </h3>
+  </head>
+   <body>
+         Current values set are as follows: <br>
+         IP address = {{ data[0] }} <br>
+         HTTPS port = {{ data[1] }} <br>
+         Username = {{ data[2] }} <br><br>
+
+         The local cache from DNAC was last updated {{ cache_timestamp }} <br>
+         Current cache size is {{ size }}KB <br> <br>
+
+         <form action = "http://localhost:81/flush" method = "get">
+         <button type="submit">Flush</button>
+         ::: flush the local cache and force search live datasets via API calls
+         </form>
+
+         <form action = "http://localhost:81/cache" method = "get">
+         <button type="submit">Cache</button>
+         :::  pull down a local/fresh copy or data for faster searching (2-3 min)
+         </form>
+
+         <form action = "http://localhost:81/description" method = "get">
+         <button type="submit">Description</button>
+         :::  search interface description
+         </form>
+
+         <form action = "http://localhost:81/sfp" method = "get">
+         <button type="submit">SFP</button>
+         :::  get a report of all current used sfps and locations
+         </form><br><br>
+
+
+         To modify the DNAC settings, hit the update DNAC button below <br><br>
+         <form action = "http://localhost:81/update" method = "get">
+            <button type="submit">Update DNAC</button>
+         </form>
+
+
+   </body>
+</html>
+

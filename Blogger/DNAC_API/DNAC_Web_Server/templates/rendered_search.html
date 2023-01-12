@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>Search Results for {{ search_str }}</title>
+    </head>
+    <body>
+        <ul>
+        <br>
+        {% for key1,value in found_devices.items(): %}
+        {% for key2,dev in value.items(): %}
+        {{ key2 }}: {{ dev }}
+        <br>
+        {% endfor %}
+        <br>
+        {% endfor %}
+	</ul>
+    </body>
+</html>

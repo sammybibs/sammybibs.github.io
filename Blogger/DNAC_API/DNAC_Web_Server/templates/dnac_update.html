@@ -1,0 +1,15 @@
+<html>
+   <head>
+      <h3>Welcome to the DNAC update engine </h3>
+  </head>
+   <body>
+         Current values show as placeholders below: <br>
+         <form action = "http://localhost:81/update" method = "post">
+         <label for="IPAddress">IP address:</label>
+         <input type="text" id="IPAddress" name="IPAddress" placeholder={{ data[0] }}><br>
+         <label for="port">HTTPS port:</label>
+         <input type="text" id="port" name="port" placeholder={{ data[1] }}><br>
+         <label for="Username">Username:</label>
+         <input type="text" id="Username" name="Username" placeholder={{ data[2] }}><br><br>
+         <button type="submit">Update Data</button>
+      </form><br>

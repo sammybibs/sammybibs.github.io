@@ -1,0 +1,27 @@
+<html>
+   <body>
+      <form action = "http://localhost:81/description" method = "post">
+         <label for="Password">DNAC Password (not needed if have local cache):</label>
+         <input type="password" id="Password" name="Password" placeholder="Password"><br><br>
+         <input type="checkbox" onclick="myFunction()">Show Password
+         <br><br>
+         <label for="Search">Search String:</label>
+         <input type="text" id="Search" name="Search" placeholder="Search">
+         <button type="submit">Login</button>
+         <br><br>
+         !!!!Dev note:: need to add a drop down to define device typoe (ACCESS/DIST/CORE/DONT_CARE) and pass that to: <br> 
+         !!!!search_DNAC.get_devices(dnac_system, token, role=0):
+      </form>
+   </body>
+</html>
+
+<script>
+   function myFunction() {
+     var x = document.getElementById("Password");
+     if (x.type === "password") {
+       x.type = "text";
+     } else {
+       x.type = "password";
+     }
+   }
+</script>
