@@ -1,5 +1,11 @@
 <html>
+         <!--  Load CSS in Flask with html-->
+         <link rel="stylesheet" href='/StaticFiles/main.css' />
+         <!--  Load JavaScript in Flask with html-->
+         <div class="wrapper">
+            <h3>Welcome to the DNAC description engine </h3>
    <body>
+      <section>
       <form action = "http://localhost:81/description" method = "post">
          <label for="Password">DNAC Password (not needed if have local cache):</label>
          <input type="password" id="Password" name="Password" placeholder="Password"><br><br>
@@ -12,7 +18,9 @@
          !!!!Dev note:: need to add a drop down to define device typoe (ACCESS/DIST/CORE/DONT_CARE) and pass that to: <br> 
          !!!!search_DNAC.get_devices(dnac_system, token, role=0):
       </form>
+   </section>
    </body>
+</div>
 </html>
 
 <script>

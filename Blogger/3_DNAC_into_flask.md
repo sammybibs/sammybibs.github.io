@@ -190,4 +190,6 @@ The front end looks like so:
 
 
 # Finalizing the code
-I use the word 'finalizing' lightly, as this code will be due some refactoring and tidy up at some point. However after 
+I use the word 'finalizing' lightly, as this code will be due some refactoring and tidy up at some point. However after some time I managed to place all the functions into flask.
+
+Next up ill add this app to AWS so you can try it for yourself,

@@ -70,7 +70,7 @@ def update_system():
       # replace file with original name
       os.replace('temp.txt', 'DNAC_data.py')
       importlib.reload(DNAC_data)
-      return render_template('dnac_setup.html', data=DNAC_data.dnac_server())
+      return index()
    if request.method == 'GET':
       return render_template('dnac_update.html', data=DNAC_data.dnac_server())
 
@@ -88,10 +88,6 @@ def flush_system():
       return redirect(url_for('index'))
       #return os.listdir()
 
-#os.chdir('cache_copy')
-#for file in os.listdir():
-#    os.remove(file)
-
 
 @app.route('/cache',methods = ['POST', 'GET'])
 def update_cache():
@@ -100,11 +96,11 @@ def update_cache():
       Password = request.form.get("Password")
       dnacs = DNAC_data.dnac_server(Password)
       token = DNAC_data.get_token(dnacs)
-      ##Get ALL deivces in DNAC
+      ##Get ALL devices in DNAC
       devices = DNAC_API.get_devices(dnacs, token, 'ALL')
       with open('./cache/get_devices.txt', 'w+') as f:
             f.write(str(devices))
-      ##Get ALL interfaces as the search string is empty
+      ##Get ALL interfaces as the search string is empty/any
       find_port = DNAC_API.find_port(dnacs, token, devices, "")
       with open('./cache/find_port.txt', 'w+') as f:
             f.write(str(find_port))
@@ -113,7 +109,7 @@ def update_cache():
       with open('./cache/get_sfp.txt', 'w+') as f:
          for line in get_sfp:
             f.write(str(line))
-      return 'Post :: The cache is updated'
+      return index()
    if request.method == 'GET':
       return render_template('cache.html')
 
@@ -144,7 +140,7 @@ def dnac_go_interface():
       searched_data = DNAC_API.find_port(dnacs, token, devices, search)
       return render_template('rendered_search.html', search_str=search, found_devices=searched_data)
    if request.method == 'GET':
-      return render_template('dnac.html')
+      return render_template('description.html')
 
 
 ##Here we get the dnac login info to get a authC token and then get all the SFP data
