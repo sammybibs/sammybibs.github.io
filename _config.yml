@@ -1,3 +1,5 @@
-theme: jekyll-theme-minimal
-title: Ramblings Of a Netwokr Engineer
-description: Things i find interesting and helpfull as I try to level up my skill trees!
+remote_theme: pages-themes/architect@v0.2.0
+plugins:
+- jekyll-remote-theme
+title: Ramblings Of a Network Engineer
+description: Things I find interesting whilst levelling up my skill trees!!
