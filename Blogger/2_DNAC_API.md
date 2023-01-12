@@ -370,3 +370,12 @@ To make this work you need to execute following workflow:
 3. DNAC token
 4. Some device filter to glean required devices (see DNAC internal API docs)
 5. Execute the GET/PUT of the data
+
+
+## DNAC SFP inventory check
+---
+
+## DNAC Find named ports
+---
+
+
