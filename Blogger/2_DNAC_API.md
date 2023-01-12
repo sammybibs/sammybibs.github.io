@@ -20,17 +20,9 @@
 
 <br><br>
 
-# The background story <a name="the-background-story"></a>
+# The story pt 2 <a name="the-background-story"></a>
 
-Wanted to leverage the DNAC API to query data thats not directly accessible via the DNAC GUI
-
-For this to be a bit more 'user friendly' the idea was to front end this with a web page.
-
-After a quick google fu i came across [flask](https://flask.palletsprojects.com/en/2.2.x/) which after an hour or so I was able to [create a basic front end](https://www.digitalocean.com/community/tutorials/how-to-make-a-web-application-using-flask-in-python-3).
-
-Concurrently I have been tinkering with creating my first webex bot using the [webex bot STK](ttps://developer.cisco.com/codeexchange/github/repo/hpreston/webexteamsbot)
-
-The first goal is to create the web front end with flask, then see if we can punt this functionality into a webex bot running in AWS.
+Now we have a flask container, we need to develop the APIs that perform the required functionality.
 
 <br><br>
 

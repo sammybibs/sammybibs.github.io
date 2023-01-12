@@ -27,7 +27,11 @@ Concurrently I have been tinkering with creating my first webex bot using the [w
 
 The first goal is to create the web front end with flask, then see if we can punt this functionality into a webex bot running in AWS.
 
-<br><br>
+<br>
+
+# The story pt1
+
+At this stage of the development cycle we will investigate the flask container and develop a framework to front end our project.
 
 # Web back end baseline <a name="web-back-end-baseline"></a>
 First lets pull together a base shell to work from, this is called ```Hello_flask.py```
