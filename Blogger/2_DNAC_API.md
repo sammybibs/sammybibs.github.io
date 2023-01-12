@@ -3,9 +3,11 @@
 - [The background story](#the-background-story-)
 - [Accessing the API](#accessing-the-api-)
 - [Use cases](#use-cases-)
-  - [DNAC User Defined Fields update](#dnac-user-defined-fields-update-)
+  - [The raw data needed](#the-raw-data-needed-)
     - [Glean device IDs](#glean-device-ids-)
     - [Glean device data](#glean-device-data-)
+  - [1 DNAC User Defined Fields update](#1-dnac-user-defined-fields-update-)
+    - [Glean SNMP data](#glean-snmp-data-)
       - [Summary](#summary-)
   - [DNAC SFP inventory check](#dnac-sfp-inventory-check-)
   - [DNAC Find named ports](#dnac-find-named-ports-)
@@ -115,35 +117,17 @@ DNAC API info is self documented in DNAC:
 * https://**{{YOUR-DNAC-IP}}**/dna/platform/app/consumer-portal/developer-toolkit/apis
 
 
-## DNAC User Defined Fields update <a name="dnac-user-defined-fields-update"></a>
----
+## The raw data needed <a name="the-raw-data-needed"></a>
 
-**Requirement:**
-* Use DNAC to identify who the device owner and contact details for them.
+For all the use cases below we are going to need similar data points, so they are contained here for ease of reference:
+1. Types of devices that we want to glean data from
+2. Data sets from those devices
 
-**Back story:**
-* This is a brownfield network, the hostname is already bloated and not practical to use. Today they leverage the ```SNMP name``` and ```SNMP contact``` details on the device to find the owner.
-
-**Solution:**
-* leverage the ```user-defined-field``` (UDF) API to post the SNMP data to the DNAC GUI for easy access.
-![](images/2023-01-11-17-37-05.png)
-
-**How do we achieve this?** <br>
-Working backwards from what we want to do, we need the following data:
-0. Push the SNMP data to the UDF in DNAC
-1. All SNMP contact and location data on the device.
-2. Details of the devices that we want to glean the SNMP data from and post to the UDF fields.
-
-For (1) we can get all this data via an API call to the ```Get Device by ID``` API, specifically **/dna/intent/api/v1/network-device/${id}**. This will provide us with a plethora of usable data about the chassis including the SNMP data. Plus this information is cached within DNAC already, so no need to make any calls direct the device itself.
-
-To achieve the above we need to get (2), what are the devices we want to query and specifically what are the devise IDs (this is a DNAC 36 character value that DNAC uses to ID a node).
-
-<br>
 
 ### Glean device IDs <a name="glean-device-ids"></a>
 ---
 
-So working backwards we first need the device IDs. We can do this with a function that calls the ```Get Device list```, specifically **/dna/intent/api/v1/network-device**. This returns a list of all devices & we can  pass parameters to filter the returned response (such as device type, location, role...)
+So working on the above needed data sets we first need 'Types of devices' which translates to  device IDs (this is a DNAC 36 character value that DNAC uses to ID a node). We can do this with a function that calls the ```Get Device list```, specifically **/dna/intent/api/v1/network-device**. This returns a list of all devices & we can  pass parameters to filter the returned response (such as device type, location, role...)
 
 For our filter I have decided to use the ```ROLE``` field, where the usable options are as per the DNAC inventory 'Device Role' column.
 * **[UNKNOWN, ACCESS, CORE, DISTRIBUTION, BODER ROUTER]**
@@ -184,7 +168,7 @@ print(device_list)
 
 <br>
 
-> Side note: I redacted the prefix and suffix out of paranoia, heres how i achieved that with slicing in a for loop.
+> Side note: I redacted the prefix and suffix from the device ID's, heres how i achieved that with slicing in a for loop.
 ```python
 r = 'redacted'
 for i,dev in enumerate(device_list):
@@ -194,15 +178,122 @@ print(device_list)
 
 <br>
 
-**Result:** Success, we now have the device ID's we can pass to the ```Get Device by ID``` and pull the SNMP data.
+**Result:** Success, we now have a list of device ID's that we can pass to any subsequent functions to pull down further data.
 
 <br>
+
+
 
 ### Glean device data <a name="glean-device-data"></a>
 ---
 
-Within this function we can do two things:
-1. Pass the device ID data to the ```Get Device by ID``` API and glean the SNMP data.
+Now we want a function that uses the device-id's to gather any needed Data sets from those devices.
+
+Within this function we will pass the device ID's one by one into the ```Get Device by ID``` API, glean the data it holds and print that back out for us to inspect.
+
+
+```python
+def get_dev_data(dnac_system, token, devices):
+    """[summary]
+    this will glean the device details
+    """
+    headers = {'content-type': 'application/json'}
+    headers['x-auth-token'] = token
+    BASE_URL = f'https://{dnac_system[0]}:{dnac_system[1]}'
+    DEVICE_URL = '/dna/intent/api/v1/network-device/'
+    ##Loop over each device passed, glen the data, print the output for inspection
+    for DEVICE in devices:
+        platform_data = requests.get(BASE_URL+DEVICE_URL+DEVICE, headers=headers, verify=False)
+        platform_data = platform_data.json()
+        print(f"device-id = {r+DEVICE[8:-8]+r}")
+        for key,value in platform_data['response'].items():
+            print(f"{key} : {value}")
+```
+
+Now lets run this, but were are only going to look at one element (device) from the list, as the data sets are just repeated for each device... And as you can see, theres a lot of good data there that can be utilized.
+
+```python
+get_dev_data(dnac_data, token, device_list)
+
+device-id = redacted-7578-444c-8e87-fe67redacted
+type : Cisco Catalyst 9300 Switch
+memorySize : NA
+lastUpdateTime : 1673521418680
+macAddress : 00:00:00:00:00:00
+deviceSupportLevel : Supported
+softwareType : IOS-XE
+softwareVersion : 17.6.3
+serialNumber : FCW1232323
+inventoryStatusDetail : <status><general code="SUCCESS"/></status>
+collectionInterval : Global Default
+managementState : Managed
+upTime : 124 days, 19:44:23.44
+lastUpdated : 2023-01-12 11:03:38
+roleSource : AUTO
+associatedWlcIp : 
+bootDateTime : 2022-09-09 15:19:38
+apManagerInterfaceIp : 
+collectionStatus : Managed
+family : Switches and Hubs
+hostname : UK-LAB-FE-01.ramblings-one
+locationName : None
+managementIpAddress : 192.168.65.99
+platformId : C9300-48U
+reachabilityFailureReason : 
+reachabilityStatus : Reachable
+series : Cisco Catalyst 9300 Series Switches
+snmpContact : Sam Bibby
+snmpLocation : The Lab of doom
+apEthernetMacAddress : None
+errorCode : None
+errorDescription : None
+interfaceCount : 0
+lineCardCount : 0
+lineCardId : 
+managedAtleastOnce : True
+tagCount : 0
+tunnelUdpPort : None
+uptimeSeconds : 10786075
+waasDeviceMode : None
+description : Cisco IOS Software [Bengaluru], Catalyst L3 Switch Software (CAT9K_IOSXE), Version 17.6.3, RELEASE SOFTWARE (fc4) Technical Support: http://www.cisco.com/techsupport Copyright (c) 1986-2022 by Cisco Systems, Inc. Compiled Wed 30-Mar-22 23:03 by mcpre netconf enabled
+location : None
+role : ACCESS
+instanceUuid : redacted-7578-444c-8e87-fe67redacted
+instanceTenantId : redactedd78a0redacted
+id : redacted-7578-444c-8e87-fe67redacted
+```
+
+
+
+## 1 DNAC User Defined Fields update <a name="1-dnac-user-defined-fields-update"></a>
+---
+
+**Requirement:**
+* Use DNAC to identify who the device owner and contact details for them.
+
+**Back story:**
+* This is a brownfield network, the hostname is already bloated and not practical to use. Today they leverage the ```SNMP name``` and ```SNMP contact``` details on the device to find the owner.
+
+**Solution:**
+* leverage the ```user-defined-field``` (UDF) API to post the SNMP data to the DNAC GUI for easy access.
+![](images/2023-01-11-17-37-05.png)
+
+**How do we achieve this?** <br>
+Working backwards from what we want to do, we need the following data:
+0. Push the SNMP data to the UDF in DNAC
+1. All SNMP contact and location data on the device.
+2. Details of the devices that we want to glean the SNMP data from and post to the UDF fields.
+
+For (2) we can get all this data via an API call to the ```Get Device list`` API covered above "Glean device IDs"
+
+And for (1) we use the API call to the ```Get Device by ID```cover inthe "Glean device data" above.
+
+
+### Glean SNMP data <a name="glean-snmp-data"></a>
+---
+
+This function will build on top of "Glean device data" function above and will do two things:
+1. Pass the device ID data to the ```Get Device by ID``` API and glean just the SNMP data.
 2. Post this SNMP data to the DNAC ```User Defined Fields``` API.
 
 > **Warning:** this post action will only work if the field placeholder is already created in DNAC.. Browse to DNAC, select a device, open the 'user defined field' menu & click ```Manage User Defined Fields```, then ```Create new field``.
@@ -219,20 +310,11 @@ def get_snmp(dnac_system, token, devices):
     headers = {'content-type': 'application/json'}
     headers['x-auth-token'] = token
     BASE_URL = f'https://{dnac_system[0]}:{dnac_system[1]}'
-    ##Get SNMP info
     DEVICE_URL = '/dna/intent/api/v1/network-device/'
     UDF_TAG = '/user-defined-field'
-    ##Loop over each device passed, glen the data, print the output for debugging
     for DEVICE in devices:
         platform_data = requests.get(BASE_URL+DEVICE_URL+DEVICE, headers=headers, verify=False)
         platform_data = platform_data.json()
-        print(f"device-id = {r+DEVICE[8:-8]+r}")
-        print(f"hostname = {platform_data['response']['hostname']}")
-        print(f"platformId = {platform_data['response']['platformId']}")
-        print(f"softwareVersion = {platform_data['response']['softwareVersion']}")
-        print(f"snmpContact = {platform_data['response']['snmpContact']}")
-        print(f"snmpLocation = {platform_data['response']['snmpLocation']}")
-        print()
         ##Check what SNMP variables are present and set the respective needed payloads.
         if platform_data['response']['snmpContact'] and platform_data['response']['snmpLocation']:
             payload = [{"name":"snmpContact","value":platform_data['response']['snmpContact']},
@@ -254,7 +336,7 @@ def get_snmp(dnac_system, token, devices):
 
 Now we can use the data from our previous functions (**dnac_data, token & the device_list**) and pass them to this function to glean the device information and updte the DNAC UDF GUI.
 
-First Lets check DNAC and a device to be sure its got no deifned UDF data. We can see below it has none and its a role of access (this mathces our device_data query (*you can validate teh deivce ID by checking the broswer URL also*))
+First Lets check DNAC and a device to be sure its got no defined UDF data. We can see below it has none and its a role of access (this matches our device_data query (*you can validate the device ID by checking the browser URL also*))
 ![](images/2023-01-12-08-46-42.png)
 
 
@@ -333,7 +415,7 @@ So lets fix that code block & re-run the function.
             #
 ```
 
-**Omitted deivces with no SNMP DATA to consolidate outputs**
+**Omitted devices with no SNMP DATA to consolidate outputs**
 ```python
 get_snmp(dnac_data, token, device_list)
 
@@ -372,7 +454,162 @@ To make this work you need to execute following workflow:
 ## DNAC SFP inventory check <a name="dnac-sfp-inventory-check"></a>
 ---
 
+**Requirement:**
+* Use DNAC to run an SFP inventory sweep.
+
+**Back story:**
+* Be helpful if we could get a holistic view of the entire estate SFPs to help both locate them all and decide if we need to make additional purchases.
+
+**Solution:**
+* leverage the ```network-device/equipment``` API to pull the DNAC cached data required.
+
+Following on from the previous example, here we pass three arguments to the function
+1. dnac_system : this is the *dnac_server* tuple from function above
+2. token : This is the access token as a string from the *get_token* function above
+3. devices : This is a list of device IDs (see *get_devices* function above)
+
+The function queries the API that contains the devices hardware data, and prints back a report on all passed devices an their respective SPF's, only if there are some present.
+
+```python
+def get_sfp(dnac_system, token, devices):
+    """[summary]
+    Gets all SFPs in use and creates a text file with switch and SFP details
+    """
+    headers = {'content-type': 'application/json'}
+    headers['x-auth-token'] = token
+    BASE_URL = f'https://{dnac_system[0]}:{dnac_system[1]}'
+    ##Get SFP info
+    DEVICE_URL = '/dna/intent/api/v1/network-device/'
+    URL_SUFFIX = '/equipment?type=SFP'
+    for DEVICE in devices:
+        platform_data = requests.get(BASE_URL+DEVICE_URL+DEVICE, headers=headers, verify=False)
+        platform_data = platform_data.json()
+        sfp_data = requests.get(BASE_URL+DEVICE_URL+DEVICE+URL_SUFFIX, headers=headers, verify=False)
+        sfp_data = sfp_data.json()
+        if len(sfp_data['response']) > 0:
+            print(":::::::::::::::::")
+            print(f"hostname = {platform_data['response']['hostname']}")
+            print(":::::::::::::::::")
+            for sfp in sfp_data['response']:
+                print(f"{sfp['description']}")
+                print(f"{sfp['serialNumber']}\n")
+    return None
+```
+
+Running this will show all devices that have SFPs and the serial/type for them.
+```python
+get_sfp(dnac_data, token, device_list)
+
+:::::::::::::::::
+hostname = UK-LAB-FE-01.ramblings-one
+:::::::::::::::::
+10/100/1000BaseTX SFP
+AGM12345678
+
+10/100/1000BaseTX SFP
+AGM18485967
+
+:::::::::::::::::
+hostname = UK-LAB-FE-02.ramblings-one
+:::::::::::::::::
+10/100/1000BaseTX SFP
+AGM45453456
+
+10/100/1000BaseTX SFP
+AGM45456789
+```
+<br>
+
 ## DNAC Find named ports <a name="dnac-find-named-ports"></a>
 ---
 
+**Requirement:**
+* Use DNAC to query all interface descriptions.
 
+**Back story:**
+* Interface descriptions are used to ID meeting room ports, these ports are only brought online during a conference, else they are shut. There is not 8021x in place yet to protect these ports.
+
+**Solution:**
+* leverage the ```interface/network-device/``` API to pull query the devices interfaces, among which is the description..
+
+
+Following on from the previous example, here we pass four arguments to the function
+1. dnac_system : this is the *dnac_server* tuple from function above
+2. token : This is the access token as a string from the *get_token* function above
+3. devices : This is a list of device IDs (see *get_devices* function above) to search
+4. FINDME : this is user provided text that we will search for.
+
+The function queries the API that contains the devices interface data, looks at the port descriptions to see if the text were looking for is within the descriptions, if it is the device data and port info is returned as a dictionary
+```python
+def find_port(dnac_system, token, devices, FINDME='PlaceHolderText'):
+    """[summary]
+    finds a device and interface based on port description
+    """
+    headers = {'content-type': 'application/json'}
+    headers['x-auth-token'] = token
+    BASE_URL = f'https://{dnac_system[0]}:{dnac_system[1]}'
+    INTERFACE_URL = '/dna/intent/api/v1/interface/network-device/' 
+    DEVICE_URL = '/dna/intent/api/v1/network-device/'
+    results = {}
+    index = 0
+    ###devices is a list of device UUIDS
+    for DEVICE in devices:
+        ###Get ALL the interface details as an itterable for the current device that is passed
+        platform_data = requests.get(BASE_URL+INTERFACE_URL+DEVICE, headers=headers, verify=False)
+        platform_data = platform_data.json()
+        ###Now we iterate over eace interface to look for a match on the interface description
+        for i in platform_data['response']:
+            if FINDME.upper() in i['description'].upper():
+                index += 1
+                ###use the device UUID to pull the device info to report back into the results
+                platform_data = requests.get(BASE_URL+DEVICE_URL+i['deviceId'], headers=headers, verify=False)
+                platform_data = platform_data.json()
+                current_result = {}
+                current_result['hostname'] = platform_data['response']['hostname']
+                current_result['managementIpAddress'] = platform_data['response']['managementIpAddress']
+                current_result['PortName'] = i['portName']
+                current_result['description'] = i['description']
+                results[index] = current_result
+    print(results)
+    return results
+
+FINDME = input('What port description do you seek: ')
+find_port(dnac, token, devices, FINDME)
+```
+
+Lets run this to look for all ports with the work 'Pim' in the description.
+```python
+FINDME = input('What port description do you seek: ')
+>Pim
+results = find_port(dnac_data, token, device_list, FINDME)
+for key in results.keys():
+    for k2, v2 in results[key].items():
+        print(f"{k2} :: {v2}")
+
+hostname :: UK-LAB-FE-01..ramblings-one
+managementIpAddress :: 192.168.65.99
+PortName :: Tunnel0
+description :: Pim Register Tunnel (Encap) for RP 192.168.65.97
+hostname :: UK-LAB-FE-01..ramblings-one
+managementIpAddress :: 192.168.65.99
+PortName :: Tunnel1
+description :: Pim Register Tunnel (Encap) for RP 192.168.254.193 on VRF CORP
+hostname :: UK-LAB-FE-02..ramblings-one
+managementIpAddress :: 192.168.65.98
+PortName :: Tunnel0
+description :: Pim Register Tunnel (Encap) for RP 192.168.65.97
+hostname :: UK-LAB-FE-02..ramblings-one
+managementIpAddress :: 192.168.65.98
+PortName :: Tunnel1
+description :: Pim Register Tunnel (Encap) for RP 192.168.254.193 on VRF CORP
+hostname :: vFE01.corpnet2.com
+managementIpAddress :: 172.23.213.36
+PortName :: Tunnel0
+description :: Pim Register Tunnel (Encap) for RP 223.255.255.254
+hostname :: vFE01.corpnet2.com
+managementIpAddress :: 172.23.213.36
+PortName :: Tunnel1
+description :: Pim Register Tunnel (Decap) for RP 223.255.255.254
+
+```
+<br>
