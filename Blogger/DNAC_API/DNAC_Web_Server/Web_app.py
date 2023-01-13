@@ -164,6 +164,42 @@ def dnac_get_sfp():
 
 
 
+"""
+def get_snmp(dnac_system, token, devices):
+    """[summary]
+    this will glean the SNMP contact/location from each deivce, then update the UDF fields
+    in DNAC with this same data.
+    """
+    headers = {'content-type': 'application/json'}
+    headers['x-auth-token'] = token
+    BASE_URL = f'https://{dnac_system[0]}:{dnac_system[1]}'
+    ##Get SNMP info
+    DEVICE_URL = '/dna/intent/api/v1/network-device/'
+    UDF_TAG = '/user-defined-field'
+    for DEVICE in devices:
+        platform_data = requests.get(BASE_URL+DEVICE_URL+DEVICE, headers=headers, verify=False)
+        platform_data = platform_data.json()
+        print(f"hostname = {platform_data['response']['hostname']}")
+        print(f"platformId = {platform_data['response']['platformId']}")
+        print(f"serialNumber = {platform_data['response']['serialNumber']}")
+        print(f"snmpContact = {platform_data['response']['snmpContact']}")
+        print(f"snmpLocation = {platform_data['response']['snmpLocation']}")
+        print()
+        if platform_data['response']['snmpContact'] and platform_data['response']['snmpLocation']:
+            payload = [{"name":"SNMP Contact","value":platform_data['response']['snmpContact']},
+                    {"name":"SNMP Location","value":platform_data['response']['snmpLocation']}]
+                    #
+        elif platform_data['response']['snmpContact']:
+            payload = [{"name":"SNMP Contact","value":platform_data['response']['snmpContact']}]
+            #
+        elif platform_data['response']['snmpLocation']:
+            payload = [{"name":"SNMP Location","value":platform_data['response']['snmpLocation']}]
+            #
+        else:
+            continue
+        requests.put(BASE_URL+DEVICE_URL+DEVICE+UDF_TAG,data=json.dumps(payload), headers=headers, verify=False)
+"""
+
 ###Sets up the flask server if this code is called directly
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=81)
