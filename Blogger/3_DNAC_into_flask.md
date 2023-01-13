@@ -31,7 +31,7 @@ Also remembering that the flask app looks in the *./templates* folder for the HT
 
 > Optimization 1: It occurred to me that a lot of this data is fairly static, so as part of this merger we will write in some code to allow locally cacheing the API's needed data sets, thus we need a local folder to store this data.
 
-> Optimization 2: To make the web pages prettier, i used a CSS stylesheet per [this guide](https://thinkinfi.com/flask-adding-html-and-css/)
+> Optimization 2: To make the web pages prettier, i used a CSS stylesheet per [this guide](https://thinkinfi.com/flask-adding-html-and-css/) and using [this layout](https://colorlib.com/wp/css-layouts/)
 
 - DNAC_Web_Server (Project folder)
   - StaticFiles
@@ -192,4 +192,5 @@ The front end looks like so:
 # Finalizing the code
 I use the word 'finalizing' lightly, as this code will be due some refactoring and tidy up at some point. However after some time I managed to place all the functions into flask.
 
-Next up ill add this app to AWS so you can try it for yourself,
+Next up ill look to add this app to AWS so you can try it for yourself :O
+

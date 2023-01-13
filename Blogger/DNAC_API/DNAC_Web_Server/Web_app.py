@@ -154,7 +154,8 @@ def dnac_get_sfp():
       searched_data = DNAC_API.get_sfp(dnacs, token, devices)
       return render_template('rendered_sfp.html', sfps=searched_data)
    if request.method == 'GET':
-      if len(os.listdir('cache')) != 0:
+      ##Check to see if there is cached data and a data in the file.
+      if len(os.listdir('cache')) != 0 and os.path.getsize('cache/get_sfp.txt') != 0:
          searched_data = []
          with open('./cache/get_sfp.txt', 'r') as f:
             for line in f:
