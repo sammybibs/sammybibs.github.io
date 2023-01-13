@@ -20,9 +20,10 @@ from datetime import date
 ###Allow us to reload modules
 import importlib
 
-###Sets the app up
-#app = Flask(__name__)
+###To convert strings to dicts.
+import ast
 
+###Sets the app up
 app = Flask(__name__, template_folder='templates', static_folder='StaticFiles')
 
 
@@ -119,10 +120,15 @@ def update_cache():
 def dnac_go_interface():
    ###Need to wirtie code for the local cahce to run...
    if request.method == 'POST':
-      """
       if len(os.listdir('cache')) != 0:
-         with open('./cache/find_port.txr','rt') as f:
-            .readlines()
+         if os.path.getsize('cache/find_port.txt') != 0:
+            with open('./cache/find_port.txt','rt') as f:
+                  searched_data = f.readlines()
+                  searched_data = ast.literal_eval(searched_data[0])
+            search = request.form.get("Search")
+            return render_template('rendered_search.html', search_str=search, found_devices=searched_data)
+      else:
+      #sudo usertool.pl -p 'admin C1sco123!'
          Password = request.form.get("Password")
          search = request.form.get("Search")
          dnacs = DNAC_data.dnac_server(Password)
@@ -130,15 +136,6 @@ def dnac_go_interface():
          devices = DNAC_API.get_devices(dnacs, token)
          searched_data = DNAC_API.find_port(dnacs, token, devices, search)
          return render_template('rendered_search.html', search_str=search, found_devices=searched_data)
-      else:
-      """ #sudo usertool.pl -p 'admin C1sco123!'
-      Password = request.form.get("Password")
-      search = request.form.get("Search")
-      dnacs = DNAC_data.dnac_server(Password)
-      token = DNAC_data.get_token(dnacs)
-      devices = DNAC_API.get_devices(dnacs, token)
-      searched_data = DNAC_API.find_port(dnacs, token, devices, search)
-      return render_template('rendered_search.html', search_str=search, found_devices=searched_data)
    if request.method == 'GET':
       return render_template('description.html')
 
@@ -155,12 +152,13 @@ def dnac_get_sfp():
       return render_template('rendered_sfp.html', sfps=searched_data)
    if request.method == 'GET':
       ##Check to see if there is cached data and a data in the file.
-      if len(os.listdir('cache')) != 0 and os.path.getsize('cache/get_sfp.txt') != 0:
-         searched_data = []
-         with open('./cache/get_sfp.txt', 'r') as f:
-            for line in f:
-               searched_data.append(line)
-         return render_template('rendered_sfp.html', sfps=searched_data)
+      if len(os.listdir('cache')) != 0:
+         if os.path.getsize('cache/get_sfp.txt') != 0:
+            searched_data = []
+            with open('./cache/get_sfp.txt', 'r') as f:
+               for line in f:
+                  searched_data.append(line)
+            return render_template('rendered_sfp.html', sfps=searched_data)
       else:
          return render_template('dnac_sfp.html')
 
