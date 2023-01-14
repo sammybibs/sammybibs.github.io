@@ -164,7 +164,7 @@ def dnac_get_sfp():
 
 
 
-"""
+###This fucntion needs a clenaup and adding to the main web front end.
 def get_snmp(dnac_system, token, devices):
     """[summary]
     this will glean the SNMP contact/location from each deivce, then update the UDF fields
@@ -198,7 +198,8 @@ def get_snmp(dnac_system, token, devices):
         else:
             continue
         requests.put(BASE_URL+DEVICE_URL+DEVICE+UDF_TAG,data=json.dumps(payload), headers=headers, verify=False)
-"""
+
+
 
 ###Sets up the flask server if this code is called directly
 if __name__ == '__main__':

@@ -4,7 +4,7 @@ plugins:
 title: Ramblings Of a Network Engineer
 description: Things I find interesting whilst levelling up my skills!
 
-show_downloads: true
+show_downloads: false
 google_analytics: G-XKHR6PXZ9V
 
 github: https://ramblings-one.com/
