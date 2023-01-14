@@ -1,0 +1,26 @@
+Have the initial homepage of the server ask for the password and cache it for that session in a variable.
+
+If you hardcore a password in yml that will be preferd
+
+If the yml file has a integer in ip index 0 then use that, else resolve hostname.
+
+(Later add full check for valid IP & if fail connect try dns, and catch exertions)
+
+(Also add to the python error logging and remove print statements)
+
+https://towardsdatascience.com/stop-using-print-and-start-using-logging-a3f50bc8ab0
+
+server: 
+  sandbox:
+    IP: glean
+    Host: sandbox.com
+    Port: 443
+    Password: Cisco123!
+
+  lab:
+    IP: 0.0.0.0
+    Host: myserver.com
+    Port: 50006
+    Password: None
+
+
