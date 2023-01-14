@@ -8,10 +8,7 @@
 * Python
   * Flask
   * jinja2
-  * lists
-  * dictionaries
-  * if/else
-  * HTML
+
 
 <br><br>
 
