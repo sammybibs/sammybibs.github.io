@@ -892,7 +892,7 @@ Again, your job is to diagnose & locate the source of the problem, please check 
 3. [VTP does not support extended VLANs](DIAG_Question.md#Solution "Sorry, no")
 4. [Misconfigured subnets between devices](DIAG_Question.md#Solution "No, the OSPF isse here is due to packets from SW1 and SW in VL1007 getting delivered to SW2 on eth 1/2 ")
 
->! VLAN 1008 is mapped to SW2 Ethernet1/2](DIAG_Question.md#Solution 
+>! VLAN 1008 is mapped to SW2 Ethernet1/2
 Correct, the vlan ascending policy assinged vlans 1007 upwards internally to L3 ports
 
 
