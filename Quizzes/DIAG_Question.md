@@ -907,7 +907,7 @@ Sorry, no!
 </details>
 
 <details>
-  <summary> VTP does not support extended VLANs
+  <summary>3: VTP does not support extended VLANs
  </summary>
 
 Sorry, no! 
@@ -918,7 +918,7 @@ Sorry, no!
 </details>
 
 <details>
-  <summary> Misconfigured subnets between devices </summary>
+  <summary>4: Misconfigured subnets between devices </summary>
 
 No, the OSPF isse here is due to packets from SW1 and SW in VL1007 getting delivered to SW2 on eth 1/2
 
