@@ -885,19 +885,42 @@ Primary Secondary Type              Ports
 ```
 
 # Solution <a name="solution"></a>
-Again, your job is to diagnose & locate the source of the problem, please check your answer here by hovering over the link
-
-1. [VLAN 1008 is mapped to SW2 Ethernet1/2](DIAG_Question.md#Solution "Correct, the vlan ascending policy assinged vlans 1007 upwards internally to L3 ports")
-2. [VTP databases are not in sync](DIAG_Question.md#Solution "Sorry, no")
-3. [VTP does not support extended VLANs](DIAG_Question.md#Solution "Sorry, no")
-4. [Misconfigured subnets between devices](DIAG_Question.md#Solution "No, the OSPF isse here is due to packets from SW1 and SW in VL1007 getting delivered to SW2 on eth 1/2 ")
-
+Again, your job is to diagnose & locate the source of the problem, please check your answer below.
 
 <details>
-  <summary> VLAN 1008 is mapped to SW2 Ethernet1/2
+  <summary>1: VLAN 1008 is mapped to SW2 Ethernet1/2
 </summary>
  
 Correct, the vlan ascending policy assinged vlans 1007 upwards internally to L3 ports
+
+</details>
+
+<details>
+  <summary>2: VTP databases are not in sync
+ </summary>
+
+Sorry, no! 
+
+</details>
+
+
+</details>
+
+<details>
+  <summary> VTP does not support extended VLANs
+ </summary>
+
+Sorry, no! 
+
+</details>
+
+
+</details>
+
+<details>
+  <summary> Misconfigured subnets between devices </summary>
+
+No, the OSPF isse here is due to packets from SW1 and SW in VL1007 getting delivered to SW2 on eth 1/2
 
 </details>
 
