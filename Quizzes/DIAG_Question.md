@@ -904,8 +904,6 @@ Sorry, no!
 </details>
 
 
-</details>
-
 <details>
   <summary>3: VTP does not support extended VLANs
  </summary>
@@ -914,8 +912,6 @@ Sorry, no!
 
 </details>
 
-
-</details>
 
 <details>
   <summary>4: Misconfigured subnets between devices </summary>
