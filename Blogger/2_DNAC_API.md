@@ -98,7 +98,7 @@ Password:
 ('131.226.217.136', '443', 'devnetuser', 'Cisco123!')
 >>> token = get_token(dnac_data)
 >>> print(token)
-eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDJlNTBiZmI2MDg5YzAwOTMyZjEyMWYiLCJhdXRoU291cmNlIjoiZXh0ZXJuYWwiLCJ0ZW5hbnROYW1lIjoiVE5UMCIsInJvbGVzIjpbIjVkNDA1ZDRlNzhhMDIzMDA0Yzg3OTg0MSJdLCJ0ZW5hbnRJZCI6IjVkNDA1ZDRkNzhhMDIzMDA0Yzg3OTgzZiIsImV4cCI6MTY3MzQ2MDczNCwiaWF0IjoxNjczNDU3MTM0LCJqdGkiOiIwNWZmZmYwNC05YjRiLTQ5NjctODIxMS00ZjNiYmI1ODY2MjUiLCJ1c2VybmFtZSI6ImRuYWFkbWluIn0.HXdp-JV8Im6fAfFd7md-lQx_ErfezWZAElj7z5je4LsjQVLSuoxXvACRPQbBNygaje8wtkzGTLouF9No7vEncKoTepnbI7koLncm-nJRBcMHZit9bq_15VAfmGZKYwIvwiwDeFbx5pfjbtnYsCihPLwk0jqs6gVS3isGh8y4hicyl5lT8U_yyN2K4EOS_mcLzRyUbDHgNmSK3HCOVA1Ej0RtubZwOy1QFut-V1IceAFVeL3pW-LvPegQj5cbbiZxrgxtfR5iGgT2pP1zDGiCqMmtR1L4K4JrgTrZqFE7LyP1L0bFPmJfsFWqXhiHV1RB9w3QOwA577r5uXZ7oKLZuw
+eyJhbGci......577r5uXZ7oKLZuw
 ```
 <br>
 
@@ -578,28 +578,28 @@ for key in results.keys():
     for k2, v2 in results[key].items():
         print(f"{k2} :: {v2}")
 
-hostname :: UK-LAB-FE-01..ramblings-one
+hostname :: UK-LAB-FE-01.ramblings-one
 managementIpAddress :: 192.168.65.99
 PortName :: Tunnel0
 description :: Pim Register Tunnel (Encap) for RP 192.168.65.97
-hostname :: UK-LAB-FE-01..ramblings-one
+hostname :: UK-LAB-FE-01.ramblings-one
 managementIpAddress :: 192.168.65.99
 PortName :: Tunnel1
 description :: Pim Register Tunnel (Encap) for RP 192.168.254.193 on VRF CORP
-hostname :: UK-LAB-FE-02..ramblings-one
+hostname :: UK-LAB-FE-02.ramblings-one
 managementIpAddress :: 192.168.65.98
 PortName :: Tunnel0
 description :: Pim Register Tunnel (Encap) for RP 192.168.65.97
-hostname :: UK-LAB-FE-02..ramblings-one
+hostname :: UK-LAB-FE-02.ramblings-one
 managementIpAddress :: 192.168.65.98
 PortName :: Tunnel1
 description :: Pim Register Tunnel (Encap) for RP 192.168.254.193 on VRF CORP
 hostname :: vFE01.corpnet2.com
-managementIpAddress :: 172.16.0..36
+managementIpAddress :: 172.16.0.36
 PortName :: Tunnel0
 description :: Pim Register Tunnel (Encap) for RP 223.255.255.254
 hostname :: vFE01.corpnet2.com
-managementIpAddress :: 172.16.0..36
+managementIpAddress :: 172.16.0.36
 PortName :: Tunnel1
 description :: Pim Register Tunnel (Decap) for RP 223.255.255.254
 
