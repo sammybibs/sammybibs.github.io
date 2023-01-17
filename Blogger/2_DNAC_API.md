@@ -360,7 +360,7 @@ snmpLocation =
 
 <Response [202]>
 device-id = redacted-8a6f-4b40-9026-e052redacted
-hostname = vFE01.corpnet2.com
+hostname = vFE01.ramblings-one
 platformId = None
 softwareVersion = 17.6.1
 snmpContact = 
@@ -594,11 +594,11 @@ hostname :: UK-LAB-FE-02.ramblings-one
 managementIpAddress :: 192.168.65.98
 PortName :: Tunnel1
 description :: Pim Register Tunnel (Encap) for RP 192.168.254.193 on VRF CORP
-hostname :: vFE01.corpnet2.com
+hostname :: vFE01.ramblings-one
 managementIpAddress :: 172.16.0.36
 PortName :: Tunnel0
 description :: Pim Register Tunnel (Encap) for RP 223.255.255.254
-hostname :: vFE01.corpnet2.com
+hostname :: vFE01.ramblings-one
 managementIpAddress :: 172.16.0.36
 PortName :: Tunnel1
 description :: Pim Register Tunnel (Decap) for RP 223.255.255.254
