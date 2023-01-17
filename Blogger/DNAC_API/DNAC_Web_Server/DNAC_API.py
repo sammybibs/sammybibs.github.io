@@ -37,7 +37,7 @@ def get_devices(dnac_system, token, role=0):
     """
     headers = {'content-type': 'application/json'}
     headers['x-auth-token'] = token
-    BASE_URL = f'https://{dnac_system[0]}:{dnac_system[1]}'
+    BASE_URL = f'https://{dnac_system["IP"]}:{dnac_system["Port"]}'
     ###Get all devices
     DEVICE_URL = '/dna/intent/api/v1/network-device'
     device_data = requests.get(BASE_URL+DEVICE_URL, headers=headers, verify=False)
@@ -51,6 +51,8 @@ def get_devices(dnac_system, token, role=0):
     return devices
 
 
+
+
 def get_snmp(dnac_system, token, devices):
     """[summary]
     this will glean the SNMP contact/location from each deivce, then update the UDF fields
@@ -58,7 +60,7 @@ def get_snmp(dnac_system, token, devices):
     """
     headers = {'content-type': 'application/json'}
     headers['x-auth-token'] = token
-    BASE_URL = f'https://{dnac_system[0]}:{dnac_system[1]}'
+    BASE_URL = f'https://{dnac_system["IP"]}:{dnac_system["Port"]}'
     ##Get SNMP info
     DEVICE_URL = '/dna/intent/api/v1/network-device/'
     UDF_TAG = '/user-defined-field'
@@ -86,7 +88,7 @@ def get_sfp(dnac_system, token, devices):
     """
     headers = {'content-type': 'application/json'}
     headers['x-auth-token'] = token
-    BASE_URL = f'https://{dnac_system[0]}:{dnac_system[1]}'
+    BASE_URL = f'https://{dnac_system["IP"]}:{dnac_system["Port"]}'
     ##Get SFP info
     DEVICE_URL = '/dna/intent/api/v1/network-device/'
     URL_SUFFIX = '/equipment?type=SFP'
@@ -113,7 +115,7 @@ def find_port(dnac_system, token, devices, FINDME='ZZZZZZZZ'):
     """
     headers = {'content-type': 'application/json'}
     headers['x-auth-token'] = token
-    BASE_URL = f'https://{dnac_system[0]}:{dnac_system[1]}'
+    BASE_URL = f'https://{dnac_system["IP"]}:{dnac_system["Port"]}'
     INTERFACE_URL = '/dna/intent/api/v1/interface/network-device/' 
     DEVICE_URL = '/dna/intent/api/v1/network-device/'
     results = {}

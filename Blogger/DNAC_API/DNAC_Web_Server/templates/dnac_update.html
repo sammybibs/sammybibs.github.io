@@ -10,6 +10,8 @@
       <section>
          Current values show as placeholders below: <br>
          <form action = "http://localhost:81/update" method = "post">
+         <label for="Hostname">Hostname:</label>
+         <input type="text" id="Hostname" name="Hostname" placeholder={{ data[4] }}><br>
          <label for="IPAddress">IP address:</label>
          <input type="text" id="IPAddress" name="IPAddress" placeholder={{ data[0] }}><br>
          <label for="port">HTTPS port:</label>

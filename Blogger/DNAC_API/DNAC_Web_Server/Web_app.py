@@ -80,19 +80,23 @@ def get_dnac(node):
          print('No IP and unresolvable hostname')
          raise NameError(f'No IP and unresolvable hostname')
    #
-   DNAC_DATA = [node['IP'], node['Port'], node['Username'], node['Password'], node['Host']]
-   return(DNAC_DATA)
+   #DNAC_DATA = [node['IP'], node['Port'], node['Username'], node['Password'], node['Host']]
+   logging.info(f'DNAC Dict data {node}')
+   return(node)
+   #return(DNAC_DATA)
 
 
 def get_token(dnac_system):
     """[summary]
     Here we call up the API to get a token
     """
-    url = (f'https://{dnac_system[0]}:{dnac_system[1]}/api/system/v1/auth/token')
+    logging.info(f'Token get for {dnac_system["IP"]}:{dnac_system["Port"]}')
+    url = (f'https://{dnac_system["IP"]}:{dnac_system["Port"]}/api/system/v1/auth/token')
     headers = {'content-type': 'application/json'}
-    resp = requests.post(url, auth=HTTPBasicAuth(username=dnac_system[2], password=dnac_system[3]), headers=headers,verify=False)
+    resp = requests.post(url, auth=HTTPBasicAuth(username=dnac_system['Username'], password=dnac_system['Password']), headers=headers,verify=False)
     ####Add in error to catch bad password 
     token = resp.json()['Token']
+    logging.info(f'DNAC token got {token}')
     return token
 
 
@@ -106,7 +110,7 @@ def index():
    size = 0
    datestamp = 'Missing'
    if request.method == 'GET':
-      cache_owner = 'No-Cache'
+      cache_owner = ['N/A']
       if len(os.listdir('cache')) != 0:
          size = sum([os.path.getsize(x) for x in os.scandir('cache')])//1024
          datestamp = str(date.fromtimestamp(os.path.getmtime('cache')))
@@ -137,22 +141,25 @@ def lab_mode():
 @app.route('/update',methods = ['POST', 'GET'])
 def update_system():
    if request.method == 'POST':
-      IP = "'"+request.form.get("IPAddress")+"'"
-      PORT = "'"+request.form.get("port")+"'"
-      USER = "'"+request.form.get("Username")+"'"
-      ####Need to add a check to see if the three above varaibles have an ', if they do error messsage
+      IP = request.form.get("IPAddress")
+      PORT = int(request.form.get("port"))
+      USER = request.form.get("Username")
+      HOST = request.form.get("Hostname")
+      ####Need to add a check to see if the four above varaibles have an ', if they do error messsage
       ####And re-do
       #
       with open('Dnac_data.yml', 'r') as file:
          dict_obj = yaml.safe_load(file)
-      print(dict_obj)
+      logging.info(f'DNAC Dict update from: {dict_obj}')
       dict_obj['server']['lab']['IP'] = IP
       dict_obj['server']['lab']['Host'] = HOST
       dict_obj['server']['lab']['Port'] = PORT
       dict_obj['server']['lab']['Username'] = USER
+      logging.info(f'DNAC Dict update to: {dict_obj}')
       with open('Dnac_data.yml', 'w') as file:
          yaml.dump(dict_obj, file)
-      return index()
+      return redirect(url_for('index'))
+      #return index()
    if request.method == 'GET':
       DNAC_data = get_dnac('lab')
       return render_template('dnac_update.html', data=DNAC_data)
@@ -177,7 +184,7 @@ def update_cache():
    if request.method == 'POST':
       ##Need a bunch of APIs to download the local needed cache
       Password = request.form.get("Password")
-      DNAC_data[3] == (Password)
+      DNAC_data['Password'] = (Password)
       token = get_token(DNAC_data)
       ##Get ALL devices in DNAC
       devices = DNAC_API.get_devices(DNAC_data, token, 'ALL')
@@ -193,7 +200,7 @@ def update_cache():
          for line in get_sfp:
             f.write(str(line))
       with open('./cache/server_name.txt', 'w+') as f:
-         f.write(str(DNAC_data[4]))
+         f.write(str(DNAC_data['Host']))
       return index()
    if request.method == 'GET':
       return render_template('cache.html')
@@ -212,12 +219,14 @@ def dnac_go_interface():
             search = request.form.get("Search")
             return render_template('rendered_search.html', search_str=search, found_devices=searched_data)
       else:
-      #sudo usertool.pl -p 'admin C1sco123!'
          Password = request.form.get("Password")
          search = request.form.get("Search")
-         DNAC_data[3] == Password
+         dev_type = request.form.get("Type")
+         DNAC_data['Password'] = Password
          token = get_token(DNAC_data)
-         devices = DNAC_API.get_devices(DNAC_data, token)
+         logging.info(f'Device type {dev_type}')
+         devices = DNAC_API.get_devices(DNAC_data, token, dev_type)
+         logging.info(f'Device results {devices}')
          searched_data = DNAC_API.find_port(DNAC_data, token, devices, search)
          return render_template('rendered_search.html', search_str=search, found_devices=searched_data)
    if request.method == 'GET':
@@ -230,7 +239,9 @@ def dnac_go_interface():
 def dnac_get_sfp():
    if request.method == 'POST':
       Password = request.form.get("Password")
-      DNAC_data[3] == Password
+      logging.info(f'Password fro form {Password}')
+      DNAC_data['Password'] = Password
+      logging.info(f'DNAC Password set {DNAC_data["Password"]}')
       token = get_token(DNAC_data)
       devices = DNAC_API.get_devices(DNAC_data, token)
       searched_data = DNAC_API.get_sfp(DNAC_data, token, devices)

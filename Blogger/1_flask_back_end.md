@@ -27,7 +27,11 @@ Onto the project, for this to be a bit more 'user friendly' the idea was to fron
 
 After some google fu i came across [flask](https://flask.palletsprojects.com/en/2.2.x/) which after an hour or so I was able to create a basic front end [using this guid](https://www.digitalocean.com/community/tutorials/how-to-make-a-web-application-using-flask-in-python-3). Concurrently I have been tinkering with creating my first webex bot using the [webex bot STK](ttps://developer.cisco.com/codeexchange/github/repo/hpreston/webexteamsbot) & I would like this app to be front ended in one, or both of these formats.
 
-The first goal is to create the web front end with flask, then see if we can punt this functionality into a webex bot running in AWS.
+The goals then are to:
+1. Create the web front end with flask
+2. Run the web front end in AWS
+3. See if we can punt this front end functionality into a webex bot running in AWS
+4. Package the app into a docker container.
 
 <br>
 

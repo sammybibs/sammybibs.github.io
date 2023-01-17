@@ -9,14 +9,15 @@
    <body>
       <section>
          Current values set are as follows: <br>
-         IP address = {{ data[0] }} <br>
-         Hostname = {{ data[4] }} <br>
-         HTTPS port = {{ data[1] }} <br>
-         Username = {{ data[2] }} <br><br>
+         IP address = {{ data['IP'] }} <br>
+         Hostname = {{ data['Host'] }} <br>
+         HTTPS port = {{ data['Port'] }} <br>
+         Username = {{ data['Username'] }} <br><br>
+
 
          The local cache from DNAC was last updated {{ cache_timestamp }} <br>
          Current cache size is {{ size }}KB <br>
-         The cache owner is {{owner}}  <br> <br>
+         The cache is for the {{owner[0]}} server  <br> <br>
 
          To modify the DNAC Lab settings, hit the update DNAC button below <br>
          <form action = "http://localhost:81/update" method = "get">

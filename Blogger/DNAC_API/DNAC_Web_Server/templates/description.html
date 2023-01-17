@@ -13,10 +13,21 @@
          <br><br>
          <label for="Search">Search String:</label>
          <input type="text" id="Search" name="Search" placeholder="Search">
-         <button type="submit">Login</button>
          <br><br>
-         !!!!Dev note:: need to add a drop down to define device typoe (ACCESS/DIST/CORE/DONT_CARE) and pass that to: <br> 
-         !!!!search_DNAC.get_devices(dnac_system, token, role=0):
+
+         <label for="Type">Choose a Device Type:</label>
+         <select name="Type" id="Type">
+           <option value="ALL">ALL</option>
+           <option value="ACCESS">ACCESS</option>
+           <option value="CORE">CORE</option>
+           <option value="DISTRIBUTION">DISTRIBUTION</option>
+           <option value="BORDER ROUTER">BORDER ROUTER</option>
+            <option value="UNKNOWN">UNKNOWN</option>
+         </select>
+         <br><br>
+         <input type="submit" value="Submit">
+       </form>
+
       </form>
    </section>
    </body>
