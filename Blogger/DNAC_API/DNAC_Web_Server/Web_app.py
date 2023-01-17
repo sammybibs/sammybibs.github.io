@@ -201,7 +201,7 @@ def update_cache():
             f.write(str(line))
       with open('./cache/server_name.txt', 'w+') as f:
          f.write(str(DNAC_data['Host']))
-      return index()
+      return redirect(url_for('index'))
    if request.method == 'GET':
       return render_template('cache.html')
 
