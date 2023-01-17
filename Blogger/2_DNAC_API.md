@@ -595,11 +595,11 @@ managementIpAddress :: 192.168.65.98
 PortName :: Tunnel1
 description :: Pim Register Tunnel (Encap) for RP 192.168.254.193 on VRF CORP
 hostname :: vFE01.corpnet2.com
-managementIpAddress :: 172.23.213.36
+managementIpAddress :: 172.16.0..36
 PortName :: Tunnel0
 description :: Pim Register Tunnel (Encap) for RP 223.255.255.254
 hostname :: vFE01.corpnet2.com
-managementIpAddress :: 172.23.213.36
+managementIpAddress :: 172.16.0..36
 PortName :: Tunnel1
 description :: Pim Register Tunnel (Decap) for RP 223.255.255.254
 
