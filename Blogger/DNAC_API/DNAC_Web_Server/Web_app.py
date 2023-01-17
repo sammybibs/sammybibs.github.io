@@ -42,15 +42,9 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s', date
 
 """
 
-1. Need to add buttin for DNAC UFDF Fields update with SNMP...
+1. Have the initial homepage of the server ask for the password and cache it for that session in a variable.
+1a. If you hardcore a password in yml that will be preferd
 
-2. Have the initial homepage of the server ask for the password and cache it for that session in a variable.
-2a. If you hardcore a password in yml that will be preferd
-
-3. If the yml file has a integer in ip index 0 then use that, else resolve hostname.
-3a. (Later add full check for valid IP & if fail connect try dns, and catch exertions)
-
-4. allow only change the 2nd dnac server, where the sandbox is static.
 """
 
 #Need to set the execute in the same folder for relative paths to use
