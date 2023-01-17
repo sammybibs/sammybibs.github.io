@@ -1,10 +1,10 @@
 server:
   lab:
-    Host: nonresolve.lab
-    IP: 192.53.254.20
+    Host: serv.com
+    IP: 1.2.3.4
     Password: None
-    Port: 50002
-    Username: dnaadmin
+    Port: 443
+    Username: jim
   sandbox:
     Host: sandboxdnac.cisco.com
     IP: glean

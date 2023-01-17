@@ -9,6 +9,9 @@ from flask import Flask, redirect, url_for, request
 ###Base import
 from flask import Flask
 
+##import the DNAC calls
+import DNAC_API
+
 ###Import for the files updates needed
 import os
 from datetime import date
@@ -18,6 +21,11 @@ import logging
 import yaml
 import re
 import socket
+import requests
+from requests.auth import HTTPBasicAuth
+import json
+import socket
+
 
 ###Allow us to reload modules
 import importlib
@@ -33,8 +41,8 @@ app = Flask(__name__, template_folder='templates', static_folder='StaticFiles')
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 
 """
-0. all dnac_data thats yaml then cast to a list needs to be all dict lookups.
 
+0. all dnac_data thats yaml then cast to a list needs to be all dict lookups.
 
 1. Need to add buttin for DNAC UFDF Fields update with SNMP...
 
@@ -72,7 +80,7 @@ def get_dnac(node):
          print('No IP and unresolvable hostname')
          raise NameError(f'No IP and unresolvable hostname')
    #
-   DNAC_DATA = [node['IP'], node['Port'], node['Username'], node['Password']]
+   DNAC_DATA = [node['IP'], node['Port'], node['Username'], node['Password'], node['Host']]
    return(DNAC_DATA)
 
 
@@ -88,6 +96,9 @@ def get_token(dnac_system):
     return token
 
 
+
+
+
 ####The web/flask functions
 @app.route('/',methods = ['POST', 'GET'])
 def index():
@@ -95,10 +106,31 @@ def index():
    size = 0
    datestamp = 'Missing'
    if request.method == 'GET':
+      cache_owner = 'No-Cache'
       if len(os.listdir('cache')) != 0:
          size = sum([os.path.getsize(x) for x in os.scandir('cache')])//1024
          datestamp = str(date.fromtimestamp(os.path.getmtime('cache')))
-      return render_template('dnac_sys_data.html', data=DNAC_data, size=size, cache_timestamp=datestamp)
+         with open('./cache/server_name.txt', 'r') as f:
+            cache_owner = f.readlines()
+      return render_template('dnac_sys_data.html', data=DNAC_data, size=size, cache_timestamp=datestamp, owner=cache_owner)
+
+
+@app.route('/sandbox_mode',methods = ['GET'])
+def sandbox():
+   logging.info('sandbox mode')
+   if request.method == 'GET':
+      global DNAC_data
+      DNAC_data = get_dnac('sandbox')
+      return redirect(url_for('index'))
+
+@app.route('/lab_mode',methods = ['GET'])
+def lab_mode():
+   logging.info('lab mode')
+   if request.method == 'GET':
+      global DNAC_data
+      DNAC_data = get_dnac('lab')
+      return redirect(url_for('index'))
+
 
 
 
@@ -111,20 +143,18 @@ def update_system():
       ####Need to add a check to see if the three above varaibles have an ', if they do error messsage
       ####And re-do
       #
-      with open('DNAC_data.py', 'r') as input:
-         with open("temp.txt", "w") as output:
-            # iterate all lines from file
-            for line in input:
-                  # if line starts with substring 'shown below' then don't write it in temp file
-                  if not line.strip("\n").startswith('def dnac_server(PASSWORD='):
-                     output.write(line)
-                  else:
-                     output.write("def dnac_server(PASSWORD='Not Cached',IP="+IP+",PORT="+PORT+",USER="+USER+"):\n")
-      # replace file with original name
-      os.replace('temp.txt', 'DNAC_data.py')
-      importlib.reload(DNAC_data)
+      with open('Dnac_data.yml', 'r') as file:
+         dict_obj = yaml.safe_load(file)
+      print(dict_obj)
+      dict_obj['server']['lab']['IP'] = IP
+      dict_obj['server']['lab']['Host'] = HOST
+      dict_obj['server']['lab']['Port'] = PORT
+      dict_obj['server']['lab']['Username'] = USER
+      with open('Dnac_data.yml', 'w') as file:
+         yaml.dump(dict_obj, file)
       return index()
    if request.method == 'GET':
+      DNAC_data = get_dnac('lab')
       return render_template('dnac_update.html', data=DNAC_data)
 
 
@@ -150,18 +180,20 @@ def update_cache():
       DNAC_data[3] == (Password)
       token = get_token(DNAC_data)
       ##Get ALL devices in DNAC
-      devices = DNAC_API.get_devices(dnacs, token, 'ALL')
+      devices = DNAC_API.get_devices(DNAC_data, token, 'ALL')
       with open('./cache/get_devices.txt', 'w+') as f:
             f.write(str(devices))
       ##Get ALL interfaces as the search string is empty/any
-      find_port = DNAC_API.find_port(dnacs, token, devices, "")
+      find_port = DNAC_API.find_port(DNAC_data, token, devices, "")
       with open('./cache/find_port.txt', 'w+') as f:
             f.write(str(find_port))
       ##GET all the SFP info on ALL nodes
-      get_sfp = DNAC_API.get_sfp(dnacs, token, devices)
+      get_sfp = DNAC_API.get_sfp(DNAC_data, token, devices)
       with open('./cache/get_sfp.txt', 'w+') as f:
          for line in get_sfp:
             f.write(str(line))
+      with open('./cache/server_name.txt', 'w+') as f:
+         f.write(str(DNAC_data[4]))
       return index()
    if request.method == 'GET':
       return render_template('cache.html')
@@ -185,8 +217,8 @@ def dnac_go_interface():
          search = request.form.get("Search")
          DNAC_data[3] == Password
          token = get_token(DNAC_data)
-         devices = DNAC_API.get_devices(dnacs, token)
-         searched_data = DNAC_API.find_port(dnacs, token, devices, search)
+         devices = DNAC_API.get_devices(DNAC_data, token)
+         searched_data = DNAC_API.find_port(DNAC_data, token, devices, search)
          return render_template('rendered_search.html', search_str=search, found_devices=searched_data)
    if request.method == 'GET':
       return render_template('description.html')
@@ -200,8 +232,8 @@ def dnac_get_sfp():
       Password = request.form.get("Password")
       DNAC_data[3] == Password
       token = get_token(DNAC_data)
-      devices = DNAC_API.get_devices(dnacs, token)
-      searched_data = DNAC_API.get_sfp(dnacs, token, devices)
+      devices = DNAC_API.get_devices(DNAC_data, token)
+      searched_data = DNAC_API.get_sfp(DNAC_data, token, devices)
       return render_template('rendered_sfp.html', sfps=searched_data)
    if request.method == 'GET':
       ##Check to see if there is cached data and a data in the file.

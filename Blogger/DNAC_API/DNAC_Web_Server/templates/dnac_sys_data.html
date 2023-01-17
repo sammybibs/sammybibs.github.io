@@ -10,15 +10,25 @@
       <section>
          Current values set are as follows: <br>
          IP address = {{ data[0] }} <br>
+         Hostname = {{ data[4] }} <br>
          HTTPS port = {{ data[1] }} <br>
          Username = {{ data[2] }} <br><br>
 
          The local cache from DNAC was last updated {{ cache_timestamp }} <br>
-         Current cache size is {{ size }}KB <br> <br> <br> <br>
+         Current cache size is {{ size }}KB <br>
+         The cache owner is {{owner}}  <br> <br>
 
-         To modify the DNAC settings, hit the update DNAC button below <br><br>
+         To modify the DNAC Lab settings, hit the update DNAC button below <br>
          <form action = "http://localhost:81/update" method = "get">
             <button type="submit">Update DNAC</button>
+         </form>
+            <br>
+         To switch between sandbox/lab mode, hit the respecitve button below <br>
+         <form action = "http://localhost:81/sandbox_mode" method = "get">
+         <button type="submit">Sandbox DNAC</button>
+         </form>
+         <form action = "http://localhost:81/lab_mode" method = "get">
+         <button type="submit">Lab DNAC</button>
          </form>
       </section>
    </body>
