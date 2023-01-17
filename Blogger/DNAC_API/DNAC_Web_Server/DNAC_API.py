@@ -16,6 +16,7 @@ import requests
 import getpass
 from requests.auth import HTTPBasicAuth
 import json
+import logging
 
 requests.urllib3.disable_warnings()
 user_inputs = sys.argv
@@ -53,6 +54,7 @@ def get_devices(dnac_system, token, role=0):
 
 
 
+###This function updates DNAC User Deifned Fields with SNMP location/contact data
 def get_snmp(dnac_system, token, devices):
     """[summary]
     this will glean the SNMP contact/location from each deivce, then update the UDF fields
@@ -67,6 +69,11 @@ def get_snmp(dnac_system, token, devices):
     for DEVICE in devices:
         platform_data = requests.get(BASE_URL+DEVICE_URL+DEVICE, headers=headers, verify=False)
         platform_data = platform_data.json()
+        logging.info(f"hostname = {platform_data['response']['hostname']}")
+        logging.info(f"platformId = {platform_data['response']['platformId']}")
+        logging.info(f"serialNumber = {platform_data['response']['serialNumber']}")
+        logging.info(f"snmpContact = {platform_data['response']['snmpContact']}")
+        logging.info(f"snmpLocation = {platform_data['response']['snmpLocation']}")
         if platform_data['response']['snmpContact'] and platform_data['response']['snmpLocation']:
             payload = [{"name":"SNMP Contact","value":platform_data['response']['snmpContact']},
                     {"name":"SNMP Location","value":platform_data['response']['snmpLocation']}]

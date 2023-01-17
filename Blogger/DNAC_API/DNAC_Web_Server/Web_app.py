@@ -42,8 +42,6 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s', date
 
 """
 
-0. all dnac_data thats yaml then cast to a list needs to be all dict lookups.
-
 1. Need to add buttin for DNAC UFDF Fields update with SNMP...
 
 2. Have the initial homepage of the server ask for the password and cache it for that session in a variable.
@@ -261,42 +259,20 @@ def dnac_get_sfp():
          return render_template('dnac_sfp.html')
 
 
-
-
-###This fucntion needs a clenaup and adding to the main web front end.
-def get_snmp(dnac_system, token, devices):
-    """[summary]
-    this will glean the SNMP contact/location from each deivce, then update the UDF fields
-    in DNAC with this same data.
-    """
-    headers = {'content-type': 'application/json'}
-    headers['x-auth-token'] = token
-    BASE_URL = f'https://{dnac_system[0]}:{dnac_system[1]}'
-    ##Get SNMP info
-    DEVICE_URL = '/dna/intent/api/v1/network-device/'
-    UDF_TAG = '/user-defined-field'
-    for DEVICE in devices:
-        platform_data = requests.get(BASE_URL+DEVICE_URL+DEVICE, headers=headers, verify=False)
-        platform_data = platform_data.json()
-        logging.info(f"hostname = {platform_data['response']['hostname']}")
-        logging.info(f"platformId = {platform_data['response']['platformId']}")
-        logging.info(f"serialNumber = {platform_data['response']['serialNumber']}")
-        logging.info(f"snmpContact = {platform_data['response']['snmpContact']}")
-        logging.info(f"snmpLocation = {platform_data['response']['snmpLocation']}")
-        logging.info()
-        if platform_data['response']['snmpContact'] and platform_data['response']['snmpLocation']:
-            payload = [{"name":"SNMP Contact","value":platform_data['response']['snmpContact']},
-                    {"name":"SNMP Location","value":platform_data['response']['snmpLocation']}]
-                    #
-        elif platform_data['response']['snmpContact']:
-            payload = [{"name":"SNMP Contact","value":platform_data['response']['snmpContact']}]
-            #
-        elif platform_data['response']['snmpLocation']:
-            payload = [{"name":"SNMP Location","value":platform_data['response']['snmpLocation']}]
-            #
-        else:
-            continue
-        requests.put(BASE_URL+DEVICE_URL+DEVICE+UDF_TAG,data=json.dumps(payload), headers=headers, verify=False)
+###This function updates DNAC User Deifned Fields with SNMP location/contact data
+@app.route('/udf',methods = ['POST', 'GET'])
+def dnac_get_udf():
+   if request.method == 'POST':
+      Password = request.form.get("Password")
+      dev_type = request.form.get("Type")
+      DNAC_data['Password'] = Password
+      token = get_token(DNAC_data)
+      devices = DNAC_API.get_devices(DNAC_data, token, dev_type)
+      DNAC_API.get_snmp(DNAC_data, token, devices)
+      logging.info(f'DNAC Password set {DNAC_data["Password"]}')
+      return redirect(url_for('index'))
+   if request.method == 'GET':
+      return render_template('dnac_udf.html')
 
 
 ###Sets up the flask server if this code is called directly
