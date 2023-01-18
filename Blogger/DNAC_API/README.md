@@ -24,3 +24,7 @@
 <br>
 
 - [DNAC info Flask](/Blogger/DNAC_API/3_DNAC_into_flask)
+    - [Technology covered](#technology-covered-)
+    - [The background story](#the-background-story-)
+    - [The story pt1](#the-story-pt1-)
+    - [Web back end baseline](#web-back-end-baseline-)
