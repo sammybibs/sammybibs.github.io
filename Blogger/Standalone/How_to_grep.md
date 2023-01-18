@@ -128,8 +128,8 @@ Now finally by way of example, here are some regexp's I have taken from my notes
 * 400:1.*_ Matches 400:1XXXX where X is anything as the . means any character & the * means the previous match the previous charterer 0 or more times.
 * 400:1.+_ is as previous, but wont match 400:1 as the + means 1 or more times, so a second character is needed.
 * 500:([0-9]2)+_ inside the ( ) is treated as one expression where the + means this expression must be there 1 or more times, so 500:X2 & 500:X2X2X2 all match.
-* "600:1_ | 600:2_" is using a "|" alternate, which looks for either of the patterns
-* "600:(12)|(22)" uses the "|" OR to look for 600:12 or 600:22
+* ```600:1_ | 600:2_``` is using a ```|``` alternate, which looks for either of the patterns
+* ```600:(12)|(22)``` uses the ```|``` OR to look for 600:12 or 600:22
 
 ## Further reading <a name="further-reading"></a>
 [Cisco Regexp](http://www.cisco.com/c/en/us/td/docs/ios/12_2/termserv/configuration/guide/ftersv_c/tcfaapre.html#wp1023226)
