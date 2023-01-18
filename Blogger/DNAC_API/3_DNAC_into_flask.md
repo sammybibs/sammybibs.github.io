@@ -197,7 +197,7 @@ I use the word 'finalizing' lightly, as this code will be due some more refactor
 What I added to the current version:
 - Changed the DNAC server imports to be yaml
 - Added DNAC server checks (IP+DNS lookup)
-- Added ability to choose lab or sandbox DANC
+- Added ability to choose and change the lab DNAC, or use the sandbox (devnet) DNAC
 
 Next up ill look to add this app to AWS so you can try it for yourself :-)
 
