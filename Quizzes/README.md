@@ -1,3 +1,13 @@
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XKHR6PXZ9V"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XKHR6PXZ9V');
+</script>
+
 # TABLE OF CONTENTS
 - [DIAG_Question (14/12/2016)](/Quizzes/DIAG_Question)
 - [802.1D review questions 9th Dec 2016](/Quizzes/8021D_review)
