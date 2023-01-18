@@ -6,7 +6,9 @@
     - [DNAC into Flask (17/01/23)](/Blogger/DNAC_API/3_DNAC_into_flask)
   - [GIT hub website builder](/Blogger/Website_builder/)
 - [Quizzes](/Quizzes/README.md)
-  - [DIAG_Question (14/12/2016)](/Quizzes/DIAG_Question)
+  - [DIAG_Question (14/12/16)](/Quizzes/DIAG_Question)
+- Stand alone
+  - [Regexp Review & how to grep Cisco 12/14/16](/Blogger/Standalone/How_to_grep)
 
 ## Other ways to find me
 
