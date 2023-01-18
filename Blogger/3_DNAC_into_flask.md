@@ -16,7 +16,7 @@
 
 Now we have a basic flask app and the DNAC APIs we need to use, we will look at combining the two together.
 
-[The full project files are here](/Blogger/DNAC_API/DNAC_Web_Server/)
+[The full project files are here](/https://github.com/sammybibs/DNAC_API_Query/)
 
 <br>
 
