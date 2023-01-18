@@ -132,6 +132,7 @@ Now finally by way of example, here are some regexp's I have taken from my notes
 * "600:(12)|(22)" uses the "|" OR to look for 600:12 or 600:22
 
 ## Further reading <a name="further-reading"></a>
-[Cisco Regexp;(http://www.cisco.com/c/en/us/td/docs/ios/12_2/termserv/configuration/guide/ftersv_c/tcfaapre.html#wp1023226)
+[Cisco Regexp](http://www.cisco.com/c/en/us/td/docs/ios/12_2/termserv/configuration/guide/ftersv_c/tcfaapre.html#wp1023226)
+
 [Cisco Shell Processing](http://www.cisco.com/c/en/us/td/docs/ios/netmgmt/configuration/guide/Convert/IOS_Shell/nm_ios_shell.html)
 
