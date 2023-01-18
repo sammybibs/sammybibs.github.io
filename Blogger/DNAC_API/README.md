@@ -1,13 +1,13 @@
 # TABLE OF CONTENTS
 
-- [Flask Back End basics](/Blogger/1_flask_back_end)
+- [Flask Back End basics](/Blogger/DNAC_API/1_flask_back_end)
   - [Technology covered](#technology-covered-)
   - [The background story](#the-background-story-)
   - [Web back end baseline](#web-back-end-baseline-)
 
 <br>
 
-- [DNAC APIs required](/Blogger/2_DNAC_API)
+- [DNAC APIs required](/Blogger/DNAC_API/2_DNAC_API)
     - [Technology covered](#technology-covered-)
     - [The background story](#the-background-story-)
     - [Accessing the API](#accessing-the-api-)
@@ -23,4 +23,4 @@
 
 <br>
 
-- [DNAC info Flask](/Blogger/3_DNAC_into_flask)
+- [DNAC info Flask](/Blogger/DNAC_API/3_DNAC_into_flask)

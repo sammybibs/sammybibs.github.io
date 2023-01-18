@@ -1,6 +1,6 @@
 # Contents
 - [Technology covered](#technology-covered-)
-- [The background story](#the-background-story-)
+- [The story pt 2](#the-story-pt-2-)
 - [Accessing the API](#accessing-the-api-)
 - [Use cases](#use-cases-)
   - [0 The raw data needed](#0-the-raw-data-needed-)
@@ -20,7 +20,7 @@
 
 <br><br>
 
-# The story pt 2 <a name="the-background-story"></a>
+# The story pt 2 <a name="the-story-pt-2"></a>
 
 Now we have a flask container, we need to develop the APIs that perform the required functionality.
 

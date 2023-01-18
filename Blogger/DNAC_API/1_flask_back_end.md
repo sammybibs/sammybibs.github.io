@@ -1,6 +1,7 @@
 # Contents
 - [Technology covered](#technology-covered-)
 - [The background story](#the-background-story-)
+- [The story pt1](#the-story-pt1-)
 - [Web back end baseline](#web-back-end-baseline-)
 
 # Technology covered <a name="technology-covered"></a>
@@ -36,7 +37,7 @@ The goals then are to:
 [The full project files are here](/https://github.com/sammybibs/DNAC_API_Query/)
 <br>
 
-# The story pt1
+# The story pt1 <a name="the-story-pt1"></a>
 
 At this stage of the development cycle we will investigate the flask container and develop a framework to front end our project.
 

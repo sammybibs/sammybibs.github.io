@@ -1,9 +1,9 @@
 # TABLE OF CONTENTS
 - [Blogger](/Blogger/README.md)
-  - DNAC API tool series
-    - [Flask Back End basics (01/01/23)](/Blogger/1_flask_back_end)
-    - [DNAC APIs required (2/01/23)](/Blogger/2_DNAC_API)\
-    - [DNAC into Flask (in progress)](/Blogger/3_DNAC_into_flask)
+  - [DNAC API tool series](/Blogger/DNAC_API/README)
+    - [Flask Back End basics (01/01/23)](/Blogger/DNAC_API/1_flask_back_end)
+    - [DNAC APIs required (2/01/23)](/Blogger/DNAC_API/2_DNAC_API)
+    - [DNAC into Flask (17/01/23)](/Blogger/DNAC_API/3_DNAC_into_flask)
 - [Quizzes](/Quizzes/README.md)
   - [DIAG_Question (14/12/2016)](/Quizzes/DIAG_Question)
 

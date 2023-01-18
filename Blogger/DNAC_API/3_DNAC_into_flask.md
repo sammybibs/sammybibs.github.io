@@ -1,7 +1,10 @@
 # Contents
 - [Technology covered](#technology-covered-)
-- [The background story](#the-background-story-)
-- [Web back end baseline](#web-back-end-baseline-)
+- [The story](#the-story-)
+- [Arranging the folder structure](#arranging-the-folder-structure-)
+- [Setup the DNAC python files](#setup-the-dnac-python-files-)
+- [Setup the flask routes and web pages](#setup-the-flask-routes-and-web-pages-)
+- [Finalizing the code](#finalizing-the-code-)
 
 # Technology covered <a name="technology-covered"></a>
 * January 03 2023
@@ -12,7 +15,7 @@
 
 <br><br>
 
-# The story <a name="the-background-story"></a>
+# The story <a name="the-story"></a>
 
 Now we have a basic flask app and the DNAC APIs we need to use, we will look at combining the two together.
 
@@ -20,7 +23,7 @@ Now we have a basic flask app and the DNAC APIs we need to use, we will look at 
 
 <br>
 
-# Arranging the folder structure
+# Arranging the folder structure <a name="arranging-the-folder-structure"></a>
 
 To make this project portable, so that anyone can copy it and modify it for their own deployment we split the code files into two, where one will take care of accessing DNAC and getting a token, the other will hold all our API calls.
 
@@ -41,7 +44,7 @@ Also remembering that the flask app looks in the *./templates* folder for the HT
   - Web_app.py (Launch code fro the flask app)
   - requirements.txt (project python requirements)
 
-# Setup the DNAC python files
+# Setup the DNAC python files <a name="setup-the-dnac-python-files"></a>
 
 The two DNAC~.py files are created in the directory:
 
@@ -81,7 +84,7 @@ def get_token(dnac_system):
 <br>
 
 
-# Setup the flask routes and web pages
+# Setup the flask routes and web pages <a name="setup-the-flask-routes-and-web-pages"></a>
 The skeleton for flask we build in the first blog post, all we need to do now is create additional functions with the @route property to call the DNAC API functions and render the results:
 
 In the Web_app.py file we need to import the DNAC files for use, as well as some other useful modules:
@@ -186,7 +189,7 @@ The front end looks like so:
 ![](images/2023-01-12-22-08-01.png)
 
 
-# Finalizing the code
+# Finalizing the code <a name="finalizing-the-code"></a>
 I use the word 'finalizing' lightly, as this code will be due some more refactoring and tidy up at some point. However after some time I managed to place all the functions into flask.
 
 What I added to the current version:
