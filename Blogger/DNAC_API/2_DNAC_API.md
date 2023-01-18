@@ -3,14 +3,14 @@
 - [The story pt 2](#the-story-pt-2-)
 - [Accessing the API](#accessing-the-api-)
 - [Use cases](#use-cases-)
-  - [0 The raw data needed](#0-the-raw-data-needed-)
-    - [Glean device IDs](#glean-device-ids-)
-    - [Glean device data](#glean-device-data-)
-  - [1 DNAC User Defined Fields update](#1-dnac-user-defined-fields-update-)
-    - [Glean SNMP data](#glean-snmp-data-)
-      - [Summary](#summary-)
-  - [2 DNAC SFP inventory check](#2-dnac-sfp-inventory-check-)
-  - [3 DNAC Find named ports](#3-dnac-find-named-ports-)
+    - [0 The raw data needed](#0-the-raw-data-needed-)
+        - [Glean device IDs](#glean-device-ids-)
+        - [Glean device data](#glean-device-data-)
+    - [1 DNAC User Defined Fields update](#1-dnac-user-defined-fields-update-)
+        - [Glean SNMP data](#glean-snmp-data-)
+        - [Summary](#summary-)
+    - [2 DNAC SFP inventory check](#2-dnac-sfp-inventory-check-)
+    - [3 DNAC Find named ports](#3-dnac-find-named-ports-)
 
 ### **[The current locally run web application is here](https://www.github.com/sammybibs/DNAC_API_Query/)**
 

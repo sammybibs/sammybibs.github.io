@@ -12,7 +12,6 @@ As a network engineer who dabbles in python I created this side project to devel
 
 I am a fan of APIs, only a recent fan mind you and I'm only on this trajectory out of necessity, So as I enhance my skill set to include APIs, python and any other faucets of automation, I'll endeavor to document them as I go. This hopefully will offer others some guidance as you also transition. That and it hopefully will be a nice reminder of where it all started (right here, right now) vs where we end up.
 
-<br>
 
 Onto the project, for this to be a bit more 'user friendly' the idea was to front end this with a web page.
 
