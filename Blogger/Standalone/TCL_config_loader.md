@@ -4,11 +4,9 @@
   - [Outcome](#outcome-)
   - [Summary](#summary-)
 
-
-
-
-
 ## Introduction <a name="introduction"></a>
+
+9th Feb 2015
 
 Ok I regularly change my configs in my Lab, the only variable that changes is part of the filepath & each router uses its own hostname, eg:
 

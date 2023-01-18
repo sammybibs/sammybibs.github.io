@@ -5,6 +5,9 @@
   - [Further reading](#further-reading-)
 
 ## Introduction <a name="introduction"></a>
+
+14th Dec 2016
+
 I learn regular expressions, I forget regular expressions. I learn regular expressions, I forget regular expressions. Sound familiar?
 
 Some of this stuff sticks for a while, but the devil is in the details & if like me you rarely use them in your day to day, well the information just evaporates out of your ears.

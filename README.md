@@ -8,7 +8,8 @@
 - [Quizzes](/Quizzes/README.md)
   - [DIAG_Question (14/12/16)](/Quizzes/DIAG_Question)
 - Stand alone
-  - [Regexp Review & how to grep Cisco 12/14/16](/Blogger/Standalone/How_to_grep)
+  - [Regexp Review & how to grep Cisco 14/12/16](/Blogger/Standalone/How_to_grep)
+  - [TCL config loader 9/2/15](/Blogger/Standalone/How_to_grep)
 
 ## Other ways to find me
 
