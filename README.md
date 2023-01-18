@@ -1,6 +1,6 @@
 # TABLE OF CONTENTS
 - **Blogger**
-  - [DNAC API tool series](/Blogger/DNAC_API/)
+  - [DNAC API tool series intro](/Blogger/DNAC_API/)
     - [Flask Back End basics (01/01/23)](/Blogger/DNAC_API/1_flask_back_end)
     - [DNAC APIs required (2/01/23)](/Blogger/DNAC_API/2_DNAC_API)
     - [DNAC into Flask (17/01/23)](/Blogger/DNAC_API/3_DNAC_into_flask)
