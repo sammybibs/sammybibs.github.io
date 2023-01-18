@@ -1,3 +1,5 @@
+......loading.....
+```
 Go daddy domain
 
 GH hosted 
@@ -8,4 +10,4 @@ GH hosted
 - markdown and git
 
 - automated contents pages 
-
+```
