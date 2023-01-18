@@ -3,7 +3,7 @@
 - [The story pt1](#the-story-pt1-)
 - [Web back end baseline](#web-back-end-baseline-)
 
-### **[The current locally run web application is here](/https://github.com/sammybibs/DNAC_API_Query/)**
+### **[The current locally run web application is here](https://www.github.com/sammybibs/DNAC_API_Query/)**
 
 # Technology covered <a name="technology-covered"></a>
 * January 01 2023

@@ -12,7 +12,7 @@
   - [2 DNAC SFP inventory check](#2-dnac-sfp-inventory-check-)
   - [3 DNAC Find named ports](#3-dnac-find-named-ports-)
 
-### **[The current locally run web application is here](/https://github.com/sammybibs/DNAC_API_Query/)**
+### **[The current locally run web application is here](https://www.github.com/sammybibs/DNAC_API_Query/)**
 
 # Technology covered <a name="technology-covered"></a>
 * January 02 2023

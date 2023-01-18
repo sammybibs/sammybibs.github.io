@@ -4,7 +4,7 @@
 - [DNAC APIs required](/Blogger/DNAC_API/2_DNAC_API)
 - [DNAC info Flask](/Blogger/DNAC_API/3_DNAC_into_flask)
 
-### **[The current locally run web application is here](/https://www.github.com/sammybibs/DNAC_API_Query/)**
+### **[The current locally run web application is here](https://www.github.com/sammybibs/DNAC_API_Query/)**
 
 # The background story
 
