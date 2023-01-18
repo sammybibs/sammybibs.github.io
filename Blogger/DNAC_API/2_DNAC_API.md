@@ -12,6 +12,8 @@
   - [2 DNAC SFP inventory check](#2-dnac-sfp-inventory-check-)
   - [3 DNAC Find named ports](#3-dnac-find-named-ports-)
 
+### **[The current locally run web application is here](/https://github.com/sammybibs/DNAC_API_Query/)**
+
 # Technology covered <a name="technology-covered"></a>
 * January 02 2023
 * DNAC API
@@ -23,8 +25,6 @@
 # The story pt 2 <a name="the-story-pt-2"></a>
 
 Now we have a flask container, we need to develop the APIs that perform the required functionality.
-
-[The full project files are here](/https://github.com/sammybibs/DNAC_API_Query/)
 
 <br><br>
 
