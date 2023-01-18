@@ -58,6 +58,7 @@ o        155.1.146.0/24 [160/1] via 155.1.0.1, 00:00:33, Tunnel0
 ```
 
 * On the spokes we can see they have just a default route as expected, this is from the hub.
+
 ```
 R1#show ip rout odr
 
@@ -82,6 +83,7 @@ conf t
 ```
 
 * A quick verification on the hub that were ok
+
 ```
 R5#show ip ospf neighbor
 
@@ -91,12 +93,14 @@ Neighbor ID     Pri   State           Dead Time   Address         Interface
 ```
 
 * On inspectipon of the HUBS routing table for OSR, we see nohing as expected. This is due to OSPF's AD being lower tha ODR (170 vs 110)
+
 ```
 R5#show ip route odr
 -nothing
 ```
 
 * On the Spoke we still see the default route from the HUB.
+
 ```
 R3#show ip route odr
 Gateway of last resort is 155.1.0.5 to network 0.0.0.0
@@ -111,6 +115,7 @@ Ok so lets revisit the problem, accoring to the Cisco FAQ's on ODR the following
 So lets try to lower the AD on the HUB for OSPF & see if we learn the routes & OSPF is just superseding them with it's better AD.
 
 On Router 5 I lowered the AD for OSPF to make it higher than ODR's 170.
+
 ```
 conf t
  router ospf 1
@@ -118,6 +123,7 @@ conf t
 ```
 
 * Then just a quick bounce of the interfaces to get things converging quickly.
+
 ```
 !!ALL (R1-R3-R5)
 conf t
