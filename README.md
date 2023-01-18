@@ -10,6 +10,8 @@
 - Stand alone
   - [Regexp Review & how to grep Cisco 14/12/16](/Blogger/Standalone/How_to_grep)
   - [TCL config loader 9/2/15](/Blogger/Standalone/How_to_grep)
+  - [ODR routing 9/2/15](/Blogger/Standalone/ODR_Routing)
+  - [802.1D review questions 9th Dec 2016](/Blogger/Standalone/8021D_review)
 
 ## Other ways to find me
 
