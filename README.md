@@ -8,7 +8,7 @@
 - [Quizzes](/Quizzes/README.md)
   - [DIAG_Question (14/12/16)](/Quizzes/DIAG_Question)
   - [802.1D review questions 9th Dec 2016](/Quizzes/8021D_review)
-- Stand alone
+- **Stand alone**
   - [Regexp Review & how to grep Cisco 14/12/16](/Blogger/Standalone/How_to_grep)
   - [TCL config loader 9/2/15](/Blogger/Standalone/How_to_grep)
   - [ODR routing 9/2/15](/Blogger/Standalone/ODR_Routing)
