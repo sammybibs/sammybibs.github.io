@@ -47,5 +47,5 @@ Friday 2nd June - Sunday 4th June
 * 11:00 - 13:00 ::: [Heineken experience (£20)](https://www.heinekenexperience.com/en/)
 * 13:00 - 17:00 ::: free roam the campaign map.
 * 17:05 - 17:30 ::: Transport to AMS: Intercity direct train: 9243 to Amsterdam Central
-* 19:15 - 19:30 ::: Fly AMS to LGW
+* 19:10 - 19:30 ::: Fly AMS to LGW
 * 20:30 - 21:30 ::: Drive to original meet point
