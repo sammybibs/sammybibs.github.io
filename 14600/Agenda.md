@@ -14,9 +14,9 @@
 
 # Payment status <a name="payment-status"></a>
 
-Sam | Mat | Marc | Mart | Gal | Scott
+Sam | Mat | Marc | Mart | Gal | Scott | Nige
 --- | --- | --- | --- | --- | ---
-**`210`** | **`210`** | `100` |**`210`** |**`210`** |`160` |
+**`210`** | **`210`** | `100` |**`210`** |**`210`** |`160` | **`210`** |
 
 * Current dues are £210:
   * Samuel Bibby - 20-67-49 : 80416711
