@@ -1,17 +1,17 @@
 # Contents
 - [Introduction](#introduction-)
-  - [Infoblox VM remote setup](#infoblox-vm-remote-setup-)
+- [Infoblox VM remote setup](#infoblox-vm-remote-setup-)
 - [Self signed cert based trust with DNAC](#self-signed-cert-based-trust-with-dnac-)
   - [CSR for infoblox and DNAC trust](#csr-for-infoblox-and-dnac-trust-)
-  - [InfoBLox DNAC integration](#infoblox-dnac-integration-)
-  - [DNAC passed info and extensible attributes](#dnac-passed-info-and-extensible-attributes-)
-    - [Attribute conclusion](#attribute-conclusion-)
-  - [DNAC passed info using LAN automation or lack there of](#dnac-passed-info-using-lan-automation-or-lack-there-of-)
-    - [API to pull from DNAC and post to Infoblox](#api-to-pull-from-dnac-and-post-to-infoblox-)
-      - [In summary](#in-summary-)
-  - [Views DHCP and DNS with DNAC](#views-dhcp-and-dns-with-dnac-)
-  - [Infoblox with ISE PXG](#infoblox-with-ise-pxg-)
-  - [Summary](#summary-)
+- [InfoBLox DNAC integration](#infoblox-dnac-integration-)
+- [DNAC passed info and extensible attributes](#dnac-passed-info-and-extensible-attributes-)
+  - [Attribute conclusion](#attribute-conclusion-)
+- [DNAC passed info using LAN automation or lack there of](#dnac-passed-info-using-lan-automation-or-lack-there-of-)
+  - [API to pull from DNAC and post to Infoblox](#api-to-pull-from-dnac-and-post-to-infoblox-)
+    - [In summary](#in-summary-)
+- [Views DHCP and DNS with DNAC](#views-dhcp-and-dns-with-dnac-)
+- [Infoblox with ISE PXG](#infoblox-with-ise-pxg-)
+- [Summary](#summary-)
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKHR6PXZ9V"></script>
@@ -34,7 +34,7 @@ If you peruse google you will find documentation about this, which this post wil
 This lab uses NIOS 8.4.4 and DNAC 2.3.3.4
 
 
-## Infoblox VM remote setup <a name="infoblox-vm-remote-setup"></a>
+# Infoblox VM remote setup <a name="infoblox-vm-remote-setup"></a>
 If you have a VM in a lab and you want to test it over and over here are the setup/reset notes.
 
 1. Open terminal/KVM of the IPAM
@@ -103,7 +103,7 @@ If its a PKI signed cert, you just need to add the root cert (and any intermedia
 https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/dna-center/2-1-2/release_notes/b_cisco_dna_center_rn_2_1_2.html
 
 
-## InfoBLox DNAC integration <a name="infoblox-dnac-integration"></a>
+# InfoBLox DNAC integration <a name="infoblox-dnac-integration"></a>
 
 On DNAC under (system -> settings -> IP Address Manage) add IPAM info:
 - If you create an IP pool on DNAC it is pushed IB,
@@ -127,7 +127,7 @@ Heres what our Infoblox integration screen looks like on DNAC:
     - DNAC will push to infoblox,  When you create a New IP Pool or New Reservation, the Cisco DNA Center updates the IPAM
     - almost impossible to remove IPAM, if you decide to now continue without IPAM Integration on DNAC
 
-## DNAC passed info and extensible attributes <a name="dnac-passed-info-and-extensible-attributes"></a>
+# DNAC passed info and extensible attributes <a name="dnac-passed-info-and-extensible-attributes"></a>
 Prior to integration with DNAC I deleted all the 'extensible attributes' that i could from the IPAM, so any new ones that appear would be from DNAC, there were no ip pools or containers in infoblox & have a bunch of IP pools configured in DNAC
 
 ```Default attributes```
@@ -184,7 +184,7 @@ I have a simple structure setup, which is rooted at the ```ORG``` and sub-gorupe
 
 
 
-### Attribute conclusion <a name="attribute-conclusion"></a>
+## Attribute conclusion <a name="attribute-conclusion"></a>
 Thus far we see only one attribute pushed from DNAC towards the IPAM, so if you are looking to leverage this data as part of your smart folder structure, it would be wise to reply on container inheritance.
 
 My view is that one of the following approached is use, noting the use of IP pools are 'as of writing' used for SDA, where SDA does not associate a IP pool with a device, its over a suite of devices at a site level. So that granularity of device level is not needed for this particular problem (see later blurb on LAN automation.
@@ -194,7 +194,7 @@ My view is that one of the following approached is use, noting the use of IP poo
 2. Create all your IP pools and sub-pools in infoblox, then import them into DNAC as needed. I'd suggest an API approach for this.
 
 
-## DNAC passed info using LAN automation or lack there of <a name="dnac-passed-info-using-lan-automation-or-lack-there-of"></a>
+# DNAC passed info using LAN automation or lack there of <a name="dnac-passed-info-using-lan-automation-or-lack-there-of"></a>
 Continuing on the the previous sub-section rhetoric.
 
 We have a 1 to 1 mapping of a container to a DHCP pool that we will use for SDA LAN automation (where the network infrastructure is configured automatically, whats of note here is the loopback 0 IP is pushed and this is the management IP of the device, thus something that would map to a hostname via DNS)
@@ -235,7 +235,7 @@ However we have no idea the device it was assigned to in Infoblox, which may hel
 
 The only was thus far I have to pass this data over is via the API, where i make a call to DNAC to pull all devices/hostnames and post them to the IPAM.
 
-### API to pull from DNAC and post to Infoblox <a name="api-to-pull-from-dnac-and-post-to-infoblox"></a>
+## API to pull from DNAC and post to Infoblox <a name="api-to-pull-from-dnac-and-post-to-infoblox"></a>
 
 So there are two parts needed for this, the first we need to pull the data from DNAC, secondly we need to push the data to Infoblox.
 
@@ -326,7 +326,7 @@ response = requests.request("GET", url, auth=('admin', 'infoblox'), verify=False
 print(response.text)
 ```
 
-#### In summary <a name="in-summary"></a>
+### In summary <a name="in-summary"></a>
 
 You can use these two calls to push and pull data as needed, where the end state should be harmony between the IPAM and DNAC. The kicker is that if you are using LAN automation with SDA, DNAC assigns the IP's in a seemingly unpredictable manner. So you must first complete this LAN auto task and then port the information from DNAC over to infoblox. It would be wise to do some sort of checking or filtering, such as only pulling data from DNAC thats related to the last LAN automation job, via using something like a 'Subnet' filter on the initial calls to DNAC. As well as some pre-check to the IPAM to ensure there is no overlap.
 
@@ -334,7 +334,7 @@ You could of course also forgo LAN automation and build the underlay manually wi
 
 <br><br>
 
-## Views DHCP and DNS with DNAC <a name="views-dhcp-and-dns-with-dnac"></a>
+# Views DHCP and DNS with DNAC <a name="views-dhcp-and-dns-with-dnac"></a>
 
 The assurance engine in DNAC can be used to resolve IPs/FQDNS to provide better reporting metric within the DNAC controller.
 
@@ -361,7 +361,7 @@ Thus it's also tru that and IP address you want to push/pull from infoblox must 
 
 <br>
 
-## Infoblox with ISE PXG <a name="infoblox-with-ise-pxg"></a>
+# Infoblox with ISE PXG <a name="infoblox-with-ise-pxg"></a>
 The data that is exchanged between Infoblox and CiscoISE/pxGrid enables significant use cases for protecting networks, such as:
 
 * RPZ/ADP hits data sent to Cisco ISE can trigger Cisco to quarantine the end station that is trying to resolve to a known bad site (SPZ) or launched a DNS attack (ADP)
@@ -378,6 +378,6 @@ The data that is exchanged between Infoblox and CiscoISE/pxGrid enables signific
 
 
 
-## Summary <a name="summary"></a>
+# Summary <a name="summary"></a>
 
 This is by no means complete, but hopefully some of these notes will be of value to you, i certainly found this path of discovery interesting.
