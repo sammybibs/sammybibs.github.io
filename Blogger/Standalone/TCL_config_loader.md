@@ -1,3 +1,9 @@
+# Contents
+  - [Introduction](#introduction-)
+  - [Setup](#setup-)
+  - [Outcome](#outcome-)
+  - [Summary](#summary-)
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKHR6PXZ9V"></script>
 <script>
@@ -7,12 +13,6 @@
 
   gtag('config', 'G-XKHR6PXZ9V');
 </script>
-
-# Contents
-  - [Introduction](#introduction-)
-  - [Setup](#setup-)
-  - [Outcome](#outcome-)
-  - [Summary](#summary-)
 
 ## Introduction <a name="introduction"></a>
 
