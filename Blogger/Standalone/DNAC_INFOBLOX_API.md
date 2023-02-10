@@ -116,7 +116,8 @@ On DNAC under (system -> settings -> IP Address Manage) add IPAM info:
 - But if you create a smaller subnet, IB will see this as a sub pool and reserve address space accordingly.
 
 Heres what our Infoblox integration screen looks like on DNAC:
-![](images/IMAGES/2023-02-10-17-08-16.png)
+
+![](images/2023-02-10-17-08-16.png)
 
 
 <br>
@@ -133,7 +134,7 @@ Heres what our Infoblox integration screen looks like on DNAC:
 Prior to integration with DNAC I deleted all the 'extensible attributes' that i could from the IPAM, so any new ones that appear would be from DNAC, there were no ip pools or containers in infoblox & have a bunch of IP pools configured in DNAC
 
 ```Default attributes```
-![](images/IMAGES/2023-02-09-16-05-33.png)
+![](images/2023-02-09-16-05-33.png)
 
 
 After we integrated DNAC and push a pool, we can see the one attribute it used ```creator```.
@@ -146,11 +147,11 @@ After we integrated DNAC and push a pool, we can see the one attribute it used `
 On the IPAM we created two 'extensible attribute' of ```ORG``` that allowed inheritance and ```HONE``` that did not have inheritance via (IPAM->Admin->Extensible attributes->(+))
 
 We then created a container of ```203.0.113.192/26``` with the two extensible attributes (IPAM->Data Management->IPAM->(+))
-![](images/IMAGES/2023-02-09-17-09-52.png)
+![](images/2023-02-09-17-09-52.png)
 
 
 This was then imported into DNAC at the global level.
-![](images/IMAGES/2023-02-09-17-12-09.png)
+![](images/2023-02-09-17-12-09.png)
 
 
 If there is no name for the pool on infoblox (which uses the comment field) the import names the pool as the subnet,so I renamed it to ```RAMBLINGS_POOL```, which pushed this to the IPAM as a comment, note tehj following:
@@ -169,7 +170,7 @@ From this container we created a sub-pool at the site level per:
   * Site = Global/EARTH2.0/Virtual_UK
 
 This pool was then pushed back to IFB as a DHCP pool. We can see that it inherits the attributes that were set in the container (that allowed inheritance), excluded the ones that did not & added the DNAC attribute of ```Creator = CISCO-DNACenter```.
-![](images/IMAGES/2023-02-09-17-24-50.png)
+![](images/2023-02-09-17-24-50.png)
 
 
 If we go back and check the 'extensible attributes' in infoblox, noting we should thus far have:
@@ -182,7 +183,7 @@ If we go back and check the 'extensible attributes' in infoblox, noting we shoul
 Which we do, so theres no other attributes pushed at this stage, which makes it a challenge for smart folder structures.
 
 I have a simple structure setup, which is rooted at the ```ORG``` and sub-goruped by the ```Creator```
-![](images/IMAGES/2023-02-09-17-46-43.png)
+![](images/2023-02-09-17-46-43.png)
 
 
 
@@ -206,18 +207,18 @@ In this example we have two pools for LAN automation, one is a global pool thats
 So in InfoBLox we have a the following:
 1. Container of '192.168.65.64/26 named GPK_SDA_LAN_AUTO_GPK_Loopbacks'
 2. DHCP pool of '192.168.65.96/27 named 163532b7-ab54-46a6-bd7b-6d7bf1f524b4_pool_dummy_0'
-![](images/IMAGES/2023-02-09-17-59-51.png)
+![](images/2023-02-09-17-59-51.png)
 
-![](images/IMAGES/2023-02-09-18-12-27.png)
+![](images/2023-02-09-18-12-27.png)
 
 
 This DHCP pool on infoblox is whats created by DNAC when it assigns the loopbacks (management IP addresses) to the nodes as part of the LAN automation workflow. The odd name of the pool is the internal object ID in DNA.
 
 
 How this looks on DNAC at a global and site level is as follows:
-![](images/IMAGES/2023-02-09-18-17-07.png)
+![](images/2023-02-09-18-17-07.png)
 
-![](images/IMAGES/2023-02-09-18-18-38.png)
+![](images/2023-02-09-18-18-38.png)
 
 
 
@@ -226,12 +227,12 @@ We can see in DNAC that there are three addresses assigned, these are the loopba
 
 
 We can also see this same data as well as the remaining free IPs in the container:
-![](images/IMAGES/2023-02-09-18-22-47.png)
+![](images/2023-02-09-18-22-47.png)
 
 
 
 However we have no idea the device it was assigned to in Infoblox, which may help for both DNS and smart folders. If you login to DNAC you can see the device if you filter by the IP address:
-![](images/IMAGES/2023-02-10-12-01-47.png)
+![](images/2023-02-10-12-01-47.png)
 
 
 
@@ -315,7 +316,7 @@ post_ipam(devices)
 ```
 
 ```Infoblox DNS populated records```
-![](images/IMAGES/2023-02-10-16-30-14.png)
+![](images/2023-02-10-16-30-14.png)
 
 
 
@@ -344,19 +345,19 @@ For DNS retrieval from Infoblox via (DNAC->provision->Service Catalog->Discovere
 
 In infoblox you can create views via (IPAM->Admin->Network views), where i have two, the 'default' and 'ENGLAND'
 
-![](images/IMAGES/2023-02-10-17-04-24.png)
+![](images/2023-02-10-17-04-24.png)
 
 
 Where I have the 'London' DNS zones in the ENGLAND view, and the 'SDA' zones in the 'Default' view.
 
-![](images/IMAGES/2023-02-10-17-05-49.png)
+![](images/2023-02-10-17-05-49.png)
 
-![](images/IMAGES/2023-02-10-17-06-02.png)
+![](images/2023-02-10-17-06-02.png)
 
 
 Per the opening section of this post we saw that DNAC integrated with the 'Default' view, thus any attempt to resolve FQDNS outside of this view will not work
 
-![](images/IMAGES/2023-02-10-17-10-56.png)
+![](images/2023-02-10-17-10-56.png)
 
 
 Thus it's also tru that and IP address you want to push/pull from infoblox must also reside within the same view that you have integrated with.
