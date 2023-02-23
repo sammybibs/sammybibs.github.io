@@ -1,0 +1,8 @@
+﻿Global Level,,Site Level,,,,,,
+Global IP Pool Name,,Type ,Subnets,Gateway,DHCP,DNS,Site,Site Pool Name
+#This name needs to be here for sub-pool lookup at global level ,,#Site level pool type,,,,#Sperated by : if needed x.x.x.x:y.y.y.y,#Sperated by : if needed x.x.x.x:y.y.y.y,
+RAMBLINGS-TEST,10.11.0.0/16,Generic,10.11.1.0/24,10.11.1.1,2.6.13.205,2.6.13.205,Global/Earth2.0/Virtual_UK,RAM-Generic
+RAMBLINGS-TEST,10.11.0.0/16,LAN,10.11.2.0/24,10.11.2.1,2.6.13.205,2.6.13.205,Global/Earth2.0/Virtual_UK,RAM-LAN
+RAMBLINGS-TEST,10.11.0.0/16,Management,10.11.3.0/24,10.11.3.1,2.6.13.205,2.6.13.205,Global/Earth2.0/Virtual_UK,RAM-Management
+RAMBLINGS-TEST,10.11.0.0/16,service,10.11.4.0/24,10.11.4.1,2.6.13.205,2.6.13.205,Global/Earth2.0/Virtual_UK,RAM-Service
+RAMBLINGS-TEST,10.11.0.0/16,WAN,10.11.5.0/24,10.11.5.1,2.6.13.205,2.6.13.205,Global/Earth2.0/Virtual_UK,RAM-WAN

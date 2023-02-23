@@ -117,7 +117,7 @@ On DNAC under (system -> settings -> IP Address Manage) add IPAM info:
 
 Heres what our Infoblox integration screen looks like on DNAC:
 
-![](images/2023-02-10-17-08-16.png)
+![](IMAGES/2023-02-10-17-08-16.png)
 
 
 <br>
@@ -134,24 +134,24 @@ Heres what our Infoblox integration screen looks like on DNAC:
 Prior to integration with DNAC I deleted all the 'extensible attributes' that i could from the IPAM, so any new ones that appear would be from DNAC, there were no ip pools or containers in infoblox & have a bunch of IP pools configured in DNAC
 
 ```Default attributes```
-![](images/2023-02-09-16-05-33.png)
+![](IMAGES/2023-02-09-16-05-33.png)
 
 
 After we integrated DNAC and push a pool, we can see the one attribute it used ```creator```.
 
 **```Attributes after intergration```**
-![](images/2023-02-09-16-16-09.png)
+![](IMAGES/2023-02-09-16-16-09.png)
 
 
 
 On the IPAM we created two 'extensible attribute' of ```ORG``` that allowed inheritance and ```HONE``` that did not have inheritance via (IPAM->Admin->Extensible attributes->(+))
 
 We then created a container of ```203.0.113.192/26``` with the two extensible attributes (IPAM->Data Management->IPAM->(+))
-![](images/2023-02-09-17-09-52.png)
+![](IMAGES/2023-02-09-17-09-52.png)
 
 
 This was then imported into DNAC at the global level.
-![](images/2023-02-09-17-12-09.png)
+![](IMAGES/2023-02-09-17-12-09.png)
 
 
 If there is no name for the pool on infoblox (which uses the comment field) the import names the pool as the subnet,so I renamed it to ```RAMBLINGS_POOL```, which pushed this to the IPAM as a comment, note tehj following:
@@ -170,7 +170,7 @@ From this container we created a sub-pool at the site level per:
   * Site = Global/EARTH2.0/Virtual_UK
 
 This pool was then pushed back to IFB as a DHCP pool. We can see that it inherits the attributes that were set in the container (that allowed inheritance), excluded the ones that did not & added the DNAC attribute of ```Creator = CISCO-DNACenter```.
-![](images/2023-02-09-17-24-50.png)
+![](IMAGES/2023-02-09-17-24-50.png)
 
 
 If we go back and check the 'extensible attributes' in infoblox, noting we should thus far have:
@@ -183,7 +183,7 @@ If we go back and check the 'extensible attributes' in infoblox, noting we shoul
 Which we do, so theres no other attributes pushed at this stage, which makes it a challenge for smart folder structures.
 
 I have a simple structure setup, which is rooted at the ```ORG``` and sub-goruped by the ```Creator```
-![](images/2023-02-09-17-46-43.png)
+![](IMAGES/2023-02-09-17-46-43.png)
 
 
 
@@ -207,32 +207,32 @@ In this example we have two pools for LAN automation, one is a global pool thats
 So in InfoBLox we have a the following:
 1. Container of '192.168.65.64/26 named GPK_SDA_LAN_AUTO_GPK_Loopbacks'
 2. DHCP pool of '192.168.65.96/27 named 163532b7-ab54-46a6-bd7b-6d7bf1f524b4_pool_dummy_0'
-![](images/2023-02-09-17-59-51.png)
+![](IMAGES/2023-02-09-17-59-51.png)
 
-![](images/2023-02-09-18-12-27.png)
+![](IMAGES/2023-02-09-18-12-27.png)
 
 
 This DHCP pool on infoblox is whats created by DNAC when it assigns the loopbacks (management IP addresses) to the nodes as part of the LAN automation workflow. The odd name of the pool is the internal object ID in DNA.
 
 
 How this looks on DNAC at a global and site level is as follows:
-![](images/2023-02-09-18-17-07.png)
+![](IMAGES/2023-02-09-18-17-07.png)
 
-![](images/2023-02-09-18-18-38.png)
+![](IMAGES/2023-02-09-18-18-38.png)
 
 
 
 We can see in DNAC that there are three addresses assigned, these are the loopbacks on the three nodes at that site.  If we check in infoblox under that DHCP pool we can see the same data:
-![](images/INFOBLOX/2023-02-09-18-20-19.png)
+![](IMAGES/INFOBLOX/2023-02-09-18-20-19.png)
 
 
 We can also see this same data as well as the remaining free IPs in the container:
-![](images/2023-02-09-18-22-47.png)
+![](IMAGES/2023-02-09-18-22-47.png)
 
 
 
 However we have no idea the device it was assigned to in Infoblox, which may help for both DNS and smart folders. If you login to DNAC you can see the device if you filter by the IP address:
-![](images/2023-02-10-12-01-47.png)
+![](IMAGES/2023-02-10-12-01-47.png)
 
 
 
@@ -316,7 +316,7 @@ post_ipam(devices)
 ```
 
 ```Infoblox DNS populated records```
-![](images/2023-02-10-16-30-14.png)
+![](IMAGES/2023-02-10-16-30-14.png)
 
 
 
@@ -345,19 +345,19 @@ For DNS retrieval from Infoblox via (DNAC->provision->Service Catalog->Discovere
 
 In infoblox you can create views via (IPAM->Admin->Network views), where i have two, the 'default' and 'ENGLAND'
 
-![](images/2023-02-10-17-04-24.png)
+![](IMAGES/2023-02-10-17-04-24.png)
 
 
 Where I have the 'London' DNS zones in the ENGLAND view, and the 'SDA' zones in the 'Default' view.
 
-![](images/2023-02-10-17-05-49.png)
+![](IMAGES/2023-02-10-17-05-49.png)
 
-![](images/2023-02-10-17-06-02.png)
+![](IMAGES/2023-02-10-17-06-02.png)
 
 
 Per the opening section of this post we saw that DNAC integrated with the 'Default' view, thus any attempt to resolve FQDNS outside of this view will not work
 
-![](images/2023-02-10-17-10-56.png)
+![](IMAGES/2023-02-10-17-10-56.png)
 
 
 Thus it's also tru that and IP address you want to push/pull from infoblox must also reside within the same view that you have integrated with.
@@ -377,6 +377,102 @@ The data that is exchanged between Infoblox and CiscoISE/pxGrid enables signific
 * The posture status is used to determine if a workstation is compliant or not in terms of having proper anti-malware software.
 * A TrustSEC tag defines the security policy for the workstation that was dynamically placed into a logical group.
 * A posture time stamp tells you the time of the posture status. For example, when a workstation falls out of compliance on having up-to-date anti-malware software installed.
+
+
+
+
+
+# DNAC does not push ranges or gateway info to infoblox
+
+When you create an IP pool in DNAC, this does not create a DHCP range in infoblox, so its not even immediately usable at this stage.
+
+Even after DNAC pushed the Pool to the IPAM, if you browse to the IPAM and look under "data management' -> 'DHCP'a and find that pool, there are zero ranges, so they wont work, you still need to login and create the needed pools in the IPAM.
+
+
+1. On infoblox i created a new empty DHCP pool (not an empty container, as DNAC cannot see containers, just DHCP pools)  ```10.11.0.0/16```
+
+![](IMAGES/2023-02-23-11-26-58.png)
+
+
+2. Then import this into DNAC.
+
+![](IMAGES/2023-02-23-11-29-25.png)
+
+3. At a site level i created a sub pool of each of the five types from this global pool (to see if theres any difference in them)
+
+| Name        | Type           | Subnet  | Gateway  |  DHCP & DNS |
+| ------------- |:-------------:| -----:| -----:| -----:|
+| RAM-Generic      | Generic | 10.11.1.0/24 | 10.11.1.1/24 | Infoblox IP |
+| RAM-LAN      | LAN      | 10.11.2.0/24 | 10.11.2.1/24 | Infoblox IP |
+| RAM-Management| Management   | 10.11.3.0/24 | 10.11.3.1/24 | Infoblox IP |
+| RAM-Service| Service   | 10.11.4.0/24 | 10.11.4.1/24 | Infoblox IP |
+| RAM-WAN| WAN   | 10.11.5.0/24 | 10.11.5.1/24 | Infoblox IP |
+
+![](IMAGES/2023-02-23-13-10-07.png)
+
+<br>
+
+> Site note, i pushed these pools using the API as it was faster using the following:
+
+
+Used excel and a CSV to hold the needed data:
+```cs
+RAMBLINGS-TEST,10.11.0.0/16,Generic,10.11.1.0/24,10.11.1.1,2.6.13.205,2.6.13.205,Global/Earth2.0/Virtual_UK,RAM-Generic
+RAMBLINGS-TEST,10.11.0.0/16,LAN,10.11.2.0/24,10.11.2.1,2.6.13.205,2.6.13.205,Global/Earth2.0/Virtual_UK,RAM-LAN
+RAMBLINGS-TEST,10.11.0.0/16,Management,10.11.3.0/25,10.11.3.1,2.6.13.205,2.6.13.205,Global/Earth2.0/Virtual_UK,RAM-Management
+RAMBLINGS-TEST,10.11.0.0/16,Service,10.11.4.0/25,10.11.4.1,2.6.13.205,2.6.13.205,Global/Earth2.0/Virtual_UK,RAM-Service
+RAMBLINGS-TEST,10.11.0.0/16,WAN,10.11.5.0/26,10.11.5.1,2.6.13.205,2.6.13.205,Global/Earth2.0/Virtual_UK,RAM-WAN
+```
+
+Used python to get the site ID for the target site, then post the CSV data back to DNAC to update the IP pools (for this to work we had already gleaned a token from DNAC (see earlier posts))
+```python
+
+def site_id(token):
+    headers = {'content-type': 'application/json'}
+    headers['x-auth-token'] = token
+    BASE_URL = f'https://{dnac_data[0]}:{dnac_data[1]}'
+    SITE = 'Global/Earth2.0/Virtual_UK'
+    results = requests.get(BASE_URL+'/dna/intent/api/v1/site?name='+SITE, headers=headers, verify=False)
+    return(results.json()['response'][0]['id'])
+
+
+def passed(token, siteid):
+    import time 
+    headers = {'content-type': 'application/json'}
+    headers['x-auth-token'] = token
+    BASE_URL = f'https://{dnac_data[0]}:{dnac_data[1]}'
+    file = open('IP_POOLS.csv','rt')
+    dhcp_list = [line.strip().split(',') for line in file if len(line.split(',')[1]) != 0]
+    for pool in dhcp_list:
+        IP_POOL = {
+                    "name": pool[8],
+                    "type": pool[2],
+                    "ipv6AddressSpace": False,
+                    "ipv4GlobalPool": pool[1],
+                    "ipv4Prefix": True,
+                    "ipv4PrefixLength": 24,
+                    "ipv4Subnet": pool[3].strip('/24'),
+                    "ipv4GateWay": pool[4],
+                    "ipv4DhcpServers": [pool[5]],
+                    "ipv4DnsServers": [pool[6]]
+                }
+        IP_POOL_NEW = json.dumps(IP_POOL)
+        requests.post(BASE_URL+'/dna/intent/api/v1/reserve-ip-subpool/'+siteid, headers=headers, verify=False, data=IP_POOL_NEW)
+        print(f'Pushed pool {IP_POOL_NEW}')
+        time.sleep(0.300)
+
+siteid = site_id(token)
+passed(token, siteid)
+```
+
+> End of Site note.
+
+<br> 
+
+4. Then on inspection of the IPAM, we see the pools are all there. However there is no ranges to hand out IPs, no default-gatewaym nothing. So this also needs populating via some other means (manually/API)
+
+![](IMAGES/2023-02-23-13-12-51.png)
+![](IMAGES/2023-02-23-13-12-33.png)
 
 
 
