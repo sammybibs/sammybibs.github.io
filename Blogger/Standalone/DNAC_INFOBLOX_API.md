@@ -389,16 +389,16 @@ When you create an IP pool in DNAC, this does not create a DHCP range in infoblo
 Even after DNAC pushed the Pool to the IPAM, if you browse to the IPAM and look under "data management' -> 'DHCP'a and find that pool, there are zero ranges, so they wont work, you still need to login and create the needed pools in the IPAM.
 
 
-1. On infoblox i created a new empty DHCP pool (not an empty container, as DNAC cannot see containers, just DHCP pools)  ```10.11.0.0/16```
+- On infoblox i created a new empty DHCP pool (not an empty container, as DNAC cannot see containers, just DHCP pools)  ```10.11.0.0/16```
 
 ![](IMAGES/2023-02-23-11-26-58.png)
 
 
-2. Then import this into DNAC.
+- Then import this into DNAC.
 
 ![](IMAGES/2023-02-23-11-29-25.png)
 
-3. At a site level i created a sub pool of each of the five types from this global pool (to see if theres any difference in them)
+- At a site level i created a sub pool of each of the five types from this global pool (to see if theres any difference in them)
 
 | Name        | Type           | Subnet  | Gateway  |  DHCP & DNS |
 | ------------- |:-------------:| -----:| -----:| -----:|
@@ -469,7 +469,7 @@ passed(token, siteid)
 
 <br> 
 
-4. Then on inspection of the IPAM, we see the pools are all there. However there is no ranges to hand out IPs, no default-gatewaym nothing. So this also needs populating via some other means (manually/API)
+- Then on inspection of the IPAM, we see the pools are all there. However there is no ranges to hand out IPs, no default-gatewaym nothing. So this also needs populating via some other means (manually/API)
 
 ![](IMAGES/2023-02-23-13-12-51.png)
 ![](IMAGES/2023-02-23-13-12-33.png)
