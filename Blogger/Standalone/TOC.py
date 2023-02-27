@@ -67,7 +67,7 @@ def TOC_to_all(filelist):
                             title = ""
                 if line[0:4] == "![](":
                     if not line[0:6] == "![](im":
-                        README[-1] = (line[0:4]+'images/'+line[4:])
+                        README[-1] = (line[0:4]+'IMAGES/'+line[4:])
         with open(file, 'w+') as NEW_TOC_FILE:
             for line in TOC:
                 NEW_TOC_FILE.write(line+"\n")
@@ -77,7 +77,7 @@ def TOC_to_all(filelist):
 
 def move_files(move_list):
     for file in move_list:
-        os.system("mv "+file+" images/"+file)
+        os.system("mv "+file+" IMAGES/"+file)
 
 
 def commit_git(commit_list):
