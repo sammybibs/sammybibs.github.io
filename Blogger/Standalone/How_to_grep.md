@@ -1,3 +1,9 @@
+# Contents
+  - [Introduction](#introduction-)
+  - [IOS regexp](#ios-regexp-)
+  - [Summary](#summary-)
+  - [Further reading](#further-reading-)
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKHR6PXZ9V"></script>
 <script>
@@ -7,12 +13,6 @@
 
   gtag('config', 'G-XKHR6PXZ9V');
 </script>
-
-# Contents
-  - [Introduction](#introduction-)
-  - [IOS regexp](#ios-regexp-)
-  - [Summary](#summary-)
-  - [Further reading](#further-reading-)
 
 ## Introduction <a name="introduction"></a>
 
