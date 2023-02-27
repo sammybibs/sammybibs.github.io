@@ -124,8 +124,8 @@ Heres what our Infoblox integration screen looks like on DNAC:
 
 [Note some limitations  per this doc](https://www.cisco.com/c/dam/en_us/training-events/product-training/dnac-12/IPAM/DNAC12_IntegratingAnIPAMServer.pdf)
 
- - You cant integrate infoblox as IPAM if you have existing pools in DNAc
- - you import the infoblox pools, but it not automation, and there are limitations of ;
+ - You cant integrate infoblox as IPAM if you have existing pools in DNAC
+ - you import the infoblox pools, but it's not automation, and there are limitations of ;
   - The IP Pool needs to be "empty". Ie. No scope or current reservations.
     - DNAC will push to infoblox,  When you create a New IP Pool or New Reservation, the Cisco DNA Center updates the IPAM
     - almost impossible to remove IPAM, if you decide to now continue without IPAM Integration on DNAC
@@ -182,7 +182,7 @@ If we go back and check the 'extensible attributes' in infoblox, noting we shoul
 
 Which we do, so theres no other attributes pushed at this stage, which makes it a challenge for smart folder structures.
 
-I have a simple structure setup, which is rooted at the ```ORG``` and sub-goruped by the ```Creator```
+I have a simple structure setup, which is rooted at the ```ORG``` and sub-grouped by the ```Creator```
 ![](IMAGES/2023-02-09-17-46-43.png)
 
 
@@ -465,18 +465,97 @@ siteid = site_id(token)
 passed(token, siteid)
 ```
 
-> End of Site note.
+> End of Side note.
 
-<br> 
+<br>
 
-- Then on inspection of the IPAM, we see the pools are all there. However there is no ranges to hand out IPs, no default-gatewaym nothing. So this also needs populating via some other means (manually/API)
+- Then on inspection of the IPAM, we see the pools are all there. However there is no ranges to hand out IPs, no default-gateway nothing. So this also needs populating via some other means (manually/API)
 
 ![](IMAGES/2023-02-23-13-12-51.png)
 ![](IMAGES/2023-02-23-13-12-33.png)
 
 
+# Import IPAM pools into DNAC
+
+Remembering from before ""The IP Pool needs to be "empty"". Ie. No scope or current reservations."", lets check the limitations of this first.
+
+Setup steps on IPAM:
+1. Create top container ```10.12.0.0/16``` and two sub DHCP pools ```10.12.1.0/24``` with no scopes defined & ```10.12.2.0/24``` with scopes created (available range, default gateway & option 43)
+2. Create top network/DHCP pool ```10.13.0.0/16``` and two sub DHCP pools ```10.13.1.0/24``` with no scopes defined & ```10.13.2.0/24``` with ranges created (available range, default gateway & option 43) and static reservations set.
+![](IMAGES/2023-02-24-09-29-27.png)
+![](IMAGES/2023-02-24-09-35-08.png)
+![](IMAGES/2023-02-24-10-43-15.png)
+
+On DNAC
+1. Import the 10.12.X.0/24 DHCP pools (remember you cannot import containers) at the global level and assign them to the site. ((Note that for the 10.13.0.0/16 range, even though we created this as a network, when you create sub-pools it gets converted into a container, thus we can no longer import this into DNAC))
+
+```Can see we cannot import the containers here:```
+![](IMAGES/2023-02-24-09-41-27.png)
+![](IMAGES/2023-02-24-10-40-32.png)
+
+
+```Can import the two pools belonging to the container.```
+![](IMAGES/2023-02-24-09-42-43.png)
+
+For the pool that has ranges set, DNAC interpreted the option 43 as the DHCP server and set this on the IP pool as show here, so that would need to be considered if o43 is used (which it would be for and Extended node, or Access point pools), it did not pick up the Gateway either, even though it was set. This is really just cosmetic as when you map the pool to a site, thats when you select these options.
+
+```dnac show pool```
+![](IMAGES/2023-02-24-09-52-32.png)
+```IPAM show O43 and gateway```
+![](IMAGES/2023-02-24-09-52-53.png)
+![](IMAGES/2023-02-24-09-56-44.png)
+
+
+2. Import the 10.13.2.0/24 pool into DNAC failed:
+
+```DNAC failed to see pool with hosts defined```
+![](IMAGES/2023-02-24-10-44-36.png)
+
+On the IPAM I delete the host record, but it still failed
+![](IMAGES/2023-02-24-10-43-15.png)
+
+Then Deleted the fixed address range as well and DNAC can see the pool.
+
+Re-added the host record with a fixed DHCP IP and it failed.
+
+Created fixed hosts that are not bound to DHCP, so just DNS records
+![](IMAGES/2023-02-24-10-52-15.png)
+
+Once i deleted the static DCHP mapping, and DNS entries fro that pool and fixed address range i could pull the pool into DNAC. Only then could i go and add there attributes back to the IP pool.
+
+
+Even though the pools are no in DNAC< they are at the global level, where to use them we need to assign them to sites, lets do that now.
+![](IMAGES/2023-02-24-10-01-06.png)
+
+
+This was a success, we did however need to manually enter all the needed data (gateway IP, DHCP/DNS server) as it wasn't pulled from the IPAM, nor does DNAC push this data to the IPAM..
+
+### Summary
+
+So for these use cases you can define a top level container on the IPAM, create sub-pools with all the pools and options. However when you pull these pools into DNAC they need to come in at the global level and also be mapped 1 to 1 to the site level, which creates a lot of IP Pools. Plus you cannot set any static bindings, DNS records or fixed ranged into the pools before they go into DNAC. Also you still need to define the DHCP/DNS/Gateway addresses for these pools in DNAC.
+
+
+# Deleting pools in DNAC at the site and global level
+
+Leading on from where we left the last point, we have a global DNAC pool ```RAM-From-container1 10.12.1.0/24``` thats also in infoblox, this is also fully reserved at the site level ```Global -> Earth 2.0 -> Virtual_UK``` in DNAC.
+
+The two test we are going to do are:
+1. Release at site level
+2. Delete at global level
+
+
+Test 1, this has no impact on the IPAM.. The site level pool is release from DNAC, the IPAM is left untouched.
+![](IMAGES/2023-02-27-15-45-17.png)
+![](IMAGES/2023-02-27-15-45-43.png)
+
+Test 2, this also deleted the pool from the IPAM.
+![](IMAGES/2023-02-27-15-46-45.png)
+![](IMAGES/2023-02-27-15-48-11.png)
+
 
 
 # Summary <a name="summary"></a>
+
+It's my opinion the DNAC->Infoblox integration is very limited and seems to add more problems that the few it solves. If you do want to reap the benefits, then that I feel it would be much easier to craft your IP schema in infoblox fully, then only import the required pools into DNAC. Using the API would make this task a bit more seamless, however then you need to manage that functionality somewhere.
 
 This is by no means complete, but hopefully some of these notes will be of value to you, i certainly found this path of discovery interesting.
