@@ -2,15 +2,7 @@
   - [Introduction](#introduction-)
   - [Lets explore this](#lets-explore-this-)
   - [Tools and techniques used](#tools-and-techniques-used-)
-  - [The required imports for this blog, added here so no need repeat.](#the-required-imports-for-this-blog,-added-here-so-no-need-repeat.-)
-  - [Lets dump the output to a text file for ease of investigation.](#lets-dump-the-output-to-a-text-file-for-ease-of-investigation.-)
-  - [Lets dump the output to a text file for ease of investigation.](#lets-dump-the-output-to-a-text-file-for-ease-of-investigation.-)
-    - [Use BS4 to create a nested data structure](#use-bs4-to-create-a-nested-data-structure-)
-- [print(soup.prettify())](#print(soup.prettify())-)
-  - [Check and return only latest jobs](#check-and-return-only-latest-jobs-)
   - [Full code](#full-code-)
-    - [Use BS4 to create a nested data structure](#use-bs4-to-create-a-nested-data-structure-)
-  - [Check and return only latest jobs](#check-and-return-only-latest-jobs-)
 
 ## Introduction <a name="introduction"></a>
 12 April 2023
@@ -26,7 +18,8 @@ The target for my search will be a jobsite, "https://jobserve.com" where we will
 
 For ease of keyword passing, ill just edit the online form and take a copy of the search ID "https://jobserve.com/gb/en/JobListing.aspx?shid=21D212D39D80605C8A02" 
 
-![](IMAGES/IMAGES/2023-04-12-17-10-15.png)
+![](IMAGES/IMAGES/IMAGES/2023-04-12-17-10-15.png)
+
 
 
 
@@ -38,7 +31,7 @@ So after some tinkering with various recommendation on stack exchange, I had the
 
 
 ```python
-##The required imports for this blog, added here so no need repeat. <a name="the-required-imports-for-this-blog,-added-here-so-no-need-repeat."></a>
+ ##The required imports for this blog, added here so no need repeat.
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
@@ -66,7 +59,7 @@ def live_scrape():
 
 html = live_scrape()
 
-##Lets dump the output to a text file for ease of investigation. <a name="lets-dump-the-output-to-a-text-file-for-ease-of-investigation."></a>
+  ##Lets dump the output to a text file for ease of investigation.
 with open('data.txt', 'w+') as f:
     for line in html:
             f.write(line)
@@ -77,7 +70,8 @@ Now this did not work, and using my stare and compare approach i finally spotted
 1. First by the power of chrome developer tools we can find the data we want to use and work back from there:
 
 So in the developer tools, if we inspect one of the job elements we can see the structure to the page. Where all jobs are nested under the class```jobSearchContainer``` and within that calss there are muliple classes of ```jobListItem newjobsum``` each with all the various attributes we need.
-![](IMAGES/IMAGES/2023-04-12-17-39-43.png.png))
+![](IMAGES/IMAGES/IMAGES/2023-04-12-17-39-43.png.png))
+
 
 
 If we delve now into the HTML we pulled from our function, we have no data for these jobs, and no precece of hte ```jobSearchContainer```. We see two levles above this class, the ```jobdisplaypanel```, but then it jumps right down to the page summary.
@@ -120,7 +114,7 @@ def live_scrape():
 
     return html
 
-##Lets dump the output to a text file for ease of investigation. <a name="lets-dump-the-output-to-a-text-file-for-ease-of-investigation."></a>
+  ##Lets dump the output to a text file for ease of investigation.
 with open('data.txt', 'w+') as f:
     for line in html:
             f.write(line)
@@ -150,13 +144,11 @@ We look to see if it was posted in the last day (this is based on the 'When" cla
 ```Python
 html = live_scrape()
 
-###Use BS4 to create a nested data structure <a name="use-bs4-to-create-a-nested-data-structure"></a>
+  ###Use BS4 to create a nested data structure
 soup = BeautifulSoup(html, 'html.parser')
 
 
-#print(soup.prettify()) <a name="print(soup.prettify())"></a>
-
-##Check and return only latest jobs <a name="check-and-return-only-latest-jobs"></a>
+  ##Check and return only latest jobs 
 for j in soup.find_all('div', class_ ="jobItem"):
     if 'hours' in j.find(class_='when').text:
         print(j.find(class_='jobResultsTitle').text, end=' ')
@@ -220,11 +212,11 @@ def live_scrape():
 
 html = live_scrape()
 
-###Use BS4 to create a nested data structure <a name="use-bs4-to-create-a-nested-data-structure"></a>
+  ###Use BS4 to create a nested data structure
 soup = BeautifulSoup(html, 'html.parser')
 
 
-##Check and return only latest jobs <a name="check-and-return-only-latest-jobs"></a>
+  ##Check and return only latest jobs
 for j in soup.find_all('div', class_ ="jobItem"):
     if 'hours' in j.find(class_='when').text:
         print(j.find(class_='jobResultsTitle').text, end=' ')

@@ -109,7 +109,8 @@ On DNAC under (system -> settings -> IP Address Manage) add IPAM info:
 
 Heres what our Infoblox integration screen looks like on DNAC:
 
-![](IMAGES/IMAGES/2023-02-10-17-08-16.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-10-17-08-16.png)
+
 
 
 
@@ -128,7 +129,8 @@ Heres what our Infoblox integration screen looks like on DNAC:
 Prior to integration with DNAC I deleted all the 'extensible attributes' that i could from the IPAM, so any new ones that appear would be from DNAC, there were no ip pools or containers in infoblox & have a bunch of IP pools configured in DNAC
 
 ```Default attributes```
-![](IMAGES/IMAGES/2023-02-09-16-05-33.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-09-16-05-33.png)
+
 
 
 
@@ -136,7 +138,8 @@ Prior to integration with DNAC I deleted all the 'extensible attributes' that i 
 After we integrated DNAC and push a pool, we can see the one attribute it used ```creator```.
 
 **```Attributes after intergration```**
-![](IMAGES/IMAGES/2023-02-09-16-16-09.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-09-16-16-09.png)
+
 
 
 
@@ -145,13 +148,15 @@ After we integrated DNAC and push a pool, we can see the one attribute it used `
 On the IPAM we created two 'extensible attribute' of ```ORG``` that allowed inheritance and ```HONE``` that did not have inheritance via (IPAM->Admin->Extensible attributes->(+))
 
 We then created a container of ```203.0.113.192/26``` with the two extensible attributes (IPAM->Data Management->IPAM->(+))
-![](IMAGES/IMAGES/2023-02-09-17-09-52.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-09-17-09-52.png)
+
 
 
 
 
 This was then imported into DNAC at the global level.
-![](IMAGES/IMAGES/2023-02-09-17-12-09.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-09-17-12-09.png)
+
 
 
 
@@ -172,7 +177,8 @@ From this container we created a sub-pool at the site level per:
   * Site = Global/EARTH2.0/Virtual_UK
 
 This pool was then pushed back to IFB as a DHCP pool. We can see that it inherits the attributes that were set in the container (that allowed inheritance), excluded the ones that did not & added the DNAC attribute of ```Creator = CISCO-DNACenter```.
-![](IMAGES/IMAGES/2023-02-09-17-24-50.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-09-17-24-50.png)
+
 
 
 
@@ -187,7 +193,8 @@ If we go back and check the 'extensible attributes' in infoblox, noting we shoul
 Which we do, so theres no other attributes pushed at this stage, which makes it a challenge for smart folder structures.
 
 I have a simple structure setup, which is rooted at the ```ORG``` and sub-grouped by the ```Creator```
-![](IMAGES/IMAGES/2023-02-09-17-46-43.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-09-17-46-43.png)
+
 
 
 
@@ -213,11 +220,13 @@ In this example we have two pools for LAN automation, one is a global pool thats
 So in InfoBLox we have a the following:
 1. Container of '192.168.65.64/26 named GPK_SDA_LAN_AUTO_GPK_Loopbacks'
 2. DHCP pool of '192.168.65.96/27 named 163532b7-ab54-46a6-bd7b-6d7bf1f524b4_pool_dummy_0'
-![](IMAGES/IMAGES/2023-02-09-17-59-51.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-09-17-59-51.png)
 
 
 
-![](IMAGES/IMAGES/2023-02-09-18-12-27.png)
+
+![](IMAGES/IMAGES/IMAGES/2023-02-09-18-12-27.png)
+
 
 
 
@@ -226,31 +235,36 @@ This DHCP pool on infoblox is whats created by DNAC when it assigns the loopback
 
 
 How this looks on DNAC at a global and site level is as follows:
-![](IMAGES/IMAGES/2023-02-09-18-17-07.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-09-18-17-07.png)
 
 
 
-![](IMAGES/IMAGES/2023-02-09-18-18-38.png)
+
+![](IMAGES/IMAGES/IMAGES/2023-02-09-18-18-38.png)
+
 
 
 
 
 
 We can see in DNAC that there are three addresses assigned, these are the loopbacks on the three nodes at that site.  If we check in infoblox under that DHCP pool we can see the same data:
-![](IMAGES/IMAGES/INFOBLOX/2023-02-09-18-20-19.png)
+![](IMAGES/IMAGES/IMAGES/INFOBLOX/2023-02-09-18-20-19.png)
+
 
 
 
 
 We can also see this same data as well as the remaining free IPs in the container:
-![](IMAGES/IMAGES/2023-02-09-18-22-47.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-09-18-22-47.png)
+
 
 
 
 
 
 However we have no idea the device it was assigned to in Infoblox, which may help for both DNS and smart folders. If you login to DNAC you can see the device if you filter by the IP address:
-![](IMAGES/IMAGES/2023-02-10-12-01-47.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-10-12-01-47.png)
+
 
 
 
@@ -336,7 +350,8 @@ post_ipam(devices)
 ```
 
 ```Infoblox DNS populated records```
-![](IMAGES/IMAGES/2023-02-10-16-30-14.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-10-16-30-14.png)
+
 
 
 
@@ -367,25 +382,29 @@ For DNS retrieval from Infoblox via (DNAC->provision->Service Catalog->Discovere
 
 In infoblox you can create views via (IPAM->Admin->Network views), where i have two, the 'default' and 'ENGLAND'
 
-![](IMAGES/IMAGES/2023-02-10-17-04-24.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-10-17-04-24.png)
+
 
 
 
 
 Where I have the 'London' DNS zones in the ENGLAND view, and the 'SDA' zones in the 'Default' view.
 
-![](IMAGES/IMAGES/2023-02-10-17-05-49.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-10-17-05-49.png)
 
 
 
-![](IMAGES/IMAGES/2023-02-10-17-06-02.png)
+
+![](IMAGES/IMAGES/IMAGES/2023-02-10-17-06-02.png)
+
 
 
 
 
 Per the opening section of this post we saw that DNAC integrated with the 'Default' view, thus any attempt to resolve FQDNS outside of this view will not work
 
-![](IMAGES/IMAGES/2023-02-10-17-10-56.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-10-17-10-56.png)
+
 
 
 
@@ -421,14 +440,16 @@ Even after DNAC pushed the Pool to the IPAM, if you browse to the IPAM and look 
 
 - On infoblox i created a new empty DHCP pool (not an empty container, as DNAC cannot see containers, just DHCP pools)  ```10.11.0.0/16```
 
-![](IMAGES/IMAGES/2023-02-23-11-26-58.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-23-11-26-58.png)
+
 
 
 
 
 - Then import this into DNAC.
 
-![](IMAGES/IMAGES/2023-02-23-11-29-25.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-23-11-29-25.png)
+
 
 
 
@@ -442,7 +463,8 @@ Even after DNAC pushed the Pool to the IPAM, if you browse to the IPAM and look 
 | RAM-Service| Service   | 10.11.4.0/24 | 10.11.4.1/24 | Infoblox IP |
 | RAM-WAN| WAN   | 10.11.5.0/24 | 10.11.5.1/24 | Infoblox IP |
 
-![](IMAGES/IMAGES/2023-02-23-13-10-07.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-23-13-10-07.png)
+
 
 
 
@@ -507,10 +529,12 @@ passed(token, siteid)
 
 - Then on inspection of the IPAM, we see the pools are all there. However there is no ranges to hand out IPs, no default-gateway nothing. So this also needs populating via some other means (manually/API)
 
-![](IMAGES/IMAGES/2023-02-23-13-12-51.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-23-13-12-51.png)
 
 
-![](IMAGES/IMAGES/2023-02-23-13-12-33.png)
+
+![](IMAGES/IMAGES/IMAGES/2023-02-23-13-12-33.png)
+
 
 
 
@@ -522,13 +546,16 @@ Remembering from before ""The IP Pool needs to be "empty"". Ie. No scope or curr
 Setup steps on IPAM:
 1. Create top container ```10.12.0.0/16``` and two sub DHCP pools ```10.12.1.0/24``` with no scopes defined & ```10.12.2.0/24``` with scopes created (available range, default gateway & option 43)
 2. Create top network/DHCP pool ```10.13.0.0/16``` and two sub DHCP pools ```10.13.1.0/24``` with no scopes defined & ```10.13.2.0/24``` with ranges created (available range, default gateway & option 43) and static reservations set.
-![](IMAGES/IMAGES/2023-02-24-09-29-27.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-24-09-29-27.png)
 
 
-![](IMAGES/IMAGES/2023-02-24-09-35-08.png)
+
+![](IMAGES/IMAGES/IMAGES/2023-02-24-09-35-08.png)
 
 
-![](IMAGES/IMAGES/2023-02-24-10-43-15.png)
+
+![](IMAGES/IMAGES/IMAGES/2023-02-24-10-43-15.png)
+
 
 
 
@@ -536,30 +563,36 @@ On DNAC
 1. Import the 10.12.X.0/24 DHCP pools (remember you cannot import containers) at the global level and assign them to the site. ((Note that for the 10.13.0.0/16 range, even though we created this as a network, when you create sub-pools it gets converted into a container, thus we can no longer import this into DNAC))
 
 ```Can see we cannot import the containers here:```
-![](IMAGES/IMAGES/2023-02-24-09-41-27.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-24-09-41-27.png)
 
 
-![](IMAGES/IMAGES/2023-02-24-10-40-32.png)
+
+![](IMAGES/IMAGES/IMAGES/2023-02-24-10-40-32.png)
+
 
 
 
 
 ```Can import the two pools belonging to the container.```
-![](IMAGES/IMAGES/2023-02-24-09-42-43.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-24-09-42-43.png)
+
 
 
 
 For the pool that has ranges set, DNAC interpreted the option 43 as the DHCP server and set this on the IP pool as show here, so that would need to be considered if o43 is used (which it would be for and Extended node, or Access point pools), it did not pick up the Gateway either, even though it was set. This is really just cosmetic as when you map the pool to a site, thats when you select these options.
 
 ```dnac show pool```
-![](IMAGES/IMAGES/2023-02-24-09-52-32.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-24-09-52-32.png)
+
 
 
 ```IPAM show O43 and gateway```
-![](IMAGES/IMAGES/2023-02-24-09-52-53.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-24-09-52-53.png)
 
 
-![](IMAGES/IMAGES/2023-02-24-09-56-44.png)
+
+![](IMAGES/IMAGES/IMAGES/2023-02-24-09-56-44.png)
+
 
 
 
@@ -567,12 +600,14 @@ For the pool that has ranges set, DNAC interpreted the option 43 as the DHCP ser
 2. Import the 10.13.2.0/24 pool into DNAC failed:
 
 ```DNAC failed to see pool with hosts defined```
-![](IMAGES/IMAGES/2023-02-24-10-44-36.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-24-10-44-36.png)
+
 
 
 
 On the IPAM I delete the host record, but it still failed
-![](IMAGES/IMAGES/2023-02-24-10-43-15.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-24-10-43-15.png)
+
 
 
 
@@ -581,7 +616,8 @@ Then Deleted the fixed address range as well and DNAC can see the pool.
 Re-added the host record with a fixed DHCP IP and it failed.
 
 Created fixed hosts that are not bound to DHCP, so just DNS records
-![](IMAGES/IMAGES/2023-02-24-10-52-15.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-24-10-52-15.png)
+
 
 
 
@@ -589,7 +625,8 @@ Once i deleted the static DCHP mapping, and DNS entries fro that pool and fixed 
 
 
 Even though the pools are no in DNAC< they are at the global level, where to use them we need to assign them to sites, lets do that now.
-![](IMAGES/IMAGES/2023-02-24-10-01-06.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-24-10-01-06.png)
+
 
 
 
@@ -611,18 +648,22 @@ The two test we are going to do are:
 
 
 Test 1, this has no impact on the IPAM.. The site level pool is release from DNAC, the IPAM is left untouched.
-![](IMAGES/IMAGES/2023-02-27-15-45-17.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-27-15-45-17.png)
 
 
-![](IMAGES/IMAGES/2023-02-27-15-45-43.png)
+
+![](IMAGES/IMAGES/IMAGES/2023-02-27-15-45-43.png)
+
 
 
 
 Test 2, this also deleted the pool from the IPAM.
-![](IMAGES/IMAGES/2023-02-27-15-46-45.png)
+![](IMAGES/IMAGES/IMAGES/2023-02-27-15-46-45.png)
 
 
-![](IMAGES/IMAGES/2023-02-27-15-48-11.png)
+
+![](IMAGES/IMAGES/IMAGES/2023-02-27-15-48-11.png)
+
 
 
 
