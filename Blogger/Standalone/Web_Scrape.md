@@ -18,7 +18,7 @@ The target for my search will be a jobsite, "https://jobserve.com" where we will
 
 For ease of keyword passing, ill just edit the online form and take a copy of the search ID "https://jobserve.com/gb/en/JobListing.aspx?shid=21D212D39D80605C8A02" 
 
-![](IMAGES/IMAGES/IMAGES/2023-04-12-17-10-15.png)
+![](IMAGES/2023-04-12-17-10-15.png)
 
 
 
@@ -70,7 +70,7 @@ Now this did not work, and using my stare and compare approach i finally spotted
 1. First by the power of chrome developer tools we can find the data we want to use and work back from there:
 
 So in the developer tools, if we inspect one of the job elements we can see the structure to the page. Where all jobs are nested under the class```jobSearchContainer``` and within that calss there are muliple classes of ```jobListItem newjobsum``` each with all the various attributes we need.
-![](IMAGES/IMAGES/IMAGES/2023-04-12-17-39-43.png.png))
+![](IMAGES/2023-04-12-17-39-43.png.png))
 
 
 
