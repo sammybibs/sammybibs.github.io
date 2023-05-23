@@ -896,6 +896,7 @@ Primary Secondary Type              Ports
 
 # Solution <a name="solution"></a>
 Again, your job is to diagnose & locate the source of the problem, please check your answer below.
+**CLick the text to reveal the answers!!**
 
 <details>
   <summary>1: VLAN 1008 is mapped to SW2 Ethernet1/2
@@ -931,4 +932,4 @@ No, the OSPF isse here is due to packets from SW1 and SW in VL1007 getting deliv
 </details>
 
 
-
+<br><br><br><br>

@@ -11,7 +11,7 @@
 ## Introduction
 9th Dec 2016
 
-Some questions to tickle you on STP, click to reveal the  answers!
+Some questions to tickle you on STP, **click the text to reveal the  answers!**
 
 ## STP Question
 **Given the topology below that is running 802.1D with all settings as default, please tell me:**
