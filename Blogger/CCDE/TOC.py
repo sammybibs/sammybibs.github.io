@@ -11,7 +11,7 @@ Version 0.3 XX/XX/XX = Refcator
 """
 import os
 
-def TOC_to_all(filelist, TAG):
+def TOC_to_all(filelist):
     master_TOC = []
     for file in filelist:
         text_title = file.strip('md$').strip('.')
@@ -106,6 +106,6 @@ filelist.remove('README.md')
 move_list = [entry for entry in (os.popen("ls | grep .png").read().split())]
 commit_list = ' '.join([entry for entry in os.popen("git status | grep 'modified:'").read().split()][1::2])
 
-TOC_to_all(filelist, TAG)
+TOC_to_all(filelist)
 move_files(move_list)
 commit_git(commit_list)
