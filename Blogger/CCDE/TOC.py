@@ -69,7 +69,8 @@ def TOC_to_all(filelist):
                     if not line[0:6] == "![](im":
                         README[-1] = (line[0:4]+'images/'+line[4:])
         with open(file, 'w+') as NEW_TOC_FILE:
-            NEW_TOC_FILE.write("""<!-- Google tag (gtag.js) -->
+            NEW_TOC_FILE.write("""
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKHR6PXZ9V"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -77,7 +78,8 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 
 gtag('config', 'G-XKHR6PXZ9V');
-</script>""")
+</script>
+""")
             for line in TOC:
                 NEW_TOC_FILE.write(line+"\n")
             for line in README:
