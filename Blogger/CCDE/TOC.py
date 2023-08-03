@@ -69,8 +69,6 @@ def TOC_to_all(filelist):
                     if not line[0:6] == "![](im":
                         README[-1] = (line[0:4]+'images/'+line[4:])
         with open(file, 'w+') as NEW_TOC_FILE:
-            for line in TAG:
-                NEW_TOC_FILE.write(line)
             for line in TOC:
                 NEW_TOC_FILE.write(line+"\n")
             for line in README:
