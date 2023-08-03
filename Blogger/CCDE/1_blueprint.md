@@ -2,8 +2,6 @@
 - [CCDE Blueprint tracker](#ccde-blueprint-tracker-)
   - [Written](#written-)
 
-
-
 # CCDE Blueprint tracker <a name="ccde-blueprint-tracker"></a>
 
 ## Written <a name="written"></a>
