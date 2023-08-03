@@ -9,6 +9,8 @@
 </script>
 
 # TABLE OF CONTENTS
+- **CCDE**
+ - [CCDE Series](/Blogger/CCDE/)
 - **Blogger**
   - [DNAC API tool series intro](/Blogger/DNAC_API/)
     - [Flask Back End basics (01/01/23)](/Blogger/DNAC_API/1_flask_back_end)
