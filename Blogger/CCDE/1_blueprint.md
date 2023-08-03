@@ -22,6 +22,8 @@ gtag('js', new Date());
 
 gtag('config', 'G-XKHR6PXZ9V');
 </script>
+
+
 # CCDE Blueprint tracker <a name="ccde-blueprint-tracker"></a>
 
 ## Written <a name="written"></a>
