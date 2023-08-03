@@ -11,7 +11,7 @@ Version 0.3 XX/XX/XX = Refcator
 """
 import os
 
-def TOC_to_all(filelist):
+def TOC_to_all(filelist, TAG):
     master_TOC = []
     for file in filelist:
         text_title = file.strip('md$').strip('.')
@@ -69,17 +69,8 @@ def TOC_to_all(filelist):
                     if not line[0:6] == "![](im":
                         README[-1] = (line[0:4]+'images/'+line[4:])
         with open(file, 'w+') as NEW_TOC_FILE:
-            NEW_TOC_FILE.write("""
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XKHR6PXZ9V"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-gtag('config', 'G-XKHR6PXZ9V');
-</script>
-""")
+            for line in TAG:
+                NEW_TOC_FILE.write(line+"\n")
             for line in TOC:
                 NEW_TOC_FILE.write(line+"\n")
             for line in README:
@@ -98,12 +89,23 @@ def commit_git(commit_list):
     os.system("git push")
 
 
+TAG = ("""
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XKHR6PXZ9V"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'G-XKHR6PXZ9V');
+</script>
+""")
 filelist = [entry for entry in (os.popen("ls | grep .md$").read().split())]
 filelist.remove('README.md')
 #commit_list = os.popen("ls | grep -E '.md$|py$'").read().replace('\n', ' ')
 move_list = [entry for entry in (os.popen("ls | grep .png").read().split())]
 commit_list = ' '.join([entry for entry in os.popen("git status | grep 'modified:'").read().split()][1::2])
 
-TOC_to_all(filelist)
+TOC_to_all(filelist, TAG)
 move_files(move_list)
 commit_git(commit_list)
