@@ -9,7 +9,7 @@
 Last assessed == NEVER
 
 | Topic        | Subject           | Skill 0-10 |
-| ------------- |:-----------------| ----------:|
+| ------------- |:-----------------| :----------:|
 | 15% Business Strategy Design      | Impact on network design, implementation, and optimization using various customer project management methodologies (for instance waterfall and agile) | 0 |
 |             |Solutions based on business continuity and operational sustainability (for instance RPO, ROI, CAPEX/OPEX cost analysis, and risk/reward)|0|
 |25% Control, data, management plane and operational design|End-to-end IP traffic flow in a feature-rich network|0|
