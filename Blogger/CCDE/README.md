@@ -12,4 +12,3 @@
 # TABLE OF CONTENTS
 
 - [Blueprint Tracker](/Blogger/CCDE/1_blueprint)
-- [400-007 Cert Guide](/Blogger/CCDE/2_CCDE400-007_Cert_Guide)

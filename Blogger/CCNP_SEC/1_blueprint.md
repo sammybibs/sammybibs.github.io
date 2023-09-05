@@ -13,9 +13,15 @@ for i in datas.split("\n"):
 </script>
 
 
+
+# Study resources
+https://ondemandelearning.cisco.com/cisco-ems/scor10/sections/1/pages/1
+https://u.cisco.com/search?query=350-701
+https://learning.oreilly.com/library/view/ccnp-and-ccie/9780135971802/
+
+
 # CCNP SEC Blueprint tracker <a name="ccnp-sec-blueprint-tracker"></a>
 Last assessed == NEVER
-
 
 # Exam Topics: Section: <a name="exam-topics:-section:"></a>
 
