@@ -40,6 +40,8 @@ If you have a VM in a lab and you want to test it over and over here are the set
 4. run command ```set temp_license ```
    * this allows a 90 day eval, where you want 2 (15 if you need IFB to make API calls)
    * For 8.4 you need networking insight license for PXGrid with ISE (IIR)
+
+
 ```
   1. DNSone (DNS, DHCP)
   2. DNSone with Grid (DNS, DHCP, Grid)
@@ -60,6 +62,7 @@ If you have a VM in a lab and you want to test it over and over here are the set
  17. Add Flex Grid Activation license
  18. Add Flex Grid Activation for Managed Services license
 ```
+
 
 5. run ```show license``` #to see whats running
 6. Login GUI and run though GM setup & change password in the process.
